@@ -195,8 +195,7 @@
 
       <!-- Helix is viral loops -->
       <section data-background-color="#0f172a">
-        <h2>Helix is viral loops, not a feature</h2>
-        <p>Traditional recruiting tools are databases &mdash; you put candidates in, you search them, you pull them out.</p>
+        <h2>Helix is a set of viral loops, not a feature</h2>
         <p>Helix is different. It's a group of <span class="highlight">viral loops</span> designed to build a network. Every user, every job, every expression of interest creates a connection &mdash; and each connection can <span class="highlight">trigger the next</span>.</p>
         <p>The product question isn't "what features do we build?" It's <strong>"how do we activate and accelerate the loops?"</strong></p>
       </section>
@@ -274,12 +273,12 @@
       <!-- Network Health -->
       <section class="compact" data-background-color="#0f172a">
         <h2>Network Health: three independent gauges</h2>
-        <h3>Hiring-Side Liquidity</h3>
+        <h3>Hiring-Side Value Realisation</h3>
         <div class="formula-block" id="formula-liquidity"></div>
         <p>Are jobs getting enough prospect interest? Below threshold, HMs churn because the platform doesn't deliver candidates.</p>
-        <h3>Prospect Activation</h3>
+        <h3>Prospect-Side Value Realisation</h3>
         <div class="formula-block" id="formula-activation"></div>
-        <p>Are prospects using the tools that make Helix valuable? Each custom link seeds Loop 5. This is an activation metric, not a liquidity metric.</p>
+        <p>(CL = Custom Links) Are prospects using the tools that make Helix valuable? Each custom link seeds Loop 5. </p>
         <h3>Bridging</h3>
         <div class="formula-block" id="formula-bridging"></div>
         <p>Fraction of users on both sides. Cross-persona conversion &mdash; circumstantial, not a product-design lever.</p>
@@ -703,22 +702,24 @@ graph TD
       if (tex) katex.render(tex, el, { displayMode: false, throwOnError: false });
     });
 
-    Reveal.initialize({
-      hash: true,
-      slideNumber: true,
-      width: 1280,
-      height: 720,
-      margin: 0.04,
-      transition: 'slide',
-      transitionSpeed: 'default',
-      backgroundTransition: 'fade',
-      center: true,
-      controls: true,
-      progress: true,
-      history: true,
-    }).then(() => {
-      mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
-    });
+    (async () => {
+      await mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
+
+      Reveal.initialize({
+        hash: true,
+        slideNumber: true,
+        width: 1280,
+        height: 720,
+        margin: 0.04,
+        transition: 'slide',
+        transitionSpeed: 'default',
+        backgroundTransition: 'fade',
+        center: true,
+        controls: true,
+        progress: true,
+        history: true,
+      });
+    })();
   </script>
 </body>
 </html>
