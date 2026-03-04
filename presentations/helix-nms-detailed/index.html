@@ -702,24 +702,29 @@ graph TD
       if (tex) katex.render(tex, el, { displayMode: false, throwOnError: false });
     });
 
-    (async () => {
-      await mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
+    function renderMermaidIn(slide) {
+      if (!slide) return;
+      const nodes = slide.querySelectorAll('.mermaid:not([data-processed])');
+      if (nodes.length) mermaid.run({ nodes });
+    }
 
-      Reveal.initialize({
-        hash: true,
-        slideNumber: true,
-        width: 1280,
-        height: 720,
-        margin: 0.04,
-        transition: 'slide',
-        transitionSpeed: 'default',
-        backgroundTransition: 'fade',
-        center: true,
-        controls: true,
-        progress: true,
-        history: true,
-      });
-    })();
+    Reveal.initialize({
+      hash: true,
+      slideNumber: true,
+      width: 1280,
+      height: 720,
+      margin: 0.04,
+      transition: 'slide',
+      transitionSpeed: 'default',
+      backgroundTransition: 'fade',
+      center: true,
+      controls: true,
+      progress: true,
+      history: true,
+    }).then(() => {
+      renderMermaidIn(Reveal.getCurrentSlide());
+      Reveal.on('slidechanged', e => renderMermaidIn(e.currentSlide));
+    });
   </script>
 </body>
 </html>
