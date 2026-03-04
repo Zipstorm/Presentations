@@ -170,6 +170,12 @@
 
     .reveal .katex { color: #e2e8f0; }
     .reveal .katex .mord.text { color: #cbd5e1; }
+
+    .reveal .slides section.compact { padding: 30px 60px; }
+    .reveal .slides section.compact h2 { margin-bottom: 0.3em; }
+    .reveal .slides section.compact h3 { margin-top: 0.2em; margin-bottom: 0.15em; }
+    .reveal .slides section.compact .formula-block { padding: 8px 20px; margin: 0.3em 0; }
+    .reveal .slides section.compact p { margin: 0.2em 0; font-size: 0.62em; }
   </style>
 </head>
 <body>
@@ -180,25 +186,25 @@
       <section class="title-slide" data-background-color="#0f172a">
         <div class="badge">DETAILED VERSION &mdash; ALL VARIABLES &amp; FUNNELS</div>
         <h1>Helix Metrics</h1>
-        <p style="font-size: 0.85em; color: #94a3b8; margin-top: 0.5em;">How We Measure and Grow a Network</p>
+        <p style="font-size: 0.85em; color: #94a3b8; margin-top: 0.5em;">Viral Loops That Build a Network</p>
         <p style="font-size: 0.65em; color: #64748b; margin-top: 0.3em;"><em>Full detail &mdash; all variables, funnels, and metrics</em></p>
         <div class="meta">
           <p><strong style="color: #e2e8f0;">Akshay Gupta</strong></p>
         </div>
       </section>
 
-      <!-- Helix is a network -->
+      <!-- Helix is viral loops -->
       <section data-background-color="#0f172a">
-        <h2>Helix is a network, not a feature</h2>
+        <h2>Helix is viral loops, not a feature</h2>
         <p>Traditional recruiting tools are databases &mdash; you put candidates in, you search them, you pull them out.</p>
-        <p>Helix is different. Every user, every job, every expression of interest creates a <span class="highlight">connection</span>. The value isn't in any single record &mdash; it's in the <span class="highlight">structure</span> of connections between them.</p>
-        <p>The product question isn't "what features do we build?" It's <strong>"how do we grow and strengthen the network?"</strong></p>
+        <p>Helix is different. It's a group of <span class="highlight">viral loops</span> designed to build a network. Every user, every job, every expression of interest creates a connection &mdash; and each connection can <span class="highlight">trigger the next</span>.</p>
+        <p>The product question isn't "what features do we build?" It's <strong>"how do we activate and accelerate the loops?"</strong></p>
       </section>
 
       <!-- Four building blocks -->
       <section data-background-color="#0f172a">
-        <h2>The network has four building blocks</h2>
-        <img src="network-schema-graph.png" alt="Helix Network Schema Graph" class="network-img">
+        <h2>Four building blocks of the network</h2>
+        <img src="network-schema-graph.svg" alt="Helix Network Schema Graph" class="network-img" style="max-height: 340px;">
         <p><strong>User</strong> &mdash; the actor. Can play any role depending on context.</p>
         <p><strong>Job</strong> &mdash; the connecting node. Every interaction flows through a job.</p>
         <p><strong>Expression of Interest (EOI)</strong> &mdash; the bridge between prospects and hiring teams.</p>
@@ -266,7 +272,7 @@
       </section>
 
       <!-- Network Health -->
-      <section data-background-color="#0f172a">
+      <section class="compact" data-background-color="#0f172a">
         <h2>Network Health: three independent gauges</h2>
         <h3>Hiring-Side Liquidity</h3>
         <div class="formula-block" id="formula-liquidity"></div>
@@ -652,7 +658,7 @@ graph TD
     L4F --> EV
     L5F --> EV
         </div>
-        <p>Every trackable event rolls up through funnels, through loop throughput, through health metrics, to Helix Size.</p>
+        <p>Every trackable event rolls up through funnels, through loop throughput, through health metrics, to Helix Size &mdash; the measure of the network the loops are building.</p>
       </section>
 
     </div>

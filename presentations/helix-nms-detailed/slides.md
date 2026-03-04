@@ -1,6 +1,6 @@
 ---
 theme: default
-title: "Helix Metrics: How We Measure and Grow a Network"
+title: "Helix Metrics: Viral Loops That Build a Network"
 info: |
   Helix analytics framework — full detail version.
   Includes all variables, funnel stages, rate metrics, throughput formulas, and cycle time per loop.
@@ -9,7 +9,7 @@ info: |
 
 # Helix Metrics
 
-## How We Measure and Grow a Network
+## Viral Loops That Build a Network
 
 *Full detail version — all variables, funnels, and metrics*
 
@@ -17,17 +17,17 @@ info: |
 
 ---
 
-# Helix is a network, not a feature
+# Helix is viral loops, not a feature
 
 Traditional recruiting tools are databases — you put candidates in, you search them, you pull them out.
 
-Helix is different. Every user, every job, every expression of interest creates a **connection**. The value isn't in any single record — it's in the **structure** of connections between them.
+Helix is different. It's a group of **viral loops** designed to build a network. Every user, every job, every expression of interest creates a connection — and each connection can **trigger the next**.
 
-The product question isn't "what features do we build?" It's **"how do we grow and strengthen the network?"**
+The product question isn't "what features do we build?" It's **"how do we activate and accelerate the loops?"**
 
 ---
 
-# The network has four building blocks
+# Four building blocks of the network
 
 ![Helix Network Schema Graph](../../context/products/helix/network-schema-graph.png)
 
@@ -499,4 +499,4 @@ graph TD
     L5F --> EV
 ```
 
-Every trackable event rolls up through funnels, through loop throughput, through health metrics, to Helix Size.
+Every trackable event rolls up through funnels, through loop throughput, through health metrics, to Helix Size — the measure of the network the loops are building.
