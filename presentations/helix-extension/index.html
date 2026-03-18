@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Helix Job Application Autofill - Wireframes</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: monospace; display: flex; height: 100vh; overflow: hidden; }
+
+    /* --- Left nav panel --- */
+    nav {
+      width: 220px;
+      min-width: 220px;
+      height: 100vh;
+      overflow-y: auto;
+      border-right: 2px solid #ddd;
+      padding: 16px 0;
+      background: #f8f8f8;
+    }
+    nav h1 { font-size: 14px; padding: 0 12px 12px; border-bottom: 1px solid #ddd; }
+    nav .section-label {
+      display: block;
+      padding: 10px 12px 4px;
+      font-weight: bold;
+      font-size: 11px;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    nav a {
+      display: block;
+      padding: 6px 12px;
+      text-decoration: none;
+      color: #333;
+      font-size: 13px;
+      border-left: 3px solid transparent;
+    }
+    nav a:hover { background: #eee; }
+    nav a:target-within,
+    nav a.active { background: #e0e7ff; border-left-color: #4F46E5; font-weight: bold; }
+
+    /* Highlight the nav link whose href matches the current target */
+    /* CSS-only: use :has on body to detect target, style matching nav link */
+    :has(#s1:target) nav a[href="#s1"],
+    :has(#s2:target) nav a[href="#s2"],
+    :has(#s3:target) nav a[href="#s3"],
+    :has(#s4:target) nav a[href="#s4"],
+    :has(#s5:target) nav a[href="#s5"],
+    :has(#s6:target) nav a[href="#s6"],
+    :has(#s7:target) nav a[href="#s7"],
+    :has(#s8:target) nav a[href="#s8"],
+    :has(#s9:target) nav a[href="#s9"],
+    :has(#s10:target) nav a[href="#s10"],
+    :has(#s11:target) nav a[href="#s11"],
+    :has(#s12:target) nav a[href="#s12"],
+    :has(#s13:target) nav a[href="#s13"],
+    :has(#s14:target) nav a[href="#s14"],
+    :has(#s15:target) nav a[href="#s15"],
+    :has(#s16:target) nav a[href="#s16"],
+    :has(#s17:target) nav a[href="#s17"],
+    :has(#s18:target) nav a[href="#s18"],
+    :has(#flow:target) nav a[href="#flow"] {
+      background: #e0e7ff;
+      border-left-color: #4F46E5;
+      font-weight: bold;
+    }
+    /* Default: highlight #s1 link when no target */
+    nav a[href="#s1"] { background: #e0e7ff; border-left-color: #4F46E5; font-weight: bold; }
+    body:has(:target) nav a[href="#s1"] { background: transparent; border-left-color: transparent; font-weight: normal; }
+
+    /* --- Main content area --- */
+    main {
+      flex: 1;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 30px 20px;
+    }
+
+    .screen { display: none; text-align: center; max-width: 750px; margin: 0 auto; }
+    .screen h2 { margin-bottom: 4px; font-size: 18px; }
+    .screen p.desc { color: #666; margin-bottom: 24px; font-size: 13px; }
+    .screen pre { display: inline-block; text-align: left; font-size: 13px; line-height: 1.4; }
+    .screen .nav-row { margin-top: 24px; }
+    .screen .nav-row a { margin: 0 12px; color: #4F46E5; }
+
+    /* Show screen-1 by default when nothing is targeted */
+    #s1 { display: block; }
+    /* When any screen is targeted, hide the default */
+    body:has(:target) #s1 { display: none; }
+    /* Show the targeted screen */
+    .screen:target { display: block; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <h1>Helix Autofill</h1>
+  <span class="section-label">Side Panel</span>
+  <a href="#s1">1. Sign In</a>
+  <a href="#s2">2. No Portfolio</a>
+  <a href="#s3">3. Idle</a>
+  <a href="#s4">4. First Use</a>
+  <a href="#s5">5. JD Confirm</a>
+  <a href="#s6">6. JD Paste</a>
+  <a href="#s7">7. Tailoring</a>
+  <a href="#s8">8. Missing Info</a>
+  <a href="#s9">9. Preview</a>
+  <a href="#s10">10. Edit Answer</a>
+  <a href="#s11">11. Filling</a>
+  <a href="#s12">12. Done</a>
+  <a href="#s13">13. Generic</a>
+  <a href="#s14">14. Error</a>
+  <span class="section-label">On-Page</span>
+  <a href="#s15">15. ATS Detected</a>
+  <a href="#s16">16. Filled (Named)</a>
+  <a href="#s17">17. Filled (Generic)</a>
+  <a href="#s18">18. Multi-Page</a>
+  <span class="section-label">Overview</span>
+  <a href="#flow">Flow Diagram</a>
+</nav>
+
+<main>
+
+<!-- ============================================ -->
+<div class="screen" id="s1">
+  <h2>1. Not Logged In</h2>
+  <p class="desc">Side panel when user opens extension but has no Helix session.</p>
+<pre>
+┌─────────────────────────────────────────┐
+│                                         │
+│             [Helix Logo]                │
+│                                         │
+│  Sign in to start applying with         │
+│  your tailored portfolio.               │
+│                                         │
+│                                         │
+│  ┌───────────────────────────────────┐  │
+│  │                                   │  │
+│  │        [ Sign in to Helix ]       │  │
+│  │                                   │  │
+│  └───────────────────────────────────┘  │
+│                                         │
+│                                         │
+│  Don't have an account?                 │
+│  Create one at seekout.ai               │
+│                                         │
+│                                         │
+│                                         │
+│                                         │
+│                                         │
+│                                         │
+│                                         │
+│                                         │
+│                                         │
+└─────────────────────────────────────────┘
+</pre>
+  <div class="nav-row"><a href="#s2">Next →</a></div>
+</div>
+
+<!-- ============================================ -->
+<div class="screen" id="s2">
+  <h2>2. No Portfolio</h2>
+  <p class="desc">Logged in but hasn't completed Helix onboarding.</p>
+<pre>
+┌─────────────────────────────────────────┐
+│                                         │
+│  Hi, Jane                               │
+│                                         │
+│  ─────────────────────────────────────  │
+│                                         │
+│  Complete your portfolio to start       │
+│  applying with Helix.                   │
+│                                         │
+│  Your portfolio is how Helix tailors    │
+│  every application specifically for     │
+│  each role you apply to.                │
+│                                         │
+│                                         │
+│  What you need to do:                   │
+│                                         │
+│  ○ Upload your resume                   │
+│  ○ Review AI conversion                 │
+│  ○ Make your first edit                 │
+│                                         │
+│                                         │
+│  ┌───────────────────────────────────┐  │
+│  │                                   │  │
+│  │   [ Complete Portfolio on Helix ] │  │
+│  │                                   │  │
+│  └───────────────────────────────────┘  │
+│                                         │
+│                                         │
+└─────────────────────────────────────────┘
+</pre>
+  <div class="nav-row"><a href="#s1">← Prev</a> <a href="#s3">Next →</a></div>
+</div>
+
+<!-- ============================================ -->
+<div class="screen" id="s3">
+  <h2>3. Idle (No ATS Detected)</h2>
+  <p class="desc">User opens extension on a non-ATS page.</p>
+<pre>
+┌─────────────────────────────────────────┐
+│                                         │
+│  [Helix Logo]              Jane S.  ●  │
+│                                         │
+│  ─────────────────────────────────────  │
+│                                         │
+│  Navigate to a job application form     │
+│  and Helix will help you apply.         │
+│                                         │
+│                                         │
+│  Supported platforms:                   │
+│                                         │
+│  ✓ Greenhouse    ✓ Lever               │
+│  ✓ Workday       ✓ iCIMS              │
+│  ✓ Taleo         ✓ SmartRecruiters    │
+│  ✓ Ashby         ✓ Workable          │
+│  ✓ Jobvite       ✓ BambooHR          │
+│  + Other sites (partial support)        │
+│                                         │
+│                                         │
+│  ─────────────────────────────────────  │
+│                                         │
+│  Your applications: 12                  │
+│  [ View on Helix ]                      │
+│                                         │
+│                                         │
+└─────────────────────────────────────────┘
+</pre>
+  <div class="nav-row"><a href="#s2">← Prev</a> <a href="#s4">Next →</a></div>
+</div>
+
+<!-- ============================================ -->
+<div class="screen" id="s4">
+  <h2>4. First-Use Comparison</h2>
+  <p class="desc">One-time education screen. Shown on first application only.</p>
+<pre>
+┌─────────────────────────────────────────┐
+│                                         │
+│  How Helix is different                 │
+│                                         │
+│  ─────────────────────────────────────  │
+│                                         │
+│  Typical autofill        Helix          │
+│  ──────────────          ─────          │
+│                                         │
+│  Same resume             Resume tailored│
+│  for every job           for THIS role  │
+│                                         │
+│  Generic answers         Answers drawn  │
+│  from templates          from YOUR      │
+│                          experience     │
+│                                         │
+│  No cover letter         Cover letter   │
+│                          that matches   │
+│                          your resume    │
+│                                         │
+│  No tracking             Track if they  │
+│                          viewed your    │
+│                          application    │
+│                                         │
+│                                         │
+│  Helix tailors your ENTIRE application  │
+│  -- resume, answers, and cover letter   │
+│  -- so everything tells one coherent    │
+│  story for this specific role.          │
+│                                         │
+│                                         │
+│  ┌───────────────────────────────────┐  │
+│  │           [ Got it ]              │  │
+│  └───────────────────────────────────┘  │
+│                                         │
+└─────────────────────────────────────────┘
+</pre>
+  <div class="nav-row"><a href="#s3">← Prev</a> <a href="#s5">Next →</a></div>
+</div>
+
+<!-- ============================================ -->
+<div class="screen" id="s5">
+  <h2>5. JD Confirmation</h2>
+  <p class="desc">Confirming the detected job before tailoring begins.</p>
+<pre>
+┌─────────────────────────────────────────┐
+│                                         │
+│  [Helix Logo]              Jane S.  ●  │
+│                                         │
+│  ─────────────────────────────────────  │
+│                                         │
+│  We found this job:                     │
+│                                         │
+│  ┌───────────────────────────────────┐  │
+│  │                                   │  │
+│  │  Senior Product Manager           │  │
+│  │  Stripe                           │  │
+│  │  San Francisco, CA (Hybrid)       │  │
+│  │                                   │  │
+│  │  "We're looking for a Senior PM   │  │
+│  │  to lead our developer payments   │  │
+│  │  platform. You'll own the API     │  │
+│  │  strategy and work with..."       │  │
+│  │                                   │  │
+│  │  [See full description]           │  │
+│  │                                   │  │
+│  └───────────────────────────────────┘  │
+│                                         │
+│  Detected via: Greenhouse               │
+│                                         │
+│                                         │
+│  ┌───────────────────────────────────┐  │
+│  │   [ Tailor my application ]       │  │
+│  └───────────────────────────────────┘  │
+│                                         │
+│  Not the right job?                     │
+│  [ Paste a different description ]      │
+│                                         │
+└─────────────────────────────────────────┘
+</pre>
+  <div class="nav-row"><a href="#s4">← Prev</a> <a href="#s6">Next →</a></div>
+</div>
+
+<!-- ============================================ -->
+<div class="screen" id="s6">
+  <h2>6. JD Paste Fallback</h2>
+  <p class="desc">JD couldn't be automatically extracted. User pastes it.</p>
+<pre>
+┌─────────────────────────────────────────┐
+│                                         │
+│  [Helix Logo]              Jane S.  ●  │
+│                                         │
+│  ─────────────────────────────────────  │
+│                                         │
+│  We couldn't find the job description   │
+│  on this page.                          │
+│                                         │
+│  Paste it below so we can tailor your   │
+│  application:                           │
+│                                         │
+│  ┌───────────────────────────────────┐  │
+│  │                                   │  │
+│  │  Paste job description here...    │  │
+│  │                                   │  │
+│  │                                   │  │
+│  │                                   │  │
+│  │                                   │  │
+│  │                                   │  │
+│  │                                   │  │
+│  │                                   │  │
+│  │                                   │  │
+│  └───────────────────────────────────┘  │
+│                                         │
+│                                         │
+│  ┌───────────────────────────────────┐  │
+│  │   [ Tailor my application ]       │  │
+│  └───────────────────────────────────┘  │
+│                                         │
+│  Or: [ Skip tailoring, fill basics ]    │
+│                                         │
+└─────────────────────────────────────────┘
+</pre>
+  <div class="nav-row"><a href="#s5">← Prev</a> <a href="#s7">Next →</a></div>
+</div>
+
+<!-- ============================================ -->
+<div class="screen" id="s7">
+  <h2>7. Tailoring Progress</h2>
+  <p class="desc">Backend is tailoring the portfolio. Steps update in real-time.</p>
+<pre>
+┌─────────────────────────────────────────┐
+│                                         │
+│  Tailoring your application             │
+│  for Senior PM at Stripe                │
+│                                         │
+│  ─────────────────────────────────────  │
+│                                         │
+│  ✓ Reading job description              │
+│  ✓ Analyzing role requirements          │
+│  ● Tailoring your portfolio...          │
+│  ○ Generating screening answers         │
+│  ○ Optimizing for Greenhouse            │
+│  ○ Preparing your resume PDF            │
+│                                         │
+│  ━━━━━━━━━━━━━━━━━━━━░░░░░░ 60%        │
+│                                         │
+│                                         │
+│                                         │
+│                                         │
+│                                         │
+│                                         │
+│                                         │
+│                                         │
+│                                         │
+│                                         │
+│                                         │
+│              [ Cancel ]                 │
+│                                         │
+└─────────────────────────────────────────┘
+</pre>
+  <div class="nav-row"><a href="#s6">← Prev</a> <a href="#s8">Next →</a></div>
+</div>
+
+<!-- ============================================ -->
+<div class="screen" id="s8">
+  <h2>8. Missing Info Collection</h2>
+  <p class="desc">Form needs info not in the prospect's Helix profile.</p>
+<pre>
+┌─────────────────────────────────────────┐
+│                                         │
+│  We need a few details for this         │
+│  application                            │
+│                                         │
+│  ─────────────────────────────────────  │
+│                                         │
+│  Salary expectations (required)         │
+│  ┌───────────────────────────────────┐  │
+│  │ [$___________] per year           │  │
+│  └───────────────────────────────────┘  │
+│  ☑ Save to my profile for future apps   │
+│                                         │
+│  Do you require visa sponsorship?       │
+│  ○ Yes  ○ No                            │
+│  ☑ Save to my profile for future apps   │
+│                                         │
+│  LinkedIn profile URL                   │
+│  ┌───────────────────────────────────┐  │
+│  │ https://linkedin.com/in/______    │  │
+│  └───────────────────────────────────┘  │
+│  ☑ Save to my profile for future apps   │
+│                                         │
+│                                         │
+│  These prompts decrease as your         │
+│  profile gets more complete.            │
+│                                         │
+│  ┌───────────────────────────────────┐  │
+│  │      [ Continue to preview ]      │  │
+│  └───────────────────────────────────┘  │
+│                                         │
+└─────────────────────────────────────────┘
+</pre>
+  <div class="nav-row"><a href="#s7">← Prev</a> <a href="#s9">Next →</a></div>
+</div>
+
+<!-- ============================================ -->
+<div class="screen" id="s9">
+  <h2>9. Preview and Edit (Collapsed)</h2>
+  <p class="desc">Tailored application ready for review. Click [v] to expand an answer.</p>
+<pre>
+┌─────────────────────────────────────────┐
+│                                         │
+│  Your application is ready              │
+│  Tailored for Senior PM at Stripe       │
+│                                         │
+│  ─────────────────────────────────────  │
+│                                         │
+│  RESUME                            [>]  │
+│  Tailored to emphasize your payments    │
+│  platform experience and API design     │
+│  work. Optimized for Greenhouse.        │
+│                                         │
+│  ─────────────────────────────────────  │
+│                                         │
+│  SCREENING ANSWERS (3)                  │
+│                                         │
+│  ┌───────────────────────────────────┐  │
+│  │ Why are you interested in this    │  │
+│  │ role at Stripe?             [v]   │  │
+│  │                                   │  │
+│  │ Stripe's mission to increase the  │  │
+│  │ GDP of the internet resonates     │  │
+│  │ deeply with my 6 years building   │  │
+│  │ developer-facing payment...       │  │
+│  │                          412/500  │  │
+│  └───────────────────────────────────┘  │
+│                                         │
+│  ┌───────────────────────────────────┐  │
+│  │ Describe your experience with     │  │
+│  │ API product management      [v]   │  │
+│  │ At [Company], I led the redesig.. │  │
+│  │                          287/500  │  │
+│  └───────────────────────────────────┘  │
+│                                         │
+│  ┌───────────────────────────────────┐  │
+│  │ What's your approach to cross-    │  │
+│  │ functional collaboration?   [v]   │  │
+│  │ I believe product managers are... │  │
+│  │                          340/500  │  │
+│  └───────────────────────────────────┘  │
+│                                         │
+│  ─────────────────────────────────────  │
+│                                         │
+│  PORTFOLIO LINK                         │
+│  seekout.ai/jane/app/stripe-pm-a7x2    │
+│  Added to: Website field, answer #1,    │
+│  resume footer                          │
+│                                         │
+│  ─────────────────────────────────────  │
+│                                         │
+│  ┌───────────────────────────────────┐  │
+│  │       [ Fill Application ]        │  │
+│  └───────────────────────────────────┘  │
+│                                         │
+└─────────────────────────────────────────┘
+</pre>
+  <div class="nav-row"><a href="#s8">← Prev</a> <a href="#s10">Next →</a></div>
+</div>
+
+<!-- ============================================ -->
+<div class="screen" id="s10">
+  <h2>10. Preview and Edit (Answer Expanded)</h2>
+  <p class="desc">One answer expanded into an editable textarea.</p>
+<pre>
+┌─────────────────────────────────────────┐
+│                                         │
+│  Your application is ready              │
+│  Tailored for Senior PM at Stripe       │
+│                                         │
+│  ─────────────────────────────────────  │
+│                                         │
+│  RESUME                            [>]  │
+│  Tailored to emphasize your payments    │
+│  platform experience and API design     │
+│  work. Optimized for Greenhouse.        │
+│                                         │
+│  ─────────────────────────────────────  │
+│                                         │
+│  SCREENING ANSWERS (3)                  │
+│                                         │
+│  ┌───────────────────────────────────┐  │
+│  │ Why are you interested in this    │  │
+│  │ role at Stripe?             [^]   │  │
+│  │                                   │  │
+│  │ ┌─────────────────────────────┐   │  │
+│  │ │ Stripe's mission to         │   │  │
+│  │ │ increase the GDP of the     │   │  │
+│  │ │ internet resonates deeply   │   │  │
+│  │ │ with my 6 years building    │   │  │
+│  │ │ developer-facing payment    │   │  │
+│  │ │ platforms. At [Company], I  │   │  │
+│  │ │ led the API monetization    │   │  │
+│  │ │ strategy that grew from     │   │  │
+│  │ │ $2M to $15M ARR, and I'm   │   │  │
+│  │ │ excited to bring that       │   │  │
+│  │ │ experience to Stripe's      │   │  │
+│  │ │ developer ecosystem.        │   │  │
+│  │ │                             │   │  │
+│  │ │ [User can edit here]        │   │  │
+│  │ └─────────────────────────────┘   │  │
+│  │                                   │  │
+│  │                          412/500  │  │
+│  └───────────────────────────────────┘  │
+│                                         │
+│  ┌───────────────────────────────────┐  │
+│  │ Describe your experience...  [v]  │  │
+│  │ At [Company], I led the redesig.. │  │
+│  │                          287/500  │  │
+│  └───────────────────────────────────┘  │
+│                                         │
+│  ┌───────────────────────────────────┐  │
+│  │ What's your approach to...  [v]   │  │
+│  │ I believe product managers are... │  │
+│  │                          340/500  │  │
+│  └───────────────────────────────────┘  │
+│                                         │
+│  ─────────────────────────────────────  │
+│                                         │
+│  ┌───────────────────────────────────┐  │
+│  │       [ Fill Application ]        │  │
+│  └───────────────────────────────────┘  │
+│                                         │
+└─────────────────────────────────────────┘
+</pre>
+  <div class="nav-row"><a href="#s9">← Prev</a> <a href="#s11">Next →</a></div>
+</div>
+
+<!-- ============================================ -->
+<div class="screen" id="s11">
+  <h2>11. Filling in Progress</h2>
+  <p class="desc">Extension is populating the ATS form fields.</p>
+<pre>
+┌─────────────────────────────────────────┐
+│                                         │
+│  Filling your application...            │
+│                                         │
+│  ─────────────────────────────────────  │
+│                                         │
+│  ✓ Name                                 │
+│  ✓ Email                                │
+│  ✓ Phone                                │
+│  ✓ Resume uploaded                      │
+│  ● Filling screening answers...         │
+│  ○ Setting dropdown values              │
+│  ○ Adding portfolio link                │
+│                                         │
+│  ━━━━━━━━━━━━━━━━━━━━━━░░░░ 70%        │
+│                                         │
+│                                         │
+│                                         │
+│                                         │
+│                                         │
+│                                         │
+│                                         │
+│                                         │
+│                                         │
+│                                         │
+│                                         │
+│                                         │
+│                                         │
+└─────────────────────────────────────────┘
+</pre>
+  <div class="nav-row"><a href="#s10">← Prev</a> <a href="#s12">Next →</a></div>
+</div>
+
+<!-- ============================================ -->
+<div class="screen" id="s12">
+  <h2>12. Post-Fill Confirmation</h2>
+  <p class="desc">Form filled. User still needs to review and click Submit on the ATS page.</p>
+<pre>
+┌─────────────────────────────────────────┐
+│                                         │
+│  ✓ Application filled                   │
+│                                         │
+│  ─────────────────────────────────────  │
+│                                         │
+│  Your tailored application for          │
+│  Senior PM at Stripe has been           │
+│  saved to your Helix dashboard.         │
+│                                         │
+│                                         │
+│  Next steps:                            │
+│                                         │
+│  1. Review the filled form              │
+│  2. Make any final edits                │
+│  3. Click Submit on the form            │
+│                                         │
+│                                         │
+│  ─────────────────────────────────────  │
+│                                         │
+│  Track this application:                │
+│                                         │
+│  seekout.ai/jane/app/stripe-pm-a7x2    │
+│  [ Copy Link ]                          │
+│                                         │
+│  You'll be notified when someone        │
+│  views your application.                │
+│                                         │
+│                                         │
+│  ─────────────────────────────────────  │
+│                                         │
+│  [ View on Helix ]  [ Apply to another ]│
+│                                         │
+└─────────────────────────────────────────┘
+</pre>
+  <div class="nav-row"><a href="#s11">← Prev</a> <a href="#s13">Next →</a></div>
+</div>
+
+<!-- ============================================ -->
+<div class="screen" id="s13">
+  <h2>13. Generic Filler Warning</h2>
+  <p class="desc">Unsupported ATS. Full tailoring runs but field fill is best-effort.</p>
+<pre>
+┌─────────────────────────────────────────┐
+│                                         │
+│  Your application is ready              │
+│  Tailored for Backend Engineer          │
+│  at Acme Corp                           │
+│                                         │
+│  ─────────────────────────────────────  │
+│                                         │
+│  ! This site isn't fully supported      │
+│                                         │
+│  We've tailored your resume and         │
+│  answers, but may not fill every        │
+│  field correctly on this form.          │
+│                                         │
+│  Fields filled: 8 of 14                 │
+│                                         │
+│  * High confidence (filled normally)    │
+│  * Medium confidence (highlighted)      │
+│  o Not filled (complete manually)       │
+│                                         │
+│  Review highlighted fields carefully    │
+│  before submitting.                     │
+│                                         │
+│  ─────────────────────────────────────  │
+│                                         │
+│  RESUME                            [>]  │
+│  Tailored for this role.                │
+│                                         │
+│  SCREENING ANSWERS (2)                  │
+│  [Same answer cards as preview]         │
+│                                         │
+│  ─────────────────────────────────────  │
+│                                         │
+│  ┌───────────────────────────────────┐  │
+│  │   [ Fill Application (8 of 14) ] │  │
+│  └───────────────────────────────────┘  │
+│                                         │
+└─────────────────────────────────────────┘
+</pre>
+  <div class="nav-row"><a href="#s12">← Prev</a> <a href="#s14">Next →</a></div>
+</div>
+
+<!-- ============================================ -->
+<div class="screen" id="s14">
+  <h2>14. Error State</h2>
+  <p class="desc">Tailoring failed due to network or backend error.</p>
+<pre>
+┌─────────────────────────────────────────┐
+│                                         │
+│  Something went wrong                   │
+│                                         │
+│  ─────────────────────────────────────  │
+│                                         │
+│  We couldn't tailor your application.   │
+│  This is usually a temporary issue.     │
+│                                         │
+│                                         │
+│                                         │
+│  ┌───────────────────────────────────┐  │
+│  │         [ Try Again ]             │  │
+│  └───────────────────────────────────┘  │
+│                                         │
+│                                         │
+│  Or fill with basic profile info        │
+│  (contact info + current resume,        │
+│   not tailored for this role):          │
+│                                         │
+│  ┌───────────────────────────────────┐  │
+│  │     [ Fill basics only ]          │  │
+│  └───────────────────────────────────┘  │
+│                                         │
+│                                         │
+│                                         │
+│                                         │
+│                                         │
+│                                         │
+└─────────────────────────────────────────┘
+</pre>
+  <div class="nav-row"><a href="#s13">← Prev</a> <a href="#s15">Next →</a></div>
+</div>
+
+<!-- ============================================ -->
+<div class="screen" id="s15">
+  <h2>15. ATS Detected Notification (On-Page)</h2>
+  <p class="desc">Notification injected onto the ATS form page.</p>
+<pre>
+ATS APPLICATION FORM PAGE
+┌──────────────────────────────────────────────────────────────┐
+│                                                              │
+│  Stripe - Senior Product Manager                             │
+│  Application Form                                            │
+│                                                              │
+│  ────────────────────────────────────────────────────────    │
+│                                                              │
+│  First Name:  [_________________]                            │
+│  Last Name:   [_________________]                            │
+│  Email:       [_________________]                            │
+│  Phone:       [_________________]                            │
+│                                                              │
+│  Resume:      [ Choose file ] No file chosen                 │
+│                                                              │
+│  Website:     [_________________]                            │
+│                                                              │
+│  Why are you interested in this role?                        │
+│  ┌────────────────────────────────────────────────────┐     │
+│  │                                                    │     │
+│  │                                                    │     │
+│  └────────────────────────────────────────────────────┘     │
+│                                                              │
+│  Describe your relevant experience:                          │
+│  ┌────────────────────────────────────────────────────┐     │
+│  │                                                    │     │
+│  │                                                    │     │
+│  └────────────────────────────────────────────────────┘     │
+│                                                              │
+│                         ┌──────────────────────────────┐    │
+│                         │ Helix can help you apply     │    │
+│                         │ to this role                 │    │
+│                         │ Detected: Greenhouse         │    │
+│                         │                              │    │
+│                         │ [ Open Helix ]               │    │
+│                         └──────────────────────────────┘    │
+│                                                              │
+│                                        [ Submit Application ]│
+│                                                              │
+└──────────────────────────────────────────────────────────────┘
+</pre>
+  <div class="nav-row"><a href="#s14">← Prev</a> <a href="#s16">Next →</a></div>
+</div>
+
+<!-- ============================================ -->
+<div class="screen" id="s16">
+  <h2>16. Form Filled - Named ATS</h2>
+  <p class="desc">ATS form after fill. Green highlights (✓) fade after 2 seconds.</p>
+<pre>
+ATS APPLICATION FORM PAGE (AFTER FILL)
+┌──────────────────────────────────────────────────────────────┐
+│                                                              │
+│  Stripe - Senior Product Manager                             │
+│  Application Form                                            │
+│                                                              │
+│  ────────────────────────────────────────────────────────    │
+│                                                              │
+│  First Name:  [Jane_______________] ✓                        │
+│  Last Name:   [Smith______________] ✓                        │
+│  Email:       [jane@email.com_____] ✓                        │
+│  Phone:       [(555) 123-4567_____] ✓                        │
+│                                                              │
+│  Resume:      [ tailored-resume.pdf ] ✓                      │
+│                                                              │
+│  Website:     [seekout.ai/jane/app/stripe-pm-a7x2] ✓        │
+│                                                              │
+│  Why are you interested in this role?                        │
+│  ┌────────────────────────────────────────────────────┐     │
+│  │ Stripe's mission to increase the GDP of the        │ ✓   │
+│  │ internet resonates deeply with my 6 years building │     │
+│  │ developer-facing payment platforms. At [Company],  │     │
+│  │ I led the API monetization strategy that grew...   │     │
+│  └────────────────────────────────────────────────────┘     │
+│                                                              │
+│  Describe your relevant experience:                          │
+│  ┌────────────────────────────────────────────────────┐     │
+│  │ At [Company], I led the redesign of our public API │ ✓   │
+│  │ serving 2M+ developers. This included defining the │     │
+│  │ versioning strategy, rate limiting approach...     │     │
+│  └────────────────────────────────────────────────────┘     │
+│                                                              │
+│  Review your answers, then submit.                           │
+│                                                              │
+│                                        [ Submit Application ]│
+│                                                              │
+└──────────────────────────────────────────────────────────────┘
+
+  ✓  = Green highlight (fades after 2s)
+</pre>
+  <div class="nav-row"><a href="#s15">← Prev</a> <a href="#s17">Next →</a></div>
+</div>
+
+<!-- ============================================ -->
+<div class="screen" id="s17">
+  <h2>17. Form Filled - Generic (Confidence Highlights)</h2>
+  <p class="desc">Unsupported ATS after generic fill. Yellow = review. Empty = manual.</p>
+<pre>
+UNKNOWN ATS FORM PAGE (AFTER GENERIC FILL)
+┌──────────────────────────────────────────────────────────────┐
+│                                                              │
+│  Acme Corp - Backend Engineer                                │
+│  Application                                                 │
+│                                                              │
+│  ────────────────────────────────────────────────────────    │
+│                                                              │
+│  Full Name:      [Jane Smith_________] ✓  high confidence    │
+│  Email Address:  [jane@email.com_____] ✓  high confidence    │
+│  Mobile:         [(555) 123-4567_____] ✓  high confidence    │
+│                                                              │
+│  Current Employer:  [Company Inc._____] !  review this       │
+│  Current Title:     [Sr. PM___________] !  review this       │
+│                                                              │
+│  Earliest Start Date:  [______________]    not filled        │
+│  Referral Code:        [______________]    not filled        │
+│                                                              │
+│  Resume:    [ tailored-resume.pdf ] ✓                        │
+│                                                              │
+│  Tell us about yourself:                                     │
+│  ┌────────────────────────────────────────────────────┐     │
+│  │ With 8 years of experience in backend systems and  │ ✓   │
+│  │ API design, I bring deep expertise in distributed  │     │
+│  │ payment platforms...                               │     │
+│  └────────────────────────────────────────────────────┘     │
+│                                                              │
+│  ✓  = Filled (high confidence)                               │
+│  !  = Filled (review needed - yellow highlight)              │
+│       = Not filled (complete manually)                       │
+│                                                              │
+│                                            [ Submit ]        │
+│                                                              │
+└──────────────────────────────────────────────────────────────┘
+</pre>
+  <div class="nav-row"><a href="#s16">← Prev</a> <a href="#s18">Next →</a></div>
+</div>
+
+<!-- ============================================ -->
+<div class="screen" id="s18">
+  <h2>18. Multi-Page Form (Workday)</h2>
+  <p class="desc">Workday stepper. Extension fills current page, re-activates on next.</p>
+<pre>
+WORKDAY MULTI-PAGE FORM
+┌──────────────────────────────────────────────────────────────┐
+│                                                              │
+│  Acme Corp - Apply for Backend Engineer                      │
+│                                                              │
+│  Step 1 of 4:  [1]---[2]---[3]---[4]                        │
+│  My Information                                              │
+│                                                              │
+│  ────────────────────────────────────────────────────────    │
+│                                                              │
+│  First Name:       [Jane_______________] ✓                   │
+│  Last Name:        [Smith______________] ✓                   │
+│  Email:            [jane@email.com_____] ✓                   │
+│  Address Line 1:   [123 Main St________] ✓                   │
+│  City:             [San Francisco______] ✓                   │
+│  State:            [California v_______] ✓                   │
+│  Country:          [United States v____] ✓                   │
+│                                                              │
+│                                                              │
+│                                        [ Next > ]            │
+│                                                              │
+└──────────────────────────────────────────────────────────────┘
+
+
+SIDE PANEL (during multi-page):
+┌─────────────────────────────────────────┐
+│                                         │
+│  Filling page 1 of 4                    │
+│  Backend Engineer at Acme Corp          │
+│                                         │
+│  ─────────────────────────────────────  │
+│                                         │
+│  ✓ Page 1: My Information (7 fields)    │
+│  ○ Page 2: My Experience                │
+│  ○ Page 3: Questions                    │
+│  ○ Page 4: Review                       │
+│                                         │
+│  ━━━━━━━━━━░░░░░░░░░░░░░░░ 25%        │
+│                                         │
+│  Click "Next" on the form to continue.  │
+│  We'll fill each page as you go.        │
+│                                         │
+│                                         │
+│                                         │
+│                                         │
+│                                         │
+│                                         │
+│                                         │
+│                                         │
+│                                         │
+│                                         │
+│                                         │
+│                                         │
+│                                         │
+└─────────────────────────────────────────┘
+</pre>
+  <div class="nav-row"><a href="#s17">← Prev</a> <a href="#flow">Next →</a></div>
+</div>
+
+<!-- ============================================ -->
+<div class="screen" id="flow">
+  <h2>Flow Sequence</h2>
+  <p class="desc">Happy path and edge case navigation between screens.</p>
+<pre>
+HAPPY PATH:
+
+  Install extension
+       |
+  [1. Not Logged In] --sign in--> [3. Idle]
+       |                              |
+  (or if already signed in)      Navigate to ATS form
+       |                              |
+  [2. No Portfolio] --complete-->  [15. ATS Detected (on-page)]
+                                      |
+                                  Click extension
+                                      |
+                               (first time only)
+                                      |
+                               [4. First-Use Comparison]
+                                      |
+                                  "Got it"
+                                      |
+                               [5. JD Confirmation]
+                                  or [6. JD Paste]
+                                      |
+                               "Tailor my application"
+                                      |
+                               [7. Tailoring Progress]
+                                      |
+                              (if missing info)
+                                      |
+                               [8. Missing Info]
+                                      |
+                               [9. Preview (Collapsed)]
+                                  or [10. Preview (Expanded)]
+                                      |
+                               "Fill Application"
+                                      |
+                               [11. Filling in Progress]
+                                      |
+                               [16. Form Filled (on-page)]
+                                  or [17. Generic Fill (on-page)]
+                                      |
+                               User reviews + submits
+                                      |
+                               [12. Post-Fill Confirmation]
+
+
+ERROR / EDGE PATHS:
+
+  Network error during tailoring --> [14. Error State]
+  Unsupported ATS detected -------> [13. Generic Warning] in preview
+  Multi-page form (Workday) ------> [18. Multi-Page] per-page fill
+  JD not found on page -----------> [6. JD Paste Fallback]
+</pre>
+  <div class="nav-row"><a href="#s18">← Prev</a> <a href="#s1">Back to start</a></div>
+</div>
+
+</main>
+
+</body>
+</html>
