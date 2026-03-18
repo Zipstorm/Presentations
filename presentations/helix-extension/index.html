@@ -87,6 +87,7 @@
     #s1 { display: block; }
     /* When any screen is targeted, hide the default */
     body:has(:target) #s1 { display: none; }
+    body:has(:target) #s1:target { display: block; }
     /* Show the targeted screen */
     .screen:target { display: block; }
   </style>
