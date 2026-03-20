@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SeekOut.ai Marketing Plan</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg2: #f7f6f3;
+    --bg3: #efeee9;
+    --text: #1a1a18;
+    --text2: #5f5e5a;
+    --text3: #888780;
+    --border: rgba(0,0,0,0.1);
+    --accent: #534AB7;
+    --accent-bg: #EEEDFE;
+    --accent-text: #3C3489;
+    --teal: #0F6E56;
+    --teal-bg: #E1F5EE;
+    --teal-text: #085041;
+    --coral: #D85A30;
+    --coral-bg: #FAECE7;
+    --coral-text: #712B13;
+    --amber: #BA7517;
+    --amber-bg: #FAEEDA;
+    --amber-text: #633806;
+    --blue: #185FA5;
+    --blue-bg: #E6F1FB;
+    --blue-text: #0C447C;
+    --green: #639922;
+    --green-bg: #EAF3DE;
+    --green-text: #27500A;
+    --pink: #D4537E;
+    --pink-bg: #FBEAF0;
+    --pink-text: #72243E;
+    --red-bg: #FCEBEB;
+    --red-text: #791F1F;
+    --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1a1a18;
+      --bg2: #2c2c2a;
+      --bg3: #3d3d3a;
+      --text: #e8e6df;
+      --text2: #b4b2a9;
+      --text3: #888780;
+      --border: rgba(255,255,255,0.1);
+      --accent: #AFA9EC;
+      --accent-bg: #26215C;
+      --accent-text: #CECBF6;
+      --teal: #5DCAA5;
+      --teal-bg: #04342C;
+      --teal-text: #9FE1CB;
+      --coral: #F0997B;
+      --coral-bg: #4A1B0C;
+      --coral-text: #F5C4B3;
+      --amber: #FAC775;
+      --amber-bg: #412402;
+      --amber-text: #FAC775;
+      --blue: #85B7EB;
+      --blue-bg: #042C53;
+      --blue-text: #B5D4F4;
+      --green: #97C459;
+      --green-bg: #173404;
+      --green-text: #C0DD97;
+      --pink: #ED93B1;
+      --pink-bg: #4B1528;
+      --pink-text: #F4C0D1;
+      --red-bg: #501313;
+      --red-text: #F7C1C1;
+    }
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.6; }
+
+  .sidebar {
+    position: fixed; top: 0; left: 0; width: 260px; height: 100vh;
+    background: var(--bg2); border-right: 1px solid var(--border);
+    overflow-y: auto; padding: 24px 0; z-index: 10;
+  }
+  .sidebar-header {
+    padding: 0 20px 20px; border-bottom: 1px solid var(--border); margin-bottom: 12px;
+  }
+  .sidebar-header h1 { font-size: 18px; font-weight: 600; color: var(--text); }
+  .sidebar-header p { font-size: 12px; color: var(--text3); margin-top: 4px; }
+  .nav-item {
+    display: block; width: 100%; text-align: left; background: none; border: none;
+    font-family: var(--font); font-size: 13px; color: var(--text2);
+    padding: 8px 20px; cursor: pointer; transition: all 0.15s;
+  }
+  .nav-item:hover { background: var(--bg3); color: var(--text); }
+  .nav-item.active { background: var(--accent-bg); color: var(--accent); font-weight: 500; }
+  .nav-group { font-size: 11px; font-weight: 600; color: var(--text3); padding: 16px 20px 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  .main { margin-left: 260px; padding: 40px 48px 80px; max-width: 900px; }
+
+  .section { display: none; }
+  .section.active { display: block; }
+
+  h2 { font-size: 22px; font-weight: 600; margin-bottom: 8px; }
+  h3 { font-size: 17px; font-weight: 600; margin: 28px 0 10px; }
+  h4 { font-size: 14px; font-weight: 600; margin: 20px 0 8px; }
+  p, li { font-size: 14px; color: var(--text2); margin-bottom: 8px; }
+  .subtitle { font-size: 14px; color: var(--text3); margin-bottom: 28px; }
+
+  .card {
+    background: var(--bg2); border-radius: 10px; padding: 16px 20px; margin: 12px 0;
+  }
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 16px 0; }
+
+  .badge {
+    display: inline-block; font-size: 11px; font-weight: 600; padding: 3px 10px;
+    border-radius: 20px; margin-right: 6px; margin-bottom: 4px;
+  }
+  .badge-purple { background: var(--accent-bg); color: var(--accent-text); }
+  .badge-teal { background: var(--teal-bg); color: var(--teal-text); }
+  .badge-coral { background: var(--coral-bg); color: var(--coral-text); }
+  .badge-amber { background: var(--amber-bg); color: var(--amber-text); }
+  .badge-blue { background: var(--blue-bg); color: var(--blue-text); }
+  .badge-green { background: var(--green-bg); color: var(--green-text); }
+  .badge-pink { background: var(--pink-bg); color: var(--pink-text); }
+  .badge-red { background: var(--red-bg); color: var(--red-text); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 12px 0; }
+  th { text-align: left; font-weight: 600; color: var(--text); padding: 10px 12px; border-bottom: 2px solid var(--border); }
+  td { padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--text2); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+
+  .phase-timeline {
+    display: flex; gap: 0; margin: 24px 0; position: relative;
+  }
+  .phase-block {
+    flex: 1; padding: 14px 16px; position: relative; cursor: pointer;
+    border: 1px solid var(--border); transition: all 0.15s;
+  }
+  .phase-block:first-child { border-radius: 10px 0 0 10px; }
+  .phase-block:last-child { border-radius: 0 10px 10px 0; }
+  .phase-block:hover { background: var(--bg3); }
+  .phase-block.active { border-color: var(--accent); background: var(--accent-bg); }
+  .phase-block .phase-num { font-size: 11px; font-weight: 700; color: var(--text3); }
+  .phase-block .phase-name { font-size: 13px; font-weight: 600; color: var(--text); margin-top: 2px; }
+  .phase-block .phase-date { font-size: 11px; color: var(--text3); margin-top: 2px; }
+  .phase-block.active .phase-num { color: var(--accent); }
+  .phase-block.active .phase-name { color: var(--accent); }
+
+  .phase-detail { margin-top: 16px; }
+  .phase-detail .card { display: none; }
+  .phase-detail .card.active { display: block; }
+
+  .metric-row { display: grid; grid-template-columns: 1fr 2fr; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .metric-row:last-child { border-bottom: none; }
+  .metric-label { font-weight: 600; color: var(--text); }
+  .metric-def { color: var(--text2); }
+
+  .channel-row {
+    display: grid; grid-template-columns: 1.5fr 1fr 0.7fr 0.7fr 0.7fr 1fr; gap: 8px;
+    padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 12px; align-items: center;
+  }
+  .channel-row.header { font-weight: 600; color: var(--text); border-bottom: 2px solid var(--border); }
+
+  .persona-card {
+    border-radius: 10px; padding: 20px; margin: 16px 0;
+  }
+  .persona-card h4 { margin-top: 0; }
+
+  ul { padding-left: 20px; margin: 8px 0; }
+  li { margin-bottom: 4px; }
+
+  .callout {
+    background: var(--amber-bg); border-left: 3px solid var(--amber); padding: 12px 16px;
+    border-radius: 0 8px 8px 0; margin: 16px 0; font-size: 13px; color: var(--amber-text);
+  }
+
+  .waitlist-mechanic {
+    display: grid; grid-template-columns: auto 1fr auto; gap: 8px 16px;
+    padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 13px; align-items: start;
+  }
+  .waitlist-mechanic:last-child { border-bottom: none; }
+
+  @media (max-width: 800px) {
+    .sidebar { display: none; }
+    .main { margin-left: 0; padding: 20px; }
+    .phase-timeline { flex-direction: column; }
+    .phase-block { border-radius: 0 !important; }
+    .phase-block:first-child { border-radius: 10px 10px 0 0 !important; }
+    .phase-block:last-child { border-radius: 0 0 10px 10px !important; }
+    .channel-row { grid-template-columns: 1fr; gap: 4px; }
+    .channel-row.header { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="sidebar">
+  <div class="sidebar-header">
+    <h1>SeekOut.ai</h1>
+    <p>Marketing Plan &middot; March 2026</p>
+  </div>
+  <div class="nav-group">Overview</div>
+  <button class="nav-item active" onclick="showSection('context')">Product context</button>
+  <button class="nav-item" onclick="showSection('strategic')">Strategic constraints</button>
+  <div class="nav-group">Execution</div>
+  <button class="nav-item" onclick="showSection('phases')">Launch phases</button>
+  <button class="nav-item" onclick="showSection('channels')">Channel strategy</button>
+  <button class="nav-item" onclick="showSection('personas')">Persona playbooks</button>
+  <button class="nav-item" onclick="showSection('waitlist')">Recruiter waitlist</button>
+  <div class="nav-group">Measurement</div>
+  <button class="nav-item" onclick="showSection('metrics')">Metrics framework</button>
+  <button class="nav-item" onclick="showSection('success')">90-day success criteria</button>
+</nav>
+
+<main class="main">
+
+  <!-- PRODUCT CONTEXT -->
+  <div id="context" class="section active">
+    <h2>Product context</h2>
+    <p class="subtitle">SeekOut.ai (codename: Helix) &mdash; a consumer-facing hiring platform connecting three personas through sharing-driven viral loops.</p>
+
+    <div class="card-grid">
+      <div class="card">
+        <span class="badge badge-purple">Candidates</span>
+        <h4 style="margin-top:10px">Upload &rarr; diagnose &rarr; build &rarr; share</h4>
+        <p style="font-size:13px">"Upload your resume. Get an AI diagnosis in 60 seconds. Walk away with a portfolio that actually gets noticed."</p>
+      </div>
+      <div class="card">
+        <span class="badge badge-teal">Hiring managers</span>
+        <h4 style="margin-top:10px">Post &rarr; share &rarr; screen &rarr; review</h4>
+        <p style="font-size:13px">"Post a job. Get AI-screened candidates with structured feedback tools."</p>
+      </div>
+      <div class="card">
+        <span class="badge badge-coral">Recruiters</span>
+        <h4 style="margin-top:10px">Intake &rarr; screen &rarr; packet &rarr; feedback</h4>
+        <p style="font-size:13px">"AI intake in 5 minutes. Screening at scale. Built by SeekOut."</p>
+      </div>
+    </div>
+
+    <h3>Key product mechanics</h3>
+    <ul>
+      <li>Every portfolio share, job link share, and prospect packet is a <strong>tracked link</strong> that pulls new users into the platform</li>
+      <li>Candidates get standalone value on day one (AI resume diagnosis + portfolio builder) &mdash; no network required</li>
+      <li>HMs and candidates create content (jobs, portfolios) that naturally distributes through sharing</li>
+      <li>One user can be multiple personas (e.g. an HM who also builds a portfolio)</li>
+    </ul>
+  </div>
+
+  <!-- STRATEGIC CONTEXT -->
+  <div id="strategic" class="section">
+    <h2>Strategic constraints</h2>
+    <p class="subtitle">Why we're phasing carefully and what's ready at launch.</p>
+
+    <div class="callout">
+      SeekOut has 1,000+ enterprise customers &mdash; warm relationships with thousands of HMs and recruiters. <strong>We only get one shot with that network.</strong> If we invite them before the product delivers clear value, we burn trust and lose our strongest distribution channel.
+    </div>
+
+    <h3>Launch readiness</h3>
+    <table>
+      <thead><tr><th>Flow</th><th>Status</th><th>Go-to-market</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Candidate flow</strong><br><span style="font-size:12px;color:var(--text3)">Portfolio builder, sharing, applications</span></td><td><span class="badge badge-green">Polished</span></td><td>Open signup</td></tr>
+        <tr><td><strong>HM flow</strong><br><span style="font-size:12px;color:var(--text3)">Job posting, screening, feedback</span></td><td><span class="badge badge-green">Polished</span></td><td>Open signup</td></tr>
+        <tr><td><strong>Recruiter flow</strong><br><span style="font-size:12px;color:var(--text3)">AI intake, sourcing, prospect packets</span></td><td><span class="badge badge-amber">In development</span></td><td>Waitlist</td></tr>
+      </tbody>
+    </table>
+
+    <h3>The enterprise network</h3>
+    <ul>
+      <li><strong>Not off-limits</strong> &mdash; but no official outreach until we have organic traction and validated value</li>
+      <li>Enterprise activation is Phase 4 (separate plan)</li>
+      <li>When we reach out, it should feel like "come see what 500 HMs are already using" &mdash; not "try our beta"</li>
+    </ul>
+
+    <h3>Relationship to SeekOut Recruit</h3>
+    <p>SeekOut.ai is a separate consumer product. Different brand, different growth model (viral vs. sales-led), different audience (individuals vs. enterprise TA teams). But built by the same team, on the same infrastructure, with the same AI. The "built by SeekOut" trust signal is an asset &mdash; use it, especially with recruiters.</p>
+  </div>
+
+  <!-- LAUNCH PHASES -->
+  <div id="phases" class="section">
+    <h2>Launch phases</h2>
+    <p class="subtitle">Click a phase to see details.</p>
+
+    <div class="phase-timeline">
+      <div class="phase-block active" onclick="showPhase(0)">
+        <div class="phase-num">Phase 0</div>
+        <div class="phase-name">Prep</div>
+        <div class="phase-date">Now &rarr; Mar 31</div>
+      </div>
+      <div class="phase-block" onclick="showPhase(1)">
+        <div class="phase-num">Phase 1</div>
+        <div class="phase-name">Dogfood</div>
+        <div class="phase-date">Mar 31 &rarr; ~2-3 wks</div>
+      </div>
+      <div class="phase-block" onclick="showPhase(2)">
+        <div class="phase-num">Phase 2</div>
+        <div class="phase-name">Public launch</div>
+        <div class="phase-date">~Mid-April</div>
+      </div>
+      <div class="phase-block" onclick="showPhase(3)">
+        <div class="phase-num">Phase 3</div>
+        <div class="phase-name">Momentum</div>
+        <div class="phase-date">3-4 wks post-launch</div>
+      </div>
+      <div class="phase-block" onclick="showPhase(4)">
+        <div class="phase-num">Phase 4</div>
+        <div class="phase-name">Enterprise</div>
+        <div class="phase-date">TBD</div>
+      </div>
+    </div>
+
+    <div class="phase-detail">
+      <div class="card active" id="phase-0">
+        <h4>Phase 0: Prep</h4>
+        <p style="font-size:13px;margin-bottom:12px">Product/eng driving toward internal go-live. Marketing prepares.</p>
+        <ul>
+          <li>Build recruiter waitlist page and mechanics</li>
+          <li>Seed content pipeline: 5+ pieces ready to publish at public launch</li>
+          <li>Start SEO content (long lead time &mdash; compounds later)</li>
+          <li><span class="badge badge-amber" style="font-size:10px">Open question</span> Should SeekOut.ai have its own LinkedIn company page?</li>
+          <li>Prepare social content calendar</li>
+          <li>Set up analytics dashboards</li>
+        </ul>
+      </div>
+      <div class="card" id="phase-1">
+        <h4>Phase 1: Internal dogfood</h4>
+        <p style="font-size:13px;margin-bottom:12px">~140 SeekOut employees use the live product. Marketing's role is minimal.</p>
+        <ul>
+          <li>Observe real usage patterns &mdash; what do people share? What language do they use?</li>
+          <li>Capture screenshots, quotes, before/after examples (with permission)</li>
+          <li>Refine messaging based on what resonates internally</li>
+          <li>Continue building public launch assets</li>
+          <li><span class="badge badge-red" style="font-size:10px">Do not</span> activate any external channels yet</li>
+        </ul>
+        <p style="font-size:12px;color:var(--text3);margin-top:12px"><strong>Exit criteria:</strong> Qualitative &mdash; internal feedback is positive enough to go public (PM decides).</p>
+      </div>
+      <div class="card" id="phase-2">
+        <h4>Phase 2: Public launch</h4>
+        <p style="font-size:13px;margin-bottom:12px">Open signup for candidates and HMs. Recruiter waitlist goes live. This is the phase where marketing proves its value.</p>
+        <ul>
+          <li>Activate all organic channels (LinkedIn, Reddit, SEO)</li>
+          <li>Drive candidate signups through content marketing</li>
+          <li>Drive HM signups through LinkedIn thought leadership + selective direct outreach</li>
+          <li>Build and grow the recruiter waitlist</li>
+          <li>Test messaging/positioning with small paid ad spend</li>
+        </ul>
+      </div>
+      <div class="card" id="phase-3">
+        <h4>Phase 3: Momentum plays</h4>
+        <p style="font-size:13px;margin-bottom:12px">Organic traction validated. Time to amplify.</p>
+        <ul>
+          <li>Coordinated launch moment: Product Hunt, Hacker News, or equivalent</li>
+          <li>Activate influencer partnerships (career coaches, recruiting creators)</li>
+          <li>Begin university/bootcamp partnerships</li>
+          <li>Scale what's working from Phase 2, cut what isn't</li>
+        </ul>
+        <p style="font-size:12px;color:var(--text3);margin-top:12px"><strong>Trigger:</strong> PM and marketing jointly decide based on Phase 2 growth trajectory, retention, and loop health.</p>
+      </div>
+      <div class="card" id="phase-4">
+        <h4>Phase 4: Enterprise activation</h4>
+        <p style="font-size:13px;margin-bottom:12px">Activate SeekOut's 500+ enterprise customer network. This phase gets its own plan.</p>
+        <ul>
+          <li>CS/AE teams drive outreach (warm intros to HMs and recruiters at existing customers)</li>
+          <li>Recruiter waitlist may be partially or fully opened</li>
+          <li>Marketing provides assets, landing pages, email templates, success stories</li>
+          <li>This is the highest-leverage growth moment &mdash; we need to be ready</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHANNEL STRATEGY -->
+  <div id="channels" class="section">
+    <h2>Channel strategy</h2>
+    <p class="subtitle">Ranked by verdict and timing.</p>
+
+    <table>
+      <thead><tr><th>Channel</th><th>Persona</th><th>Cost</th><th>Time to impact</th><th>Verdict</th></tr></thead>
+      <tbody>
+        <tr><td><strong>LinkedIn organic</strong></td><td>All three</td><td>Low</td><td>2-4 weeks</td><td><span class="badge badge-green">Primary &mdash; Phase 0</span></td></tr>
+        <tr><td><strong>SEO / Content</strong></td><td>Candidates</td><td>Low (time)</td><td>2-4 months</td><td><span class="badge badge-green">Start now</span></td></tr>
+        <tr><td><strong>Reddit</strong></td><td>Candidates</td><td>Low</td><td>1-2 weeks</td><td><span class="badge badge-green">Do &mdash; authentically</span></td></tr>
+        <tr><td><strong>Paid ads</strong></td><td>Candidates, HMs</td><td>Medium</td><td>Immediate</td><td><span class="badge badge-blue">Messaging tests only</span></td></tr>
+        <tr><td><strong>Influencer / Creator</strong></td><td>Candidates</td><td>$500-5K/creator</td><td>2-6 weeks</td><td><span class="badge badge-purple">Phase 3</span></td></tr>
+        <tr><td><strong>Product Hunt / HN</strong></td><td>Tech candidates</td><td>Low</td><td>Launch day</td><td><span class="badge badge-purple">Phase 3</span></td></tr>
+        <tr><td><strong>University / Bootcamp</strong></td><td>Candidates</td><td>Low-Med</td><td>1-3 months</td><td><span class="badge badge-purple">Phase 3</span></td></tr>
+        <tr><td><strong>Referral program</strong></td><td>All three</td><td>Eng time</td><td>Ongoing</td><td><span class="badge badge-teal">Product builds</span></td></tr>
+        <tr><td><strong>Twitter / X</strong></td><td>Recruiters, HMs</td><td>Low</td><td>2-4 weeks</td><td><span class="badge badge-amber">Repurpose only</span></td></tr>
+        <tr><td><strong>TikTok / Reels</strong></td><td>Candidates</td><td>Low-Med</td><td>4-8 weeks</td><td><span class="badge badge-red">Skip unless natural fit</span></td></tr>
+        <tr><td><strong>Enterprise base</strong></td><td>HMs, Recruiters</td><td>Zero</td><td>Immediate</td><td><span class="badge badge-pink">Phase 4 &mdash; biggest lever</span></td></tr>
+      </tbody>
+    </table>
+
+    <h3>Paid ads: messaging testing only</h3>
+    <div class="callout">
+      Budget goal is <strong>learning, not volume</strong>. Keep spend at ~$500&ndash;1K/week max during testing. Kill anything that isn't generating learning.
+    </div>
+    <ul>
+      <li>A/B test headlines, value props, and positioning across personas</li>
+      <li>Identify which messages drive clicks vs. actual signups</li>
+      <li>Test candidate vs. HM messaging independently</li>
+      <li>Build a library of validated messaging for organic channels</li>
+    </ul>
+  </div>
+
+  <!-- PERSONA PLAYBOOKS -->
+  <div id="personas" class="section">
+    <h2>Persona playbooks</h2>
+    <p class="subtitle">Tactics by persona, in priority order.</p>
+
+    <div class="persona-card" style="background:var(--accent-bg)">
+      <span class="badge badge-purple">Candidates &mdash; volume play</span>
+      <h4 style="color:var(--accent-text)">Open signup</h4>
+      <p style="font-size:13px;color:var(--accent-text);opacity:0.8;margin:8px 0"><strong>The hook:</strong> "Upload your resume. Get an AI diagnosis in 60 seconds. Walk away with a portfolio that actually gets noticed."</p>
+      <p style="font-size:13px;color:var(--accent-text);opacity:0.8"><strong>The magic moment:</strong> The before/after of AI resume diagnosis.</p>
+      <h4 style="color:var(--accent-text);font-size:13px">Tactics</h4>
+      <ol style="font-size:13px;color:var(--accent-text);opacity:0.85;padding-left:20px">
+        <li>"Resume before/after" content &mdash; core content engine</li>
+        <li>SEO targeting "AI resume builder," "resume tips 2026"</li>
+        <li>Reddit presence &mdash; authentic, no shilling</li>
+        <li>"Score share" mechanic &mdash; "My resume went from 62 &rarr; 91"</li>
+        <li>University/bootcamp outreach (Phase 3)</li>
+      </ol>
+    </div>
+
+    <div class="persona-card" style="background:var(--teal-bg)">
+      <span class="badge badge-teal">Hiring managers &mdash; quality play</span>
+      <h4 style="color:var(--teal-text)">Open signup</h4>
+      <p style="font-size:13px;color:var(--teal-text);opacity:0.8;margin:8px 0"><strong>The hook:</strong> "Post a job. Get AI-screened candidates with structured feedback tools. No recruiter middleman needed."</p>
+      <h4 style="color:var(--teal-text);font-size:13px">Tactics</h4>
+      <ol style="font-size:13px;color:var(--teal-text);opacity:0.85;padding-left:20px">
+        <li>LinkedIn thought leadership &mdash; earn trust, soft CTAs</li>
+        <li>Job sharing loop &mdash; beautiful Open Graph link previews</li>
+        <li>Selective direct outreach at launch (outside enterprise base)</li>
+        <li>Private HM community (Slack/Discord) for early adopters</li>
+      </ol>
+    </div>
+
+    <div class="persona-card" style="background:var(--coral-bg)">
+      <span class="badge badge-coral">Recruiters &mdash; demand building</span>
+      <h4 style="color:var(--coral-text)">Waitlisted</h4>
+      <p style="font-size:13px;color:var(--coral-text);opacity:0.8;margin:8px 0"><strong>The hook:</strong> "The AI recruiting tool that actually works &mdash; built by SeekOut, the company 1,000+ enterprises already trust."</p>
+      <h4 style="color:var(--coral-text);font-size:13px">Tactics</h4>
+      <ol style="font-size:13px;color:var(--coral-text);opacity:0.85;padding-left:20px">
+        <li>Leverage enterprise brand trust signal</li>
+        <li>Waitlist counter as social proof</li>
+        <li>Weekly "drop" emails &mdash; sneak peeks, demo clips</li>
+        <li>"AI intake in 5 minutes" demo video</li>
+        <li>Influencer fast-track (5K+ followers get early access)</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- RECRUITER WAITLIST -->
+  <div id="waitlist" class="section">
+    <h2>Recruiter waitlist mechanics</h2>
+    <p class="subtitle">The waitlist isn't just demand generation &mdash; referrals from waitlisted recruiters drive candidate and HM signups too.</p>
+
+    <div class="card" style="margin-bottom:16px">
+      <div class="waitlist-mechanic">
+        <span class="badge badge-purple">Counter</span>
+        <div><strong>Public position counter</strong><br><span style="font-size:12px;color:var(--text3)">"You're #847 of 2,341 on the waitlist"</span></div>
+        <span style="font-size:12px;color:var(--text3)">Social proof + FOMO</span>
+      </div>
+      <div class="waitlist-mechanic">
+        <span class="badge badge-teal">Referral</span>
+        <div><strong>Referral queue-jumping</strong><br><span style="font-size:12px;color:var(--text3)">Each referral who signs up moves you up 10 spots</span></div>
+        <span style="font-size:12px;color:var(--text3)">Every recruiter becomes a marketer</span>
+      </div>
+      <div class="waitlist-mechanic">
+        <span class="badge badge-amber">Gamification</span>
+        <div><strong>Milestone unlocks</strong><br><span style="font-size:12px;color:var(--text3)">3 referrals: early content. 5: priority onboarding. 10: founding member.</span></div>
+        <span style="font-size:12px;color:var(--text3)">Drives referral volume</span>
+      </div>
+      <div class="waitlist-mechanic">
+        <span class="badge badge-blue">Engagement</span>
+        <div><strong>Weekly drop emails</strong><br><span style="font-size:12px;color:var(--text3)">Product sneak peeks, demo clips, AI screening results</span></div>
+        <span style="font-size:12px;color:var(--text3)">Keeps interest while waiting</span>
+      </div>
+      <div class="waitlist-mechanic">
+        <span class="badge badge-pink">Social</span>
+        <div><strong>LinkedIn shareability</strong><br><span style="font-size:12px;color:var(--text3)">"I'm #234 on the SeekOut.ai waitlist" shareable card</span></div>
+        <span style="font-size:12px;color:var(--text3)">Organic reach</span>
+      </div>
+      <div class="waitlist-mechanic">
+        <span class="badge badge-coral">VIP</span>
+        <div><strong>Influencer fast-track</strong><br><span style="font-size:12px;color:var(--text3)">Recruiters with 5K+ followers get instant access</span></div>
+        <span style="font-size:12px;color:var(--text3)">Aspirational content</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- METRICS -->
+  <div id="metrics" class="section">
+    <h2>Metrics framework</h2>
+    <p class="subtitle">Track weekly (daily once public). Dashboards owned by Product/Engineering.</p>
+
+    <h3>User growth by persona</h3>
+    <div class="card">
+      <div class="metric-row"><span class="metric-label">Total unique users</span><span class="metric-def">All registered accounts</span></div>
+      <div class="metric-row"><span class="metric-label">Candidates</span><span class="metric-def">Users who have created a portfolio</span></div>
+      <div class="metric-row"><span class="metric-label">Hiring managers</span><span class="metric-def">Users who have posted at least one job</span></div>
+      <div class="metric-row"><span class="metric-label">Recruiters (waitlist)</span><span class="metric-def">Users on the recruiter waitlist</span></div>
+      <div class="metric-row"><span class="metric-label">Multi-persona users</span><span class="metric-def">Users who are both candidate AND HM</span></div>
+    </div>
+
+    <h3>Waitlist metrics</h3>
+    <div class="card">
+      <div class="metric-row"><span class="metric-label">Waitlist signups</span><span class="metric-def">Total and weekly new</span></div>
+    </div>
+
+    <h3>Channel metrics</h3>
+    <p>Define and track what makes sense for each channel as they activate.</p>
+  </div>
+
+  <!-- 90-DAY SUCCESS -->
+  <div id="success" class="section">
+    <h2>90-day success criteria</h2>
+    <p class="subtitle">March 20 &rarr; ~June 18. What "marketing is doing a great job" looks like.</p>
+
+    <h3>By end of Phase 0 + Dogfood <span style="font-weight:400;color:var(--text3)">&nbsp;Mar 20 &rarr; mid-April</span></h3>
+    <table>
+      <thead><tr><th>Outcome</th><th>Measured by</th></tr></thead>
+      <tbody>
+        <tr><td>Public launch ready the moment product says "go"</td><td>Landing pages, content pipeline, social calendar, waitlist page live</td></tr>
+        <tr><td>SEO foundation planted</td><td>3-5 articles published targeting high-intent candidate keywords</td></tr>
+        <tr><td>Internal dogfood insights captured</td><td>Portfolio of screenshots, quotes, before/afters ready</td></tr>
+      </tbody>
+    </table>
+
+    <h3>By end of Month 1 post-launch <span style="font-weight:400;color:var(--text3)">&nbsp;mid-April &rarr; mid-May</span></h3>
+    <table>
+      <thead><tr><th>Outcome</th><th>Measured by</th></tr></thead>
+      <tbody>
+        <tr><td>Signups growing week-over-week</td><td>Positive weekly growth rate for candidates and HMs</td></tr>
+        <tr><td>2-3 channels validated</td><td>Can rank channels by signup volume and activation rate</td></tr>
+        <tr><td>Content cadence established</td><td>Publishing 2-3x/week across LinkedIn + blog/SEO</td></tr>
+        <tr><td>Recruiter waitlist growing</td><td>Waitlist signups increasing weekly</td></tr>
+      </tbody>
+    </table>
+
+    <h3>By end of Month 2 post-launch <span style="font-weight:400;color:var(--text3)">&nbsp;mid-May &rarr; mid-June</span></h3>
+    <table>
+      <thead><tr><th>Outcome</th><th>Measured by</th></tr></thead>
+      <tbody>
+        <tr><td>Best channel identified and scaled</td><td>Disproportionate effort on highest-ROI channel</td></tr>
+        <tr><td>Shared link conversion improving</td><td>A/B tested OG images, landing pages, CTAs</td></tr>
+        <tr><td>Ready for Phase 3 momentum play</td><td>Launch moment planned, influencer pipeline built</td></tr>
+        <tr><td>Paid ad learnings documented</td><td>Messaging/positioning test results with data</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      We're not setting specific signup number targets yet. We'll set those together after the first 2 weeks of public launch data, when we understand baseline organic growth.
+    </div>
+  </div>
+
+</main>
+
+<script>
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function showPhase(idx) {
+  document.querySelectorAll('.phase-block').forEach((b, i) => {
+    b.classList.toggle('active', i === idx);
+  });
+  document.querySelectorAll('.phase-detail .card').forEach((c, i) => {
+    c.classList.toggle('active', i === idx);
+  });
+}
+</script>
+
+</body>
+</html>
