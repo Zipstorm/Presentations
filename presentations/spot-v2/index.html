@@ -1,0 +1,1658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPOT V2 — Engage & Settings Wireframes</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #4A90D9;
+    --blue-dark: #3A7BC8;
+    --blue-light: #E8F1FB;
+    --teal: #2DD4BF;
+    --teal-light: #E6F9F3;
+    --purple: #A78BFA;
+    --purple-bg: #F0EEFF;
+    --green: #00B894;
+    --green-light: #E6F9F3;
+    --amber: #FDCB6E;
+    --amber-dark: #E17055;
+    --amber-bg: #FFF8E7;
+    --red: #D63031;
+    --red-bg: #FFEAEA;
+    --gray-50: #FAFAFA;
+    --gray-100: #F5F5F5;
+    --gray-200: #EEEEEE;
+    --gray-300: #E0E0E0;
+    --gray-400: #BDBDBD;
+    --gray-500: #9E9E9E;
+    --gray-600: #757575;
+    --gray-700: #616161;
+    --gray-800: #424242;
+    --gray-900: #212121;
+    --sidebar-bg: #1B2332;
+    --sidebar-text: #C4C4D4;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+    --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
+    --radius: 8px;
+    --radius-lg: 12px;
+    /* Pipeline stage colors */
+    --stage-sourced: #9E9E9E;
+    --stage-contacted: #4A90D9;
+    --stage-responded: #2DD4BF;
+    --stage-screening: #A78BFA;
+    --stage-interview: #FB923C;
+    --stage-offer: #FDCB6E;
+    --stage-hired: #00B894;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', -apple-system, sans-serif; background: #EEF1F6; color: var(--gray-900); min-height: 100vh; }
+
+  /* ─── Control Bar ─── */
+  .control-bar { position: sticky; top: 0; z-index: 100; background: white; border-bottom: 1px solid var(--gray-200); padding: 10px 20px; display: flex; align-items: center; gap: 12px; box-shadow: var(--shadow-sm); flex-wrap: wrap; }
+  .control-bar h1 { font-size: 15px; font-weight: 700; white-space: nowrap; color: var(--blue); }
+  .screen-tabs { display: flex; gap: 3px; margin-left: auto; background: var(--gray-100); border-radius: 7px; padding: 2px; flex-wrap: wrap; }
+  .screen-tab { padding: 5px 10px; border-radius: 5px; font-size: 11px; font-weight: 500; cursor: pointer; border: none; background: transparent; color: var(--gray-600); transition: all 0.15s; white-space: nowrap; }
+  .screen-tab:hover { color: var(--gray-800); }
+  .screen-tab.active { background: white; color: var(--blue); box-shadow: var(--shadow-sm); }
+  .tab-sep { width: 1px; background: var(--gray-300); margin: 4px 2px; }
+
+  /* ─── State Bar ─── */
+  .state-bar { background: white; border-bottom: 1px solid var(--gray-200); padding: 7px 20px; display: flex; align-items: center; gap: 6px; overflow-x: auto; }
+  .state-bar .label { font-size: 11px; font-weight: 600; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; margin-right: 4px; }
+  .state-btn { padding: 4px 10px; border-radius: 5px; font-size: 11px; font-weight: 500; cursor: pointer; border: 1px solid var(--gray-300); background: white; color: var(--gray-700); transition: all 0.15s; white-space: nowrap; }
+  .state-btn:hover { border-color: var(--blue); color: var(--blue); }
+  .state-btn.active { background: var(--blue); color: white; border-color: var(--blue); }
+
+  .canvas { display: flex; justify-content: center; padding: 28px 20px 48px; }
+  .screen { display: none; }
+  .screen.active { display: block; }
+  .hidden { display: none !important; }
+
+  /* ═══ App Shell ═══ */
+  .app-shell { width: 1080px; background: white; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); overflow: hidden; display: flex; flex-direction: column; }
+  .topbar { display: flex; align-items: center; padding: 10px 18px; border-bottom: 1px solid var(--gray-200); background: white; gap: 10px; }
+  .topbar .back { font-size: 14px; color: var(--gray-500); cursor: pointer; }
+  .topbar .brand { font-size: 14px; font-weight: 700; color: var(--blue); }
+  .topbar .brand span { color: var(--gray-400); font-weight: 400; }
+  .topbar .req-name { font-size: 13px; font-weight: 600; color: var(--gray-800); margin-left: 4px; }
+  .topbar .spacer { flex: 1; }
+  .topbar .mock-toggle { padding: 4px 10px; border-radius: 5px; font-size: 10px; font-weight: 500; border: 1px solid var(--gray-300); background: white; color: var(--gray-600); }
+  .topbar .icon-btn { width: 30px; height: 30px; border-radius: 6px; border: none; background: transparent; color: var(--gray-500); cursor: pointer; font-size: 15px; display: flex; align-items: center; justify-content: center; position: relative; }
+  .topbar .icon-btn:hover { background: var(--gray-100); }
+  .topbar .icon-btn .dot { position: absolute; top: 4px; right: 4px; width: 7px; height: 7px; background: var(--red); border-radius: 50%; border: 1.5px solid white; }
+  .topbar .avatar { width: 28px; height: 28px; border-radius: 50%; background: var(--blue); color: white; font-size: 11px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+
+  .app-body { display: flex; min-height: 540px; }
+
+  /* ─── Sidebar ─── */
+  .sidebar { width: 140px; background: var(--sidebar-bg); padding: 18px 10px; display: flex; flex-direction: column; color: var(--sidebar-text); flex-shrink: 0; }
+  .sidebar-nav { list-style: none; }
+  .sidebar-nav li { padding: 8px 10px; border-radius: 6px; font-size: 12px; cursor: pointer; margin-bottom: 2px; display: flex; align-items: center; gap: 7px; color: var(--sidebar-text); }
+  .sidebar-nav li:hover { background: rgba(255,255,255,0.06); }
+  .sidebar-nav li.active { background: rgba(255,255,255,0.12); color: white; font-weight: 600; }
+  .sidebar-nav li .nav-icon { font-size: 14px; width: 18px; text-align: center; }
+  .sidebar-nav li .nav-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--amber); margin-left: auto; }
+
+  /* ─── Content Area ─── */
+  .content-area { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: var(--gray-50); }
+
+  /* ─── Segmented Control (Engage tabs / Settings tabs) ─── */
+  .seg-control { display: flex; padding: 12px 18px 0; gap: 0; background: white; border-bottom: 1px solid var(--gray-200); }
+  .seg-btn { padding: 8px 16px; font-size: 12px; font-weight: 500; color: var(--gray-500); cursor: pointer; border: none; background: transparent; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 0.15s; }
+  .seg-btn:hover { color: var(--gray-700); }
+  .seg-btn.active { color: var(--blue); border-bottom-color: var(--blue); font-weight: 600; }
+
+  /* ─── Content Main ─── */
+  .content-main { flex: 1; padding: 16px 18px; overflow-y: auto; }
+
+  /* ─── Table ─── */
+  .data-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .data-table th { text-align: left; padding: 8px 10px; font-size: 10px; font-weight: 600; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid var(--gray-200); }
+  .data-table td { padding: 10px; border-bottom: 1px solid var(--gray-100); vertical-align: middle; }
+  .data-table tr:hover { background: var(--gray-50); cursor: pointer; }
+  .data-table .cb { width: 24px; }
+  .data-table input[type="checkbox"] { accent-color: var(--blue); }
+
+  /* ─── Stage Badge ─── */
+  .stage-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; }
+  .stage-badge.sourced { background: #F5F5F5; color: var(--stage-sourced); }
+  .stage-badge.contacted { background: var(--blue-light); color: var(--blue); }
+  .stage-badge.responded { background: var(--teal-light); color: #0D9488; }
+  .stage-badge.screening { background: var(--purple-bg); color: #7C3AED; }
+  .stage-badge.interview { background: #FFF3E0; color: #E65100; }
+  .stage-badge.offer { background: var(--amber-bg); color: #D97706; }
+  .stage-badge.hired { background: var(--green-light); color: var(--green); }
+
+  /* ─── Stars ─── */
+  .stars { color: var(--amber); font-size: 11px; letter-spacing: 1px; }
+  .stars .empty { color: var(--gray-300); }
+
+  /* ─── Email Status ─── */
+  .email-status { font-size: 10px; font-weight: 500; }
+  .email-status.sent { color: var(--gray-500); }
+  .email-status.opened { color: var(--blue); }
+  .email-status.replied { color: var(--green); }
+  .scrn-status { font-size: 10px; color: var(--gray-500); }
+  .scrn-status.scheduled { color: var(--purple); }
+
+  /* ─── Search & Filters ─── */
+  .toolbar { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+  .search-box { display: flex; align-items: center; gap: 6px; padding: 7px 12px; border: 1px solid var(--gray-300); border-radius: 6px; font-size: 12px; color: var(--gray-500); background: white; flex: 1; max-width: 280px; }
+  .filter-btn { padding: 6px 12px; border: 1px solid var(--gray-300); border-radius: 6px; font-size: 11px; font-weight: 500; background: white; color: var(--gray-700); cursor: pointer; display: flex; align-items: center; gap: 4px; }
+  .filter-btn:hover { border-color: var(--blue); }
+  .toolbar .spacer { flex: 1; }
+
+  /* ─── Bulk Action Bar ─── */
+  .bulk-bar { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: var(--blue-light); border: 1px solid var(--blue); border-radius: var(--radius); margin-top: 12px; }
+  .bulk-bar .count { font-size: 12px; font-weight: 600; color: var(--blue); }
+  .bulk-bar .spacer { flex: 1; }
+  .bulk-bar .bulk-btn { padding: 6px 14px; border-radius: 6px; font-size: 11px; font-weight: 600; cursor: pointer; border: none; }
+  .bulk-bar .bulk-btn.primary { background: var(--blue); color: white; }
+  .bulk-bar .bulk-btn.ghost { background: transparent; color: var(--gray-600); border: 1px solid var(--gray-300); }
+
+  /* ─── Drawer ─── */
+  .with-drawer { display: flex; gap: 0; height: 100%; }
+  .with-drawer .main-col { flex: 1; overflow-y: auto; padding: 16px 18px; opacity: 0.5; }
+  .with-drawer .drawer { width: 360px; border-left: 1px solid var(--gray-200); background: white; overflow-y: auto; padding: 18px; flex-shrink: 0; }
+  .drawer-close { float: right; width: 24px; height: 24px; border-radius: 4px; border: none; background: var(--gray-100); color: var(--gray-500); cursor: pointer; font-size: 12px; display: flex; align-items: center; justify-content: center; }
+  .drawer h3 { font-size: 14px; font-weight: 700; margin-bottom: 14px; }
+  .drawer-tabs { display: flex; gap: 0; margin-bottom: 14px; border-bottom: 1px solid var(--gray-200); }
+  .drawer-tab { padding: 6px 12px; font-size: 11px; font-weight: 500; color: var(--gray-500); border-bottom: 2px solid transparent; cursor: pointer; }
+  .drawer-tab.active { color: var(--blue); border-bottom-color: var(--blue); font-weight: 600; }
+
+  .candidate-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+  .candidate-avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--blue); color: white; font-size: 15px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .candidate-info .c-name { font-size: 14px; font-weight: 700; }
+  .candidate-info .c-title { font-size: 11px; color: var(--gray-600); }
+  .candidate-info .c-meta { font-size: 10px; color: var(--gray-500); margin-top: 2px; }
+
+  .drawer-section { margin-bottom: 14px; }
+  .drawer-section .ds-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--gray-500); margin-bottom: 6px; }
+  .drawer-section .ds-value { font-size: 12px; color: var(--gray-800); }
+  .why-card { background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 10px 12px; font-size: 11px; color: var(--gray-700); line-height: 1.5; }
+  .why-card .skill-tags { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 8px; }
+  .why-card .skill-tag { padding: 2px 7px; background: var(--blue-light); color: var(--blue); border-radius: 3px; font-size: 10px; font-weight: 500; }
+  .link-btn { font-size: 11px; color: var(--blue); text-decoration: none; font-weight: 500; display: inline-flex; align-items: center; gap: 4px; }
+  .note-input { width: 100%; padding: 8px 10px; border: 1px solid var(--gray-300); border-radius: 6px; font-size: 11px; color: var(--gray-500); background: white; }
+
+  /* ─── Email View ─── */
+  .email-row { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-bottom: 1px solid var(--gray-100); cursor: pointer; transition: background 0.1s; }
+  .email-row:hover { background: var(--gray-50); }
+  .email-row .e-name { font-size: 12px; font-weight: 600; color: var(--gray-800); white-space: nowrap; min-width: 120px; }
+  .email-row .e-stage { margin-left: 0; }
+  .email-row .e-preview { flex: 1; min-width: 0; }
+  .email-row .e-subject { font-size: 12px; color: var(--gray-700); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .email-row .e-snippet { font-size: 11px; color: var(--gray-500); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .email-row .e-labels { display: flex; gap: 4px; flex-shrink: 0; }
+  .email-label { padding: 1px 6px; border-radius: 3px; font-size: 9px; font-weight: 600; }
+  .email-label.hot { background: #FFEAEA; color: var(--red); }
+  .email-label.fe { background: var(--blue-light); color: var(--blue); }
+  .email-row .e-date { font-size: 10px; color: var(--gray-400); white-space: nowrap; margin-left: 8px; flex-shrink: 0; }
+
+  .email-list { background: white; border: 1px solid var(--gray-200); border-radius: var(--radius); overflow: hidden; }
+
+  /* Thread drawer */
+  .thread-header { margin-bottom: 14px; }
+  .thread-header .th-name { font-size: 14px; font-weight: 700; }
+  .thread-header .th-meta { font-size: 11px; color: var(--gray-500); margin-top: 2px; }
+  .thread-header .th-labels { display: flex; gap: 4px; margin-top: 6px; }
+  .thread-msg { margin-bottom: 12px; }
+  .thread-msg .tm-header { font-size: 10px; color: var(--gray-400); margin-bottom: 4px; border-bottom: 1px solid var(--gray-100); padding-bottom: 4px; }
+  .thread-msg .tm-body { background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 10px 12px; font-size: 11px; line-height: 1.6; color: var(--gray-700); }
+  .thread-msg.reply .tm-body { background: var(--teal-light); border-color: var(--teal); }
+  .reply-status { font-size: 11px; color: var(--green); font-weight: 500; margin: 8px 0; display: flex; align-items: center; gap: 4px; }
+  .compose-area { margin-top: 12px; }
+  .compose-area textarea { width: 100%; height: 60px; padding: 8px 10px; border: 1px solid var(--gray-300); border-radius: 6px; font-size: 11px; font-family: inherit; resize: none; }
+  .compose-actions { display: flex; align-items: center; gap: 6px; margin-top: 8px; }
+  .btn-ai-draft { padding: 6px 12px; background: var(--blue); color: white; border: none; border-radius: 5px; font-size: 11px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 4px; }
+  .btn-ai-draft .arrow { font-size: 9px; margin-left: 2px; }
+  .btn-send { padding: 6px 14px; background: var(--green); color: white; border: none; border-radius: 5px; font-size: 11px; font-weight: 600; cursor: pointer; margin-left: auto; }
+  .ai-presets { background: white; border: 1px solid var(--gray-200); border-radius: 6px; padding: 4px 0; box-shadow: var(--shadow-md); margin-top: 4px; }
+  .ai-presets .preset { padding: 6px 12px; font-size: 11px; color: var(--gray-700); cursor: pointer; }
+  .ai-presets .preset:hover { background: var(--gray-50); }
+
+  /* ─── Calendar ─── */
+  .cal-toolbar { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .cal-toolbar .cal-nav { display: flex; align-items: center; gap: 8px; }
+  .cal-toolbar .cal-nav button { width: 28px; height: 28px; border-radius: 5px; border: 1px solid var(--gray-300); background: white; cursor: pointer; font-size: 13px; color: var(--gray-600); }
+  .cal-toolbar .cal-month { font-size: 14px; font-weight: 700; }
+  .cal-toolbar .today-btn { padding: 5px 12px; border: 1px solid var(--gray-300); border-radius: 5px; font-size: 11px; font-weight: 500; background: white; color: var(--gray-700); cursor: pointer; }
+  .cal-toolbar .cal-actions { display: flex; gap: 6px; margin-left: auto; }
+  .cal-toolbar .cal-action-btn { padding: 6px 12px; border-radius: 6px; font-size: 11px; font-weight: 600; cursor: pointer; border: 1px solid var(--gray-300); background: white; color: var(--gray-700); }
+  .cal-toolbar .cal-action-btn.primary { background: var(--blue); color: white; border-color: var(--blue); }
+
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); background: white; border: 1px solid var(--gray-200); border-radius: var(--radius); overflow: hidden; }
+  .cal-grid .cal-day-header { padding: 8px; text-align: center; font-size: 10px; font-weight: 600; color: var(--gray-500); text-transform: uppercase; border-bottom: 1px solid var(--gray-200); background: var(--gray-50); }
+  .cal-grid .cal-cell { min-height: 80px; padding: 6px; border-right: 1px solid var(--gray-100); border-bottom: 1px solid var(--gray-100); }
+  .cal-grid .cal-cell:nth-child(7n) { border-right: none; }
+  .cal-cell .cal-date { font-size: 11px; font-weight: 600; color: var(--gray-700); margin-bottom: 4px; }
+  .cal-cell .cal-date.today { background: var(--blue); color: white; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+  .cal-event { padding: 2px 5px; border-radius: 3px; font-size: 9px; font-weight: 500; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .cal-event.intake { background: #EDE9FE; color: #7C3AED; }
+  .cal-event.screening { background: var(--gray-100); color: var(--gray-700); }
+  .cal-event.outlook { background: var(--blue-light); color: var(--blue); }
+
+  .cal-legend { display: flex; gap: 16px; margin-top: 10px; font-size: 10px; color: var(--gray-500); }
+  .cal-legend .legend-dot { width: 8px; height: 8px; border-radius: 2px; display: inline-block; margin-right: 4px; }
+  .cal-legend .legend-dot.intake-dot { background: #7C3AED; }
+  .cal-legend .legend-dot.screening-dot { background: var(--gray-500); }
+  .cal-legend .legend-dot.outlook-dot { background: var(--blue); }
+
+  .upcoming { margin-top: 16px; }
+  .upcoming h4 { font-size: 12px; font-weight: 600; margin-bottom: 8px; color: var(--gray-800); }
+  .upcoming-item { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border: 1px solid var(--gray-200); border-radius: 6px; margin-bottom: 6px; background: white; font-size: 11px; color: var(--gray-700); }
+  .upcoming-item .ui-icon { font-size: 14px; }
+  .upcoming-item .ui-type { font-size: 10px; color: var(--gray-500); }
+
+  /* ─── Kanban ─── */
+  .kanban { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; }
+  .kanban-col { min-width: 130px; flex: 1; background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius); overflow: hidden; }
+  .kanban-col-header { padding: 10px; border-bottom: 1px solid var(--gray-200); background: white; display: flex; align-items: center; justify-content: space-between; }
+  .kanban-col-header .kh-name { font-size: 11px; font-weight: 600; color: var(--gray-800); }
+  .kanban-col-header .kh-count { font-size: 10px; font-weight: 600; color: var(--gray-500); background: var(--gray-100); padding: 1px 6px; border-radius: 10px; }
+  .kanban-cards { padding: 8px; display: flex; flex-direction: column; gap: 6px; min-height: 60px; }
+  .kanban-card { background: white; border: 1px solid var(--gray-200); border-radius: 6px; padding: 8px 10px; cursor: pointer; transition: box-shadow 0.15s; }
+  .kanban-card:hover { box-shadow: var(--shadow-sm); border-color: var(--blue); }
+  .kanban-card .kc-name { font-size: 11px; font-weight: 600; color: var(--gray-800); }
+  .kanban-card .kc-title { font-size: 10px; color: var(--gray-500); }
+  .kanban-empty { text-align: center; padding: 16px 8px; font-size: 10px; color: var(--gray-400); font-style: italic; }
+
+  /* ─── Metrics ─── */
+  .metric-card { background: white; border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 20px; margin-bottom: 16px; box-shadow: var(--shadow-sm); }
+  .metric-card h3 { font-size: 13px; font-weight: 700; margin-bottom: 14px; }
+
+  /* Sankey (simplified) */
+  .sankey { display: flex; flex-direction: column; gap: 8px; }
+  .sankey-row { display: flex; align-items: center; gap: 0; }
+  .sankey-node { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; color: var(--gray-700); min-width: 90px; }
+  .sankey-node .sn-count { font-size: 10px; color: var(--gray-500); }
+  .sankey-bar { height: 20px; border-radius: 3px; transition: width 0.3s; }
+  .sankey-dropoff { font-size: 9px; color: var(--red); font-weight: 500; margin-left: 6px; display: flex; align-items: center; gap: 3px; }
+
+  /* Line chart placeholder */
+  .chart-placeholder { height: 160px; background: var(--gray-50); border: 1px dashed var(--gray-300); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; color: var(--gray-400); font-size: 12px; }
+  .chart-legend { display: flex; gap: 12px; margin-top: 10px; font-size: 10px; flex-wrap: wrap; }
+  .chart-legend span { display: flex; align-items: center; gap: 4px; }
+  .chart-legend .cl-dot { width: 8px; height: 8px; border-radius: 2px; }
+
+  /* ─── Settings Forms ─── */
+  .settings-form { max-width: 580px; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px; }
+  .form-group { margin-bottom: 14px; }
+  .form-label { font-size: 11px; font-weight: 600; color: var(--gray-700); margin-bottom: 5px; display: block; }
+  .form-label .req { color: var(--red); }
+  .form-input { width: 100%; padding: 8px 12px; border: 1px solid var(--gray-300); border-radius: 6px; font-size: 12px; color: var(--gray-800); background: white; font-family: inherit; }
+  .form-input:focus { outline: none; border-color: var(--blue); }
+  .form-textarea { width: 100%; padding: 10px 12px; border: 1px solid var(--gray-300); border-radius: 6px; font-size: 12px; color: var(--gray-800); background: white; font-family: inherit; resize: vertical; min-height: 100px; line-height: 1.5; }
+  .form-select { width: 100%; padding: 8px 12px; border: 1px solid var(--gray-300); border-radius: 6px; font-size: 12px; color: var(--gray-800); background: white; appearance: auto; }
+  .form-hint { font-size: 10px; color: var(--gray-400); margin-top: 3px; }
+  .working-hours { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .working-hours .wh-field { display: flex; align-items: center; gap: 4px; font-size: 11px; color: var(--gray-600); }
+  .working-hours input[type="time"] { padding: 4px 8px; border: 1px solid var(--gray-300); border-radius: 4px; font-size: 11px; }
+  .day-checks { display: flex; gap: 6px; margin-top: 6px; }
+  .day-check { display: flex; align-items: center; gap: 3px; font-size: 10px; color: var(--gray-600); }
+  .day-check input { accent-color: var(--blue); }
+
+  .btn-primary { padding: 8px 20px; background: var(--blue); color: white; border: none; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; }
+  .btn-primary:hover { background: var(--blue-dark); }
+  .btn-secondary { padding: 8px 20px; background: white; color: var(--gray-600); border: 1px solid var(--gray-300); border-radius: 6px; font-size: 12px; font-weight: 500; cursor: pointer; }
+
+  /* ─── Sequence Cards ─── */
+  .seq-card { background: white; border: 1px solid var(--gray-200); border-radius: var(--radius); margin-bottom: 10px; overflow: hidden; box-shadow: var(--shadow-sm); }
+  .seq-card-header { display: flex; align-items: center; padding: 14px 16px; cursor: pointer; gap: 10px; }
+  .seq-card-header:hover { background: var(--gray-50); }
+  .seq-card-header .expand-icon { font-size: 10px; color: var(--gray-400); transition: transform 0.2s; width: 16px; }
+  .seq-card-header.expanded .expand-icon { transform: rotate(90deg); }
+  .seq-card-header .seq-name { font-size: 13px; font-weight: 600; flex: 1; }
+  .seq-card-header .seq-meta { font-size: 10px; color: var(--gray-500); }
+  .seq-card-header .seq-stats { display: flex; gap: 8px; font-size: 10px; margin-left: 8px; }
+  .seq-card-header .seq-stats span { display: flex; align-items: center; gap: 3px; }
+  .seq-card-header .menu-btn { width: 24px; height: 24px; border: none; background: transparent; color: var(--gray-400); cursor: pointer; font-size: 14px; border-radius: 4px; }
+  .seq-card-header .menu-btn:hover { background: var(--gray-100); }
+  .seq-detail { padding: 0 16px 16px; border-top: 1px solid var(--gray-200); }
+  .seq-stage { position: relative; padding: 12px 14px; background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 6px; margin-top: 10px; }
+  .seq-stage .ss-label { font-size: 10px; font-weight: 600; color: var(--blue); margin-bottom: 4px; }
+  .seq-stage .ss-delay { font-size: 10px; color: var(--gray-500); }
+  .seq-stage .ss-template { font-size: 11px; color: var(--gray-600); margin-top: 4px; }
+  .seq-stage .ss-preview { font-size: 11px; color: var(--gray-700); margin-top: 6px; line-height: 1.5; }
+  .seq-connector { text-align: center; font-size: 10px; color: var(--gray-400); padding: 4px 0; }
+
+  /* ─── Prerequisites Banner ─── */
+  .prereq-banner { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: var(--amber-bg); border: 1px solid var(--amber); border-radius: var(--radius); margin-bottom: 14px; }
+  .prereq-banner .pb-icon { font-size: 20px; }
+  .prereq-banner .pb-text { flex: 1; font-size: 12px; color: var(--gray-700); line-height: 1.4; }
+  .prereq-banner .pb-btn { padding: 6px 14px; background: var(--blue); color: white; border: none; border-radius: 5px; font-size: 11px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+
+  /* ─── AI Chat Panel ─── */
+  .with-chat { display: flex; height: 100%; }
+  .with-chat .main-side { flex: 1; overflow-y: auto; }
+  .chat-panel { width: 300px; border-left: 1px solid var(--gray-200); display: flex; flex-direction: column; background: white; flex-shrink: 0; }
+  .chat-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; border-bottom: 1px solid var(--gray-200); }
+  .chat-header .chat-title { font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 5px; }
+  .chat-header .close-btn { width: 22px; height: 22px; border-radius: 4px; border: none; background: transparent; color: var(--gray-400); cursor: pointer; font-size: 13px; }
+  .chat-messages { flex: 1; overflow-y: auto; padding: 14px; display: flex; flex-direction: column; gap: 10px; }
+  .chat-msg { padding: 9px 10px; border-radius: 7px; font-size: 11px; line-height: 1.5; max-width: 92%; }
+  .chat-msg.ai { background: var(--gray-100); color: var(--gray-800); align-self: flex-start; }
+  .chat-msg.user { background: var(--blue); color: white; align-self: flex-end; }
+  .approval-card { background: white; border: 1px solid var(--blue); border-radius: var(--radius); padding: 10px 12px; margin-top: 6px; }
+  .approval-card .ac-title { font-size: 11px; font-weight: 600; margin-bottom: 4px; }
+  .approval-card .ac-detail { font-size: 10px; color: var(--gray-600); margin-bottom: 8px; }
+  .approval-card .ac-actions { display: flex; gap: 6px; }
+  .approval-card .ac-btn { padding: 4px 12px; border-radius: 4px; font-size: 10px; font-weight: 600; cursor: pointer; border: none; }
+  .approval-card .ac-btn.approve { background: var(--green); color: white; }
+  .approval-card .ac-btn.reject { background: var(--gray-100); color: var(--gray-600); }
+  .chat-input { border-top: 1px solid var(--gray-200); padding: 10px 14px; display: flex; gap: 6px; align-items: center; }
+  .chat-input input { flex: 1; padding: 7px 10px; border: 1px solid var(--gray-300); border-radius: 5px; font-size: 11px; outline: none; }
+  .chat-input .send-btn { width: 28px; height: 28px; border-radius: 5px; border: none; background: var(--blue); color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 13px; }
+
+  /* ─── Notification Dropdown ─── */
+  .notif-dropdown { position: absolute; right: 60px; top: 42px; width: 340px; background: white; border: 1px solid var(--gray-200); border-radius: var(--radius); box-shadow: var(--shadow-lg); z-index: 50; }
+  .notif-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; border-bottom: 1px solid var(--gray-200); }
+  .notif-header h4 { font-size: 13px; font-weight: 700; }
+  .notif-header .mark-read { font-size: 10px; color: var(--blue); cursor: pointer; font-weight: 500; }
+  .notif-filters { display: flex; gap: 0; padding: 6px 14px; border-bottom: 1px solid var(--gray-100); overflow-x: auto; }
+  .notif-filter { padding: 4px 8px; font-size: 10px; font-weight: 500; color: var(--gray-500); cursor: pointer; border-radius: 4px; white-space: nowrap; }
+  .notif-filter.active { background: var(--blue-light); color: var(--blue); }
+  .notif-list { max-height: 300px; overflow-y: auto; }
+  .notif-item { display: flex; gap: 10px; padding: 10px 14px; border-bottom: 1px solid var(--gray-100); cursor: pointer; align-items: flex-start; }
+  .notif-item:hover { background: var(--gray-50); }
+  .notif-item .ni-icon { font-size: 14px; flex-shrink: 0; margin-top: 2px; }
+  .notif-item .ni-text { flex: 1; font-size: 11px; color: var(--gray-700); line-height: 1.4; }
+  .notif-item .ni-text strong { font-weight: 600; color: var(--gray-900); }
+  .notif-item .ni-text .ni-sub { font-size: 10px; color: var(--gray-500); margin-top: 1px; }
+  .notif-item .ni-time { font-size: 10px; color: var(--gray-400); white-space: nowrap; flex-shrink: 0; }
+
+  /* ─── Modal ─── */
+  .modal-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center; z-index: 40; border-radius: var(--radius-lg); }
+  .modal { background: white; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); padding: 24px; width: 420px; position: relative; }
+  .modal h3 { font-size: 16px; font-weight: 700; margin-bottom: 18px; }
+  .modal-close { position: absolute; right: 16px; top: 16px; width: 26px; height: 26px; border-radius: 50%; border: none; background: var(--gray-100); color: var(--gray-500); cursor: pointer; font-size: 12px; }
+  .modal-footer { display: flex; justify-content: flex-end; gap: 8px; margin-top: 20px; padding-top: 14px; border-top: 1px solid var(--gray-200); }
+
+  /* ─── Booking Page (Candidate-Facing) ─── */
+  .booking-page { width: 480px; background: white; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); padding: 36px; text-align: center; }
+  .booking-page .bp-logo { font-size: 24px; font-weight: 800; color: var(--blue); margin-bottom: 18px; }
+  .booking-page h2 { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+  .booking-page .bp-sub { font-size: 12px; color: var(--gray-500); margin-bottom: 6px; }
+  .booking-page .bp-msg { font-size: 12px; color: var(--gray-600); font-style: italic; margin-bottom: 16px; }
+  .booking-page .bp-duration { font-size: 11px; color: var(--gray-500); margin-bottom: 18px; }
+  .booking-page .bp-week-nav { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 14px; font-size: 12px; font-weight: 600; color: var(--gray-700); }
+  .booking-page .bp-week-nav button { border: none; background: transparent; cursor: pointer; font-size: 14px; color: var(--gray-500); }
+  .bp-day { text-align: left; margin-bottom: 12px; }
+  .bp-day .bp-day-label { font-size: 11px; font-weight: 600; color: var(--gray-700); margin-bottom: 6px; }
+  .bp-slots { display: flex; gap: 6px; flex-wrap: wrap; }
+  .bp-slot { padding: 6px 16px; border: 1px solid var(--blue); border-radius: 5px; font-size: 11px; font-weight: 500; color: var(--blue); cursor: pointer; background: white; }
+  .bp-slot:hover { background: var(--blue-light); }
+  .bp-confirmed { text-align: center; padding: 30px; }
+  .bp-confirmed .bp-check { font-size: 40px; margin-bottom: 12px; }
+  .bp-confirmed h2 { font-size: 18px; margin-bottom: 8px; }
+  .bp-confirmed .bp-details { font-size: 12px; color: var(--gray-600); line-height: 1.6; }
+
+  /* ─── Sequence Wizard ─── */
+  .wizard { width: 620px; background: white; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); overflow: hidden; }
+  .wizard-header { padding: 20px 24px; border-bottom: 1px solid var(--gray-200); }
+  .wizard-header h2 { font-size: 16px; font-weight: 700; }
+  .wizard-steps { display: flex; align-items: center; gap: 0; padding: 12px 24px; border-bottom: 1px solid var(--gray-100); }
+  .wizard-step { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--gray-400); font-weight: 500; }
+  .wizard-step.active { color: var(--blue); }
+  .wizard-step.completed { color: var(--green); }
+  .wizard-step .wdot { width: 7px; height: 7px; border-radius: 50%; background: var(--gray-300); }
+  .wizard-step.active .wdot { background: var(--blue); }
+  .wizard-step.completed .wdot { background: var(--green); }
+  .wizard-step-line { width: 30px; height: 1px; background: var(--gray-300); margin: 0 8px; }
+  .wizard-body { padding: 20px 24px; }
+  .wizard-footer { border-top: 1px solid var(--gray-200); padding: 12px 24px; display: flex; justify-content: flex-end; gap: 8px; }
+
+  /* ─── Settings prereq checklist ─── */
+  .prereq-check { background: white; border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 20px; max-width: 480px; margin: 40px auto; box-shadow: var(--shadow-sm); }
+  .prereq-check h3 { font-size: 14px; font-weight: 700; margin-bottom: 14px; text-align: center; }
+  .prereq-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid var(--gray-200); border-radius: 6px; margin-bottom: 8px; }
+  .prereq-item .pi-icon { font-size: 16px; }
+  .prereq-item .pi-text { flex: 1; }
+  .prereq-item .pi-name { font-size: 12px; font-weight: 600; }
+  .prereq-item .pi-desc { font-size: 10px; color: var(--gray-500); }
+  .prereq-item.done { background: var(--green-light); border-color: var(--green); }
+  .prereq-item.pending { background: var(--amber-bg); border-color: var(--amber); }
+
+  /* ─── SAM redirect card ─── */
+  .redirect-card { background: white; border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 40px; text-align: center; max-width: 400px; margin: 40px auto; box-shadow: var(--shadow-sm); }
+  .redirect-card .rc-icon { font-size: 32px; margin-bottom: 10px; }
+  .redirect-card p { font-size: 12px; color: var(--gray-600); margin-bottom: 16px; }
+
+  /* ─── Checkbox settings ─── */
+  .check-group { margin-bottom: 14px; }
+  .check-group .cg-label { font-size: 12px; font-weight: 600; color: var(--gray-800); margin-bottom: 8px; }
+  .check-item { display: flex; align-items: center; gap: 8px; padding: 4px 0; font-size: 12px; color: var(--gray-700); }
+  .check-item input { accent-color: var(--blue); }
+
+  /* ─── Responsive overflow ─── */
+  .screen-tabs { overflow-x: auto; }
+</style>
+</head>
+<body>
+
+<!-- ═══ Control Bar ═══ -->
+<div class="control-bar">
+  <h1>SPOT V2 — Engage & Settings</h1>
+  <div class="screen-tabs" id="screen-tabs">
+    <button class="screen-tab active" onclick="showScreen('s1')">List View</button>
+    <button class="screen-tab" onclick="showScreen('s2')">Email View</button>
+    <button class="screen-tab" onclick="showScreen('s3')">Calendar</button>
+    <button class="screen-tab" onclick="showScreen('s4')">Kanban</button>
+    <button class="screen-tab" onclick="showScreen('s5')">Metrics</button>
+    <div class="tab-sep"></div>
+    <button class="screen-tab" onclick="showScreen('s6')">Sender Identity</button>
+    <button class="screen-tab" onclick="showScreen('s7')">Email Sequences</button>
+    <button class="screen-tab" onclick="showScreen('s8')">Email Preferences</button>
+    <div class="tab-sep"></div>
+    <button class="screen-tab" onclick="showScreen('s9')">Notifications</button>
+    <button class="screen-tab" onclick="showScreen('s10')">Booking Page</button>
+    <button class="screen-tab" onclick="showScreen('s11')">Sequence Wizard</button>
+    <button class="screen-tab" onclick="showScreen('s12')">Prerequisites</button>
+  </div>
+</div>
+
+<!-- ═══ State Bars ═══ -->
+<div class="state-bar" id="state-bar-s1">
+  <span class="label">State</span>
+  <button class="state-btn active" onclick="showState('s1','1A')">1A Normal</button>
+  <button class="state-btn" onclick="showState('s1','1B')">1B Candidate Drawer</button>
+  <button class="state-btn" onclick="showState('s1','1C')">1C Bulk Action</button>
+</div>
+<div class="state-bar hidden" id="state-bar-s2">
+  <span class="label">State</span>
+  <button class="state-btn active" onclick="showState('s2','2A')">2A Inbox</button>
+  <button class="state-btn" onclick="showState('s2','2B')">2B Thread Drawer</button>
+</div>
+<div class="state-bar hidden" id="state-bar-s3">
+  <span class="label">State</span>
+  <button class="state-btn active" onclick="showState('s3','3A')">3A Calendar</button>
+  <button class="state-btn" onclick="showState('s3','3B')">3B Manual Invite</button>
+  <button class="state-btn" onclick="showState('s3','3C')">3C Booking Config</button>
+</div>
+<div class="state-bar hidden" id="state-bar-s4">
+  <span class="label">State</span>
+  <button class="state-btn active" onclick="showState('s4','4A')">4A Normal</button>
+</div>
+<div class="state-bar hidden" id="state-bar-s5">
+  <span class="label">State</span>
+  <button class="state-btn active" onclick="showState('s5','5A')">5A Normal</button>
+  <button class="state-btn" onclick="showState('s5','5B')">5B Empty</button>
+</div>
+<div class="state-bar hidden" id="state-bar-s6">
+  <span class="label">State</span>
+  <button class="state-btn active" onclick="showState('s6','6A')">6A Default</button>
+  <button class="state-btn" onclick="showState('s6','6B')">6B With AI Chat</button>
+</div>
+<div class="state-bar hidden" id="state-bar-s7">
+  <span class="label">State</span>
+  <button class="state-btn active" onclick="showState('s7','7A')">7A List</button>
+  <button class="state-btn" onclick="showState('s7','7B')">7B Expanded</button>
+</div>
+<div class="state-bar hidden" id="state-bar-s8">
+  <span class="label">State</span>
+  <button class="state-btn active" onclick="showState('s8','8A')">8A Default</button>
+</div>
+<div class="state-bar hidden" id="state-bar-s9">
+  <span class="label">State</span>
+  <button class="state-btn active" onclick="showState('s9','9A')">9A Dropdown</button>
+</div>
+<div class="state-bar hidden" id="state-bar-s10">
+  <span class="label">State</span>
+  <button class="state-btn active" onclick="showState('s10','10A')">10A Select Time</button>
+  <button class="state-btn" onclick="showState('s10','10B')">10B Confirmed</button>
+</div>
+<div class="state-bar hidden" id="state-bar-s11">
+  <span class="label">State</span>
+  <button class="state-btn active" onclick="showState('s11','11A')">11A Context</button>
+  <button class="state-btn" onclick="showState('s11','11B')">11B Review Steps</button>
+  <button class="state-btn" onclick="showState('s11','11C')">11C Settings</button>
+  <button class="state-btn" onclick="showState('s11','11D')">11D Save</button>
+</div>
+<div class="state-bar hidden" id="state-bar-s12">
+  <span class="label">State</span>
+  <button class="state-btn active" onclick="showState('s12','12A')">12A Blocked</button>
+  <button class="state-btn" onclick="showState('s12','12B')">12B Partial</button>
+</div>
+
+<!-- ═══ Canvas ═══ -->
+<div class="canvas">
+
+<!-- ══════════ SCREEN 1: LIST VIEW ══════════ -->
+<div class="screen active" id="screen-s1">
+
+  <!-- 1A: Normal -->
+  <div id="s1-1A">
+    <div class="app-shell">
+      <div class="topbar">
+        <span class="back">&#8592;</span>
+        <span class="brand">SeekOut</span>
+        <span class="topbar-sep" style="color:var(--gray-300);">—</span>
+        <span class="req-name">Senior Frontend Engineer @ SeekOut</span>
+        <span class="spacer"></span>
+        <button class="mock-toggle">Mock</button>
+        <button class="icon-btn">&#128172;</button>
+        <button class="icon-btn">&#128276;<span class="dot"></span></button>
+        <div class="avatar">TC</div>
+      </div>
+      <div class="app-body">
+        <div class="sidebar">
+          <ul class="sidebar-nav">
+            <li><span class="nav-icon">&#9673;</span> Intake</li>
+            <li><span class="nav-icon">&#128269;</span> Source</li>
+            <li class="active"><span class="nav-icon">&#9654;</span> Engage</li>
+            <li><span class="nav-icon">&#9638;</span> Views</li>
+            <li><span class="nav-icon">&#9881;</span> Settings</li>
+          </ul>
+        </div>
+        <div class="content-area">
+          <div class="seg-control">
+            <button class="seg-btn active">List</button>
+            <button class="seg-btn">Email</button>
+            <button class="seg-btn">Calendar</button>
+            <button class="seg-btn">Kanban</button>
+            <button class="seg-btn">Metrics</button>
+          </div>
+          <div class="content-main">
+            <div class="toolbar">
+              <div class="search-box">&#128269; Search candidates...</div>
+              <button class="filter-btn">Stage &#9660;</button>
+              <span class="spacer"></span>
+            </div>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th class="cb"><input type="checkbox"></th>
+                  <th>Name</th>
+                  <th>Title</th>
+                  <th>Co</th>
+                  <th>Exp</th>
+                  <th>Stage</th>
+                  <th>Email</th>
+                  <th>Scrn</th>
+                  <th>Match</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="cb"><input type="checkbox"></td>
+                  <td style="font-weight:600">Maya Rodriguez</td>
+                  <td>Sr FE Eng</td>
+                  <td>Figma</td>
+                  <td>6yr</td>
+                  <td><span class="stage-badge screening">Screening</span></td>
+                  <td><span class="email-status replied">Replied</span></td>
+                  <td><span class="scrn-status scheduled">Sched</span></td>
+                  <td><span class="stars">&#9733;&#9733;&#9733;&#9733;<span class="empty">&#9733;</span></span></td>
+                </tr>
+                <tr>
+                  <td class="cb"><input type="checkbox"></td>
+                  <td style="font-weight:600">Kevin Tran</td>
+                  <td>Sr SWE</td>
+                  <td>Vercel</td>
+                  <td>7yr</td>
+                  <td><span class="stage-badge screening">Screening</span></td>
+                  <td><span class="email-status replied">Replied</span></td>
+                  <td><span class="scrn-status scheduled">Sched</span></td>
+                  <td><span class="stars">&#9733;&#9733;&#9733;&#9733;<span class="empty">&#9733;</span></span></td>
+                </tr>
+                <tr>
+                  <td class="cb"><input type="checkbox"></td>
+                  <td style="font-weight:600">Alex Chen</td>
+                  <td>Sr SWE</td>
+                  <td>Meta</td>
+                  <td>8yr</td>
+                  <td><span class="stage-badge contacted">Contacted</span></td>
+                  <td><span class="email-status sent">Sent</span></td>
+                  <td><span class="scrn-status">Not sched</span></td>
+                  <td><span class="stars">&#9733;&#9733;&#9733;&#9733;<span class="empty">&#9733;</span></span></td>
+                </tr>
+                <tr>
+                  <td class="cb"><input type="checkbox"></td>
+                  <td style="font-weight:600">Priya Sharma</td>
+                  <td>Staff Eng</td>
+                  <td>Google</td>
+                  <td>12yr</td>
+                  <td><span class="stage-badge contacted">Contacted</span></td>
+                  <td><span class="email-status opened">Opened</span></td>
+                  <td><span class="scrn-status">Not sched</span></td>
+                  <td><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></td>
+                </tr>
+                <tr>
+                  <td class="cb"><input type="checkbox"></td>
+                  <td style="font-weight:600">David Kim</td>
+                  <td>Princ. Eng</td>
+                  <td>Amazon</td>
+                  <td>15yr</td>
+                  <td><span class="stage-badge responded">Responded</span></td>
+                  <td><span class="email-status replied">Replied</span></td>
+                  <td><span class="scrn-status scheduled">Sched</span></td>
+                  <td><span class="stars">&#9733;&#9733;&#9733;<span class="empty">&#9733;&#9733;</span></span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1B: Candidate Drawer -->
+  <div id="s1-1B" class="hidden">
+    <div class="app-shell">
+      <div class="topbar">
+        <span class="back">&#8592;</span>
+        <span class="brand">SeekOut</span>
+        <span style="color:var(--gray-300);">—</span>
+        <span class="req-name">Senior FE @ SeekOut</span>
+        <span class="spacer"></span>
+        <button class="mock-toggle">Mock</button>
+        <button class="icon-btn">&#128172;</button>
+        <button class="icon-btn">&#128276;<span class="dot"></span></button>
+        <div class="avatar">TC</div>
+      </div>
+      <div class="app-body">
+        <div class="sidebar">
+          <ul class="sidebar-nav">
+            <li><span class="nav-icon">&#9673;</span> Intake</li>
+            <li><span class="nav-icon">&#128269;</span> Source</li>
+            <li class="active"><span class="nav-icon">&#9654;</span> Engage</li>
+            <li><span class="nav-icon">&#9638;</span> Views</li>
+            <li><span class="nav-icon">&#9881;</span> Settings</li>
+          </ul>
+        </div>
+        <div class="content-area">
+          <div class="seg-control">
+            <button class="seg-btn active">List</button>
+            <button class="seg-btn">Email</button>
+            <button class="seg-btn">Calendar</button>
+            <button class="seg-btn">Kanban</button>
+            <button class="seg-btn">Metrics</button>
+          </div>
+          <div class="content-main" style="padding:0;">
+            <div class="with-drawer">
+              <div class="main-col">
+                <div class="toolbar">
+                  <div class="search-box">&#128269; Search candidates...</div>
+                  <button class="filter-btn">Stage &#9660;</button>
+                </div>
+                <table class="data-table">
+                  <thead><tr><th class="cb"><input type="checkbox"></th><th>Name</th><th>Title</th><th>Co</th><th>Stage</th></tr></thead>
+                  <tbody>
+                    <tr style="background:var(--blue-light)"><td class="cb"><input type="checkbox"></td><td style="font-weight:600">Maya Rodriguez</td><td>Sr FE Eng</td><td>Figma</td><td><span class="stage-badge screening">Screening</span></td></tr>
+                    <tr><td class="cb"><input type="checkbox"></td><td>Kevin Tran</td><td>Sr SWE</td><td>Vercel</td><td><span class="stage-badge screening">Screening</span></td></tr>
+                    <tr><td class="cb"><input type="checkbox"></td><td>Alex Chen</td><td>Sr SWE</td><td>Meta</td><td><span class="stage-badge contacted">Contacted</span></td></tr>
+                    <tr><td class="cb"><input type="checkbox"></td><td>Priya Sharma</td><td>Staff Eng</td><td>Google</td><td><span class="stage-badge contacted">Contacted</span></td></tr>
+                    <tr><td class="cb"><input type="checkbox"></td><td>David Kim</td><td>Princ. Eng</td><td>Amazon</td><td><span class="stage-badge responded">Responded</span></td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="drawer">
+                <button class="drawer-close">&#10005;</button>
+                <div class="drawer-tabs">
+                  <div class="drawer-tab active">Profile</div>
+                  <div class="drawer-tab">Notes</div>
+                  <div class="drawer-tab">Activity</div>
+                </div>
+                <div class="candidate-header">
+                  <div class="candidate-avatar">MR</div>
+                  <div class="candidate-info">
+                    <div class="c-name">Maya Rodriguez</div>
+                    <div class="c-title">Senior FE Engineer &middot; Figma</div>
+                    <div class="c-meta">&#128205; Seattle, WA &middot; 6 years</div>
+                  </div>
+                </div>
+                <a class="link-btn" href="#">&#128279; View LinkedIn Profile</a>
+                <div class="drawer-section" style="margin-top:14px;">
+                  <div class="ds-label">Pipeline Stage</div>
+                  <select class="form-select" style="max-width:180px;"><option>Screening</option></select>
+                </div>
+                <div class="drawer-section">
+                  <div class="ds-label">Match Score</div>
+                  <div class="stars" style="font-size:14px;">&#9733;&#9733;&#9733;&#9733;<span class="empty">&#9733;</span> <span style="font-size:11px;color:var(--gray-500);">(4/5)</span></div>
+                </div>
+                <div class="drawer-section">
+                  <div class="ds-label">Why SPOT Picked</div>
+                  <div class="why-card">
+                    Near-perfect match. Figma component library with Radix + Tailwind. Accessibility audit experience.
+                    <div class="skill-tags">
+                      <span class="skill-tag">React</span>
+                      <span class="skill-tag">TypeScript</span>
+                      <span class="skill-tag">Radix</span>
+                      <span class="skill-tag">Tailwind</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="drawer-section">
+                  <div class="ds-label">Email Status</div>
+                  <div class="ds-value" style="font-size:11px;"><span style="color:var(--green);">&#10003; Replied</span> &middot; 3 opens &middot; Feb 26</div>
+                </div>
+                <div class="drawer-section">
+                  <div class="ds-label">Screening</div>
+                  <div class="ds-value" style="font-size:11px;">&#128197; Scheduled — Mar 28, 2pm</div>
+                  <a class="link-btn" href="#" style="margin-top:4px;display:inline-block;">Copy booking link</a>
+                </div>
+                <div class="drawer-section">
+                  <div class="ds-label">Notes</div>
+                  <input class="note-input" placeholder="+ Add note" readonly>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1C: Bulk Action -->
+  <div id="s1-1C" class="hidden">
+    <div class="app-shell">
+      <div class="topbar">
+        <span class="back">&#8592;</span>
+        <span class="brand">SeekOut</span>
+        <span style="color:var(--gray-300);">—</span>
+        <span class="req-name">Senior Frontend Engineer @ SeekOut</span>
+        <span class="spacer"></span>
+        <button class="mock-toggle">Mock</button>
+        <button class="icon-btn">&#128172;</button>
+        <button class="icon-btn">&#128276;<span class="dot"></span></button>
+        <div class="avatar">TC</div>
+      </div>
+      <div class="app-body">
+        <div class="sidebar">
+          <ul class="sidebar-nav">
+            <li><span class="nav-icon">&#9673;</span> Intake</li>
+            <li><span class="nav-icon">&#128269;</span> Source</li>
+            <li class="active"><span class="nav-icon">&#9654;</span> Engage</li>
+            <li><span class="nav-icon">&#9638;</span> Views</li>
+            <li><span class="nav-icon">&#9881;</span> Settings</li>
+          </ul>
+        </div>
+        <div class="content-area">
+          <div class="seg-control">
+            <button class="seg-btn active">List</button>
+            <button class="seg-btn">Email</button>
+            <button class="seg-btn">Calendar</button>
+            <button class="seg-btn">Kanban</button>
+            <button class="seg-btn">Metrics</button>
+          </div>
+          <div class="content-main">
+            <div class="toolbar">
+              <div class="search-box">&#128269; Search candidates...</div>
+              <button class="filter-btn">Stage &#9660;</button>
+            </div>
+            <table class="data-table">
+              <thead><tr><th class="cb"><input type="checkbox" checked></th><th>Name</th><th>Title</th><th>Co</th><th>Exp</th><th>Stage</th><th>Email</th><th>Match</th></tr></thead>
+              <tbody>
+                <tr style="background:var(--blue-light)"><td class="cb"><input type="checkbox" checked></td><td style="font-weight:600">Alex Chen</td><td>Sr SWE</td><td>Meta</td><td>8yr</td><td><span class="stage-badge contacted">Contacted</span></td><td><span class="email-status sent">Sent</span></td><td><span class="stars">&#9733;&#9733;&#9733;&#9733;<span class="empty">&#9733;</span></span></td></tr>
+                <tr style="background:var(--blue-light)"><td class="cb"><input type="checkbox" checked></td><td style="font-weight:600">Priya Sharma</td><td>Staff Eng</td><td>Google</td><td>12yr</td><td><span class="stage-badge contacted">Contacted</span></td><td><span class="email-status opened">Opened</span></td><td><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></td></tr>
+                <tr><td class="cb"><input type="checkbox"></td><td>Maya Rodriguez</td><td>Sr FE Eng</td><td>Figma</td><td>6yr</td><td><span class="stage-badge screening">Screening</span></td><td><span class="email-status replied">Replied</span></td><td><span class="stars">&#9733;&#9733;&#9733;&#9733;<span class="empty">&#9733;</span></span></td></tr>
+                <tr><td class="cb"><input type="checkbox"></td><td>Kevin Tran</td><td>Sr SWE</td><td>Vercel</td><td>7yr</td><td><span class="stage-badge screening">Screening</span></td><td><span class="email-status replied">Replied</span></td><td><span class="stars">&#9733;&#9733;&#9733;&#9733;<span class="empty">&#9733;</span></span></td></tr>
+                <tr><td class="cb"><input type="checkbox"></td><td>David Kim</td><td>Princ. Eng</td><td>Amazon</td><td>15yr</td><td><span class="stage-badge responded">Responded</span></td><td><span class="email-status replied">Replied</span></td><td><span class="stars">&#9733;&#9733;&#9733;<span class="empty">&#9733;&#9733;</span></span></td></tr>
+              </tbody>
+            </table>
+            <div class="bulk-bar">
+              <span class="count">&#9745; 2 selected</span>
+              <span class="spacer"></span>
+              <button class="bulk-btn ghost">Clear</button>
+              <button class="bulk-btn primary">Engage &#9660;</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SCREEN 2: EMAIL VIEW ══════════ -->
+<div class="screen" id="screen-s2">
+
+  <!-- 2A: Inbox -->
+  <div id="s2-2A">
+    <div class="app-shell">
+      <div class="topbar">
+        <span class="back">&#8592;</span><span class="brand">SeekOut</span><span style="color:var(--gray-300);">—</span><span class="req-name">Senior FE @ SeekOut</span><span class="spacer"></span>
+        <button class="mock-toggle">Mock</button><button class="icon-btn">&#128172;</button><button class="icon-btn">&#128276;<span class="dot"></span></button><div class="avatar">TC</div>
+      </div>
+      <div class="app-body">
+        <div class="sidebar"><ul class="sidebar-nav"><li><span class="nav-icon">&#9673;</span> Intake</li><li><span class="nav-icon">&#128269;</span> Source</li><li class="active"><span class="nav-icon">&#9654;</span> Engage</li><li><span class="nav-icon">&#9638;</span> Views</li><li><span class="nav-icon">&#9881;</span> Settings</li></ul></div>
+        <div class="content-area">
+          <div class="seg-control"><button class="seg-btn">List</button><button class="seg-btn active">Email</button><button class="seg-btn">Calendar</button><button class="seg-btn">Kanban</button><button class="seg-btn">Metrics</button></div>
+          <div class="content-main">
+            <div class="toolbar">
+              <div class="search-box">&#128269; Search</div>
+              <button class="filter-btn">Status &#9660;</button>
+              <button class="filter-btn">Stage &#9660;</button>
+              <button class="filter-btn">Labels &#9660;</button>
+            </div>
+            <div class="email-list">
+              <div class="email-row"><span class="e-name">Maya Rodriguez</span><span class="stage-badge screening e-stage">Screening</span><div class="e-preview"><div class="e-subject">Re: Your work on Figma's canvas —</div><div class="e-snippet">&#8617; Thanks for reaching out! I'm open to exploring...</div></div><div class="e-labels"><span class="email-label hot">Hot lead</span><span class="email-label fe">FE</span></div><span class="e-date">Feb 27</span></div>
+              <div class="email-row"><span class="e-name">Kevin Tran</span><span class="stage-badge screening e-stage">Screening</span><div class="e-preview"><div class="e-subject">Following up — SeekOut FE role</div><div class="e-snippet">&#8617; Interested, let's talk...</div></div><div class="e-labels"><span class="email-label fe">FE</span></div><span class="e-date">Mar 1</span></div>
+              <div class="email-row"><span class="e-name">Alex Chen</span><span class="stage-badge contacted e-stage">Contacted</span><div class="e-preview"><div class="e-subject">Hi Alex — I'm reaching out about an exciting role...</div><div class="e-snippet">&#128231; Sent &middot; 0 opens</div></div><div class="e-labels"></div><span class="e-date">Mar 4</span></div>
+              <div class="email-row"><span class="e-name">Priya Sharma</span><span class="stage-badge contacted e-stage">Contacted</span><div class="e-preview"><div class="e-subject">Hi Priya — I'm recruiting for a position that...</div><div class="e-snippet">&#128231; Opened &middot; 1 open</div></div><div class="e-labels"></div><span class="e-date">Mar 3</span></div>
+              <div class="email-row"><span class="e-name">David Kim</span><span class="stage-badge responded e-stage">Responded</span><div class="e-preview"><div class="e-subject">Re: SeekOut engineering role</div><div class="e-snippet">&#8617; When works for a call?</div></div><div class="e-labels"><span class="email-label hot">Hot lead</span></div><span class="e-date">Mar 5</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2B: Thread Drawer -->
+  <div id="s2-2B" class="hidden">
+    <div class="app-shell">
+      <div class="topbar">
+        <span class="back">&#8592;</span><span class="brand">SeekOut</span><span style="color:var(--gray-300);">—</span><span class="req-name">Senior FE @ SeekOut</span><span class="spacer"></span>
+        <button class="mock-toggle">Mock</button><button class="icon-btn">&#128172;</button><button class="icon-btn">&#128276;<span class="dot"></span></button><div class="avatar">TC</div>
+      </div>
+      <div class="app-body">
+        <div class="sidebar"><ul class="sidebar-nav"><li><span class="nav-icon">&#9673;</span> Intake</li><li><span class="nav-icon">&#128269;</span> Source</li><li class="active"><span class="nav-icon">&#9654;</span> Engage</li><li><span class="nav-icon">&#9638;</span> Views</li><li><span class="nav-icon">&#9881;</span> Settings</li></ul></div>
+        <div class="content-area">
+          <div class="seg-control"><button class="seg-btn">List</button><button class="seg-btn active">Email</button><button class="seg-btn">Calendar</button><button class="seg-btn">Kanban</button><button class="seg-btn">Metrics</button></div>
+          <div class="content-main" style="padding:0;">
+            <div class="with-drawer">
+              <div class="main-col" style="font-size:12px;padding-top:10px;">
+                <div class="email-row" style="background:var(--blue-light);"><span class="e-name">Maya R.</span><div class="e-preview"><div class="e-subject" style="font-size:11px;">Re: Your work on Figma's canvas</div></div><span class="e-date">Feb 27</span></div>
+                <div class="email-row"><span class="e-name">Kevin T.</span><div class="e-preview"><div class="e-subject" style="font-size:11px;">Following up — SeekOut FE role</div></div><span class="e-date">Mar 1</span></div>
+                <div class="email-row"><span class="e-name">Alex C.</span><div class="e-preview"><div class="e-subject" style="font-size:11px;">Hi Alex — exciting role...</div></div><span class="e-date">Mar 4</span></div>
+                <div class="email-row"><span class="e-name">David K.</span><div class="e-preview"><div class="e-subject" style="font-size:11px;">Re: SeekOut engineering role</div></div><span class="e-date">Mar 5</span></div>
+              </div>
+              <div class="drawer">
+                <button class="drawer-close">&#10005;</button>
+                <div class="thread-header">
+                  <div class="th-name">Maya Rodriguez &middot; Sr FE Eng &middot; Figma</div>
+                  <div class="th-meta"><span class="stage-badge screening">Screening</span> &nbsp;&#128231; 3 opens &middot; Last: Feb 26</div>
+                  <div class="th-labels"><span class="email-label hot">Hot lead</span><span class="email-label fe">FE</span><span style="font-size:10px;color:var(--blue);cursor:pointer;">+</span></div>
+                </div>
+                <div class="thread-msg">
+                  <div class="tm-header">Feb 24, 9:02am — TC</div>
+                  <div class="tm-body"><strong>Subject: Your work on Figma's canvas —</strong><br><br>Hi Maya, I came across your work at Figma and was impressed by your component library architecture...</div>
+                </div>
+                <div class="thread-msg reply">
+                  <div class="tm-header">Feb 27, 2:15pm — Maya Rodriguez</div>
+                  <div class="tm-body">Thanks for reaching out! I'm open to exploring new opportunities. When would be good to chat?</div>
+                </div>
+                <div class="reply-status">&#10003; Candidate has replied</div>
+                <div class="compose-area">
+                  <textarea placeholder="Type reply..."></textarea>
+                  <div class="compose-actions">
+                    <button class="btn-ai-draft">Draft with AI <span class="arrow">&#9660;</span></button>
+                    <button class="btn-send">Send</button>
+                  </div>
+                  <div class="ai-presets">
+                    <div class="preset">&#8226; Send screening link</div>
+                    <div class="preset">&#8226; Answer questions</div>
+                    <div class="preset">&#8226; Ask to schedule interview</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SCREEN 3: CALENDAR VIEW ══════════ -->
+<div class="screen" id="screen-s3">
+
+  <!-- 3A: Calendar -->
+  <div id="s3-3A">
+    <div class="app-shell">
+      <div class="topbar"><span class="back">&#8592;</span><span class="brand">SeekOut</span><span style="color:var(--gray-300);">—</span><span class="req-name">Senior FE @ SeekOut</span><span class="spacer"></span><button class="mock-toggle">Mock</button><button class="icon-btn">&#128172;</button><button class="icon-btn">&#128276;<span class="dot"></span></button><div class="avatar">TC</div></div>
+      <div class="app-body">
+        <div class="sidebar"><ul class="sidebar-nav"><li><span class="nav-icon">&#9673;</span> Intake</li><li><span class="nav-icon">&#128269;</span> Source</li><li class="active"><span class="nav-icon">&#9654;</span> Engage</li><li><span class="nav-icon">&#9638;</span> Views</li><li><span class="nav-icon">&#9881;</span> Settings</li></ul></div>
+        <div class="content-area">
+          <div class="seg-control"><button class="seg-btn">List</button><button class="seg-btn">Email</button><button class="seg-btn active">Calendar</button><button class="seg-btn">Kanban</button><button class="seg-btn">Metrics</button></div>
+          <div class="content-main">
+            <div class="cal-toolbar">
+              <div class="cal-nav"><button>&#9664;</button><span class="cal-month">March 2026</span><button>&#9654;</button></div>
+              <button class="today-btn">Today</button>
+              <div class="cal-actions">
+                <button class="cal-action-btn">Connect Outlook</button>
+                <button class="cal-action-btn primary">Booking Link</button>
+              </div>
+            </div>
+            <div class="cal-grid">
+              <div class="cal-day-header">Sun</div><div class="cal-day-header">Mon</div><div class="cal-day-header">Tue</div><div class="cal-day-header">Wed</div><div class="cal-day-header">Thu</div><div class="cal-day-header">Fri</div><div class="cal-day-header">Sat</div>
+              <div class="cal-cell"><div class="cal-date">22</div></div>
+              <div class="cal-cell"><div class="cal-date today">23</div></div>
+              <div class="cal-cell"><div class="cal-date">24</div></div>
+              <div class="cal-cell"><div class="cal-date">25</div></div>
+              <div class="cal-cell"><div class="cal-date">26</div><div class="cal-event intake">Intake mtg</div><div class="cal-event screening">Priya S.</div><div class="cal-event outlook">Team standup</div></div>
+              <div class="cal-cell"><div class="cal-date">27</div><div class="cal-event outlook">Design review</div></div>
+              <div class="cal-cell"><div class="cal-date">28</div><div class="cal-event screening">Maya R.</div></div>
+              <div class="cal-cell"><div class="cal-date">29</div></div>
+              <div class="cal-cell"><div class="cal-date">30</div><div class="cal-event screening">Kevin T.</div></div>
+              <div class="cal-cell"><div class="cal-date">31</div></div>
+              <div class="cal-cell"><div class="cal-date">1</div></div>
+              <div class="cal-cell"><div class="cal-date">2</div><div class="cal-event outlook">All hands</div></div>
+              <div class="cal-cell"><div class="cal-date">3</div></div>
+              <div class="cal-cell"><div class="cal-date">4</div></div>
+            </div>
+            <div class="cal-legend">
+              <span><span class="legend-dot intake-dot"></span> Intake meeting</span>
+              <span><span class="legend-dot screening-dot"></span> Screening</span>
+              <span><span class="legend-dot outlook-dot"></span> Outlook (blocked)</span>
+            </div>
+            <div class="upcoming">
+              <h4>Upcoming</h4>
+              <div class="upcoming-item"><span class="ui-icon">&#128197;</span><div><strong>Mar 26, 10am</strong> — Priya S.<br><span class="ui-type">Screening</span></div></div>
+              <div class="upcoming-item"><span class="ui-icon">&#128197;</span><div><strong>Mar 28, 2pm</strong> — Maya R.<br><span class="ui-type">Screening</span></div></div>
+              <div class="upcoming-item"><span class="ui-icon">&#128197;</span><div><strong>Mar 30, 11am</strong> — Kevin T.<br><span class="ui-type">Screening</span></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3B: Manual Invite Modal -->
+  <div id="s3-3B" class="hidden">
+    <div class="app-shell" style="position:relative;">
+      <div class="topbar"><span class="back">&#8592;</span><span class="brand">SeekOut</span><span style="color:var(--gray-300);">—</span><span class="req-name">Senior FE @ SeekOut</span><span class="spacer"></span><button class="mock-toggle">Mock</button><button class="icon-btn">&#128172;</button><button class="icon-btn">&#128276;</button><div class="avatar">TC</div></div>
+      <div class="app-body" style="position:relative;">
+        <div class="sidebar"><ul class="sidebar-nav"><li><span class="nav-icon">&#9673;</span> Intake</li><li><span class="nav-icon">&#128269;</span> Source</li><li class="active"><span class="nav-icon">&#9654;</span> Engage</li><li><span class="nav-icon">&#9638;</span> Views</li><li><span class="nav-icon">&#9881;</span> Settings</li></ul></div>
+        <div class="content-area" style="position:relative;">
+          <div class="modal-overlay">
+            <div class="modal">
+              <button class="modal-close">&#10005;</button>
+              <h3>New Screening Invite</h3>
+              <div class="form-group"><div class="form-label">Candidate</div><select class="form-select"><option>Search candidates...</option><option>Maya Rodriguez</option><option>Kevin Tran</option></select></div>
+              <div class="form-grid">
+                <div class="form-group"><div class="form-label">Date</div><input class="form-input" type="text" value="Mar 26"></div>
+                <div class="form-group"><div class="form-label">Time</div><input class="form-input" type="text" value="2:00 PM"></div>
+              </div>
+              <div class="form-grid">
+                <div class="form-group"><div class="form-label">Duration</div><select class="form-select"><option>30 min</option><option>15 min</option><option>45 min</option><option>60 min</option></select></div>
+                <div class="form-group"><div class="form-label">Meeting Type</div><select class="form-select"><option>Screening</option><option>Interview</option></select></div>
+              </div>
+              <div class="form-group"><div class="form-label">Location / Video Link</div><input class="form-input" type="text" value="https://zoom.us/j/..."></div>
+              <div class="form-group"><div class="form-label">Notes (optional)</div><textarea class="form-textarea" style="min-height:60px;" placeholder="Add notes..."></textarea></div>
+              <div class="modal-footer"><button class="btn-secondary">Cancel</button><button class="btn-primary">Send Invite</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3C: Booking Config -->
+  <div id="s3-3C" class="hidden">
+    <div class="app-shell" style="position:relative;">
+      <div class="topbar"><span class="back">&#8592;</span><span class="brand">SeekOut</span><span style="color:var(--gray-300);">—</span><span class="req-name">Senior FE @ SeekOut</span><span class="spacer"></span><button class="mock-toggle">Mock</button><button class="icon-btn">&#128172;</button><button class="icon-btn">&#128276;</button><div class="avatar">TC</div></div>
+      <div class="app-body" style="position:relative;">
+        <div class="sidebar"><ul class="sidebar-nav"><li><span class="nav-icon">&#9673;</span> Intake</li><li><span class="nav-icon">&#128269;</span> Source</li><li class="active"><span class="nav-icon">&#9654;</span> Engage</li><li><span class="nav-icon">&#9638;</span> Views</li><li><span class="nav-icon">&#9881;</span> Settings</li></ul></div>
+        <div class="content-area" style="position:relative;">
+          <div class="modal-overlay">
+            <div class="modal">
+              <button class="modal-close">&#10005;</button>
+              <h3>Generate Booking Page</h3>
+              <div class="form-group">
+                <div class="form-label">Screening Duration</div>
+                <div style="display:flex;gap:6px;margin-top:4px;">
+                  <button class="filter-btn">15 min</button>
+                  <button class="filter-btn" style="border-color:var(--blue);background:var(--blue-light);color:var(--blue);">30 min</button>
+                  <button class="filter-btn">45 min</button>
+                  <button class="filter-btn">60 min</button>
+                </div>
+              </div>
+              <div class="form-group"><div class="form-label">Available Date Range</div><div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--gray-700);">Next <select class="form-select" style="width:70px;display:inline-block;"><option>7</option><option>14</option><option>30</option></select> days</div></div>
+              <div class="form-group"><div class="form-label">Custom Message (optional)</div><input class="form-input" type="text" value="Looking forward to connecting!"></div>
+              <div class="modal-footer"><button class="btn-secondary">Cancel</button><button class="btn-primary">Generate Link</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SCREEN 4: KANBAN VIEW ══════════ -->
+<div class="screen" id="screen-s4">
+  <div id="s4-4A">
+    <div class="app-shell">
+      <div class="topbar"><span class="back">&#8592;</span><span class="brand">SeekOut</span><span style="color:var(--gray-300);">—</span><span class="req-name">Senior FE @ SeekOut</span><span class="spacer"></span><button class="mock-toggle">Mock</button><button class="icon-btn">&#128172;</button><button class="icon-btn">&#128276;<span class="dot"></span></button><div class="avatar">TC</div></div>
+      <div class="app-body">
+        <div class="sidebar"><ul class="sidebar-nav"><li><span class="nav-icon">&#9673;</span> Intake</li><li><span class="nav-icon">&#128269;</span> Source</li><li class="active"><span class="nav-icon">&#9654;</span> Engage</li><li><span class="nav-icon">&#9638;</span> Views</li><li><span class="nav-icon">&#9881;</span> Settings</li></ul></div>
+        <div class="content-area">
+          <div class="seg-control"><button class="seg-btn">List</button><button class="seg-btn">Email</button><button class="seg-btn">Calendar</button><button class="seg-btn active">Kanban</button><button class="seg-btn">Metrics</button></div>
+          <div class="content-main">
+            <div class="kanban">
+              <div class="kanban-col"><div class="kanban-col-header"><span class="kh-name">Sourced</span><span class="kh-count">5</span></div><div class="kanban-cards"><div class="kanban-card"><div class="kc-name">Rachel M.</div><div class="kc-title">SWE</div></div><div class="kanban-card"><div class="kc-name">Michael T.</div><div class="kc-title">SWE</div></div></div></div>
+              <div class="kanban-col"><div class="kanban-col-header"><span class="kh-name">Contacted</span><span class="kh-count">12</span></div><div class="kanban-cards"><div class="kanban-card"><div class="kc-name">Alex Chen</div><div class="kc-title">Sr SWE</div></div><div class="kanban-card"><div class="kc-name">Priya S.</div><div class="kc-title">Staff Eng</div></div><div class="kanban-card"><div class="kc-name">Sarah J.</div><div class="kc-title">FE Lead</div></div></div></div>
+              <div class="kanban-col"><div class="kanban-col-header"><span class="kh-name">Responded</span><span class="kh-count">4</span></div><div class="kanban-cards"><div class="kanban-card"><div class="kc-name">Lucia T.</div><div class="kc-title">Sr FE</div></div><div class="kanban-card"><div class="kc-name">James W.</div><div class="kc-title">Sr FE</div></div></div></div>
+              <div class="kanban-col"><div class="kanban-col-header"><span class="kh-name">Screening</span><span class="kh-count">5</span></div><div class="kanban-cards"><div class="kanban-card"><div class="kc-name">Maya R.</div><div class="kc-title">Sr FE Eng</div></div><div class="kanban-card"><div class="kc-name">Kevin T.</div><div class="kc-title">Sr SWE</div></div><div class="kanban-card"><div class="kc-name">Sarah P.</div><div class="kc-title">Sr UI</div></div></div></div>
+              <div class="kanban-col"><div class="kanban-col-header"><span class="kh-name">Interview</span><span class="kh-count">3</span></div><div class="kanban-cards"><div class="kanban-card"><div class="kc-name">James L.</div><div class="kc-title">Sr Eng</div></div><div class="kanban-card"><div class="kc-name">Sarah J.</div><div class="kc-title">Lead</div></div><div class="kanban-card"><div class="kc-name">David K.</div><div class="kc-title">Princ.</div></div></div></div>
+              <div class="kanban-col"><div class="kanban-col-header"><span class="kh-name">Offer</span><span class="kh-count">1</span></div><div class="kanban-cards"><div class="kanban-card"><div class="kc-name">Priya S.</div><div class="kc-title">Staff</div></div></div></div>
+              <div class="kanban-col"><div class="kanban-col-header"><span class="kh-name">Hired</span><span class="kh-count">1</span></div><div class="kanban-cards"><div class="kanban-card"><div class="kc-name">Dana R.</div><div class="kc-title">Jr Eng</div></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SCREEN 5: METRICS VIEW ══════════ -->
+<div class="screen" id="screen-s5">
+
+  <!-- 5A: Normal -->
+  <div id="s5-5A">
+    <div class="app-shell">
+      <div class="topbar"><span class="back">&#8592;</span><span class="brand">SeekOut</span><span style="color:var(--gray-300);">—</span><span class="req-name">Senior FE @ SeekOut</span><span class="spacer"></span><button class="mock-toggle">Mock</button><button class="icon-btn">&#128172;</button><button class="icon-btn">&#128276;</button><div class="avatar">TC</div></div>
+      <div class="app-body">
+        <div class="sidebar"><ul class="sidebar-nav"><li><span class="nav-icon">&#9673;</span> Intake</li><li><span class="nav-icon">&#128269;</span> Source</li><li class="active"><span class="nav-icon">&#9654;</span> Engage</li><li><span class="nav-icon">&#9638;</span> Views</li><li><span class="nav-icon">&#9881;</span> Settings</li></ul></div>
+        <div class="content-area">
+          <div class="seg-control"><button class="seg-btn">List</button><button class="seg-btn">Email</button><button class="seg-btn">Calendar</button><button class="seg-btn">Kanban</button><button class="seg-btn active">Metrics</button></div>
+          <div class="content-main">
+            <div class="metric-card">
+              <h3>Pipeline Progression</h3>
+              <div class="sankey">
+                <div class="sankey-row"><div class="sankey-node">Sourced <span class="sn-count">(24)</span></div><div class="sankey-bar" style="width:100%;background:var(--stage-sourced);"></div></div>
+                <div class="sankey-row"><div class="sankey-node">Contacted <span class="sn-count">(12)</span></div><div class="sankey-bar" style="width:50%;background:var(--stage-contacted);"></div><span class="sankey-dropoff">&#9679; 8 No reply</span></div>
+                <div class="sankey-row"><div class="sankey-node">Responded <span class="sn-count">(8)</span></div><div class="sankey-bar" style="width:33%;background:var(--stage-responded);"></div><span class="sankey-dropoff">&#9679; 2 Bounced</span></div>
+                <div class="sankey-row"><div class="sankey-node">Screening <span class="sn-count">(5)</span></div><div class="sankey-bar" style="width:21%;background:var(--stage-screening);"></div><span class="sankey-dropoff">&#9679; 3 Declined</span></div>
+                <div class="sankey-row"><div class="sankey-node">Interview <span class="sn-count">(3)</span></div><div class="sankey-bar" style="width:12.5%;background:var(--stage-interview);"></div><span class="sankey-dropoff">&#9679; 1 Withdrew</span></div>
+                <div class="sankey-row"><div class="sankey-node">Offer <span class="sn-count">(1)</span></div><div class="sankey-bar" style="width:4%;background:var(--stage-offer);"></div></div>
+                <div class="sankey-row"><div class="sankey-node">Hired <span class="sn-count">(1)</span></div><div class="sankey-bar" style="width:4%;background:var(--stage-hired);"></div></div>
+              </div>
+            </div>
+            <div class="metric-card">
+              <h3>Stage Activity Over Time</h3>
+              <div class="chart-placeholder">&#128200; Line chart: candidate counts per stage over time</div>
+              <div class="chart-legend">
+                <span><span class="cl-dot" style="background:var(--stage-sourced);"></span> Sourced</span>
+                <span><span class="cl-dot" style="background:var(--stage-contacted);"></span> Contacted</span>
+                <span><span class="cl-dot" style="background:var(--stage-responded);"></span> Responded</span>
+                <span><span class="cl-dot" style="background:var(--stage-screening);"></span> Screening</span>
+                <span><span class="cl-dot" style="background:var(--stage-interview);"></span> Interview</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5B: Empty -->
+  <div id="s5-5B" class="hidden">
+    <div class="app-shell">
+      <div class="topbar"><span class="back">&#8592;</span><span class="brand">SeekOut</span><span style="color:var(--gray-300);">—</span><span class="req-name">Senior FE @ SeekOut</span><span class="spacer"></span><button class="mock-toggle">Mock</button><button class="icon-btn">&#128172;</button><button class="icon-btn">&#128276;</button><div class="avatar">TC</div></div>
+      <div class="app-body">
+        <div class="sidebar"><ul class="sidebar-nav"><li><span class="nav-icon">&#9673;</span> Intake</li><li><span class="nav-icon">&#128269;</span> Source</li><li class="active"><span class="nav-icon">&#9654;</span> Engage</li><li><span class="nav-icon">&#9638;</span> Views</li><li><span class="nav-icon">&#9881;</span> Settings</li></ul></div>
+        <div class="content-area">
+          <div class="seg-control"><button class="seg-btn">List</button><button class="seg-btn">Email</button><button class="seg-btn">Calendar</button><button class="seg-btn">Kanban</button><button class="seg-btn active">Metrics</button></div>
+          <div class="content-main" style="display:flex;align-items:center;justify-content:center;">
+            <div style="text-align:center;color:var(--gray-400);">
+              <div style="font-size:36px;margin-bottom:10px;">&#128202;</div>
+              <div style="font-size:13px;font-weight:500;">No pipeline data yet.</div>
+              <div style="font-size:12px;">Add candidates to see metrics.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SCREEN 6: SETTINGS — SENDER IDENTITY ══════════ -->
+<div class="screen" id="screen-s6">
+
+  <!-- 6A: Default -->
+  <div id="s6-6A">
+    <div class="app-shell">
+      <div class="topbar"><span class="back">&#8592;</span><span class="brand">SeekOut</span><span style="color:var(--gray-300);">—</span><span class="req-name">Senior FE @ SeekOut</span><span class="spacer"></span><button class="mock-toggle">Mock</button><button class="icon-btn">&#128276;</button><div class="avatar">TC</div></div>
+      <div class="app-body">
+        <div class="sidebar"><ul class="sidebar-nav"><li><span class="nav-icon">&#9673;</span> Intake</li><li><span class="nav-icon">&#128269;</span> Source</li><li><span class="nav-icon">&#9654;</span> Engage</li><li><span class="nav-icon">&#9638;</span> Views</li><li class="active"><span class="nav-icon">&#9881;</span> Settings<span class="nav-dot"></span></li></ul></div>
+        <div class="content-area">
+          <div class="seg-control">
+            <button class="seg-btn active">Sender Identity</button>
+            <button class="seg-btn">Email Sequences</button>
+            <button class="seg-btn">Screening Settings</button>
+            <button class="seg-btn">Email Preferences</button>
+          </div>
+          <div class="content-main">
+            <div style="font-size:11px;color:var(--gray-500);margin-bottom:12px;">&#8592; Settings</div>
+            <div class="settings-form">
+              <div class="form-grid">
+                <div class="form-group"><div class="form-label">Full Name <span class="req">*</span></div><input class="form-input" value="Taylor Chen"></div>
+                <div class="form-group"><div class="form-label">Email <span class="req">*</span></div><input class="form-input" value="taylor@seekout.com"></div>
+              </div>
+              <div class="form-grid">
+                <div class="form-group"><div class="form-label">Title</div><input class="form-input" value="Sr Technical Recruiter"></div>
+                <div class="form-group"><div class="form-label">Company</div><input class="form-input" value="SeekOut"></div>
+              </div>
+              <div class="form-grid">
+                <div class="form-group"><div class="form-label">LinkedIn URL</div><input class="form-input" value="linkedin.com/in/taylorchen"></div>
+                <div class="form-group"><div class="form-label">Phone (optional)</div><input class="form-input" value="+1-425-555-0123"></div>
+              </div>
+              <div class="form-group">
+                <div class="form-label">Email Signature <span class="req">*</span></div>
+                <textarea class="form-textarea">Taylor Chen
+Senior Technical Recruiter
+SeekOut
+taylor@seekout.com
+calendly.com/taylor</textarea>
+                <div class="form-hint">HTML-safe &middot; line breaks &middot; links &middot; basic formatting</div>
+              </div>
+              <div class="form-group">
+                <div class="form-label">Working Hours</div>
+                <div class="working-hours">
+                  <div class="wh-field">Start: <input type="time" value="09:00"></div>
+                  <div class="wh-field">End: <input type="time" value="18:00"></div>
+                  <div class="wh-field">Timezone: <select class="form-select" style="width:180px;display:inline-block;"><option>America/New_York</option></select></div>
+                </div>
+                <div class="day-checks">
+                  <label class="day-check"><input type="checkbox" checked> M</label>
+                  <label class="day-check"><input type="checkbox" checked> T</label>
+                  <label class="day-check"><input type="checkbox" checked> W</label>
+                  <label class="day-check"><input type="checkbox" checked> Th</label>
+                  <label class="day-check"><input type="checkbox" checked> F</label>
+                  <label class="day-check"><input type="checkbox"> Sa</label>
+                  <label class="day-check"><input type="checkbox"> Su</label>
+                </div>
+              </div>
+              <div style="font-size:10px;color:var(--gray-500);margin-bottom:14px;">* = Required for email operations</div>
+              <button class="btn-primary">Save Changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6B: With AI Chat -->
+  <div id="s6-6B" class="hidden">
+    <div class="app-shell">
+      <div class="topbar"><span class="back">&#8592;</span><span class="brand">SeekOut</span><span style="color:var(--gray-300);">—</span><span class="req-name">Senior FE @ SeekOut</span><span class="spacer"></span><button class="mock-toggle">Mock</button><button class="icon-btn" style="background:var(--blue-light);color:var(--blue);">&#128172;</button><button class="icon-btn">&#128276;</button><div class="avatar">TC</div></div>
+      <div class="app-body">
+        <div class="sidebar"><ul class="sidebar-nav"><li><span class="nav-icon">&#9673;</span> Intake</li><li><span class="nav-icon">&#128269;</span> Source</li><li><span class="nav-icon">&#9654;</span> Engage</li><li><span class="nav-icon">&#9638;</span> Views</li><li class="active"><span class="nav-icon">&#9881;</span> Settings</li></ul></div>
+        <div class="content-area">
+          <div class="seg-control"><button class="seg-btn active">Sender Identity</button><button class="seg-btn">Email Sequences</button><button class="seg-btn">Screening Settings</button><button class="seg-btn">Email Preferences</button></div>
+          <div class="content-main" style="padding:0;">
+            <div class="with-chat">
+              <div class="main-side" style="padding:16px 18px;">
+                <div style="font-size:11px;color:var(--gray-500);margin-bottom:12px;">&#8592; Settings</div>
+                <div class="settings-form">
+                  <div class="form-grid">
+                    <div class="form-group"><div class="form-label">Full Name <span class="req">*</span></div><input class="form-input" value="Taylor Chen"></div>
+                    <div class="form-group"><div class="form-label">Email <span class="req">*</span></div><input class="form-input" value="taylor@seekout.com"></div>
+                  </div>
+                  <div class="form-group">
+                    <div class="form-label">Email Signature <span class="req">*</span></div>
+                    <textarea class="form-textarea">Taylor Chen
+Senior Technical Recruiter
+SeekOut</textarea>
+                  </div>
+                  <button class="btn-primary">Save Changes</button>
+                </div>
+              </div>
+              <div class="chat-panel">
+                <div class="chat-header"><span class="chat-title">&#10024; AI Assistant</span><button class="close-btn">&#10005;</button></div>
+                <div class="chat-messages">
+                  <div class="chat-msg user">Update my email signature to include VP of Talent</div>
+                  <div class="chat-msg ai">I'll update your signature. Here's the change:
+                    <div class="approval-card">
+                      <div class="ac-title">Update Email Signature</div>
+                      <div class="ac-detail">
+                        <strong>Old:</strong> Senior Technical Recruiter<br>
+                        <strong>New:</strong> VP of Talent
+                      </div>
+                      <div class="ac-actions">
+                        <button class="ac-btn approve">Approve</button>
+                        <button class="ac-btn reject">Reject</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="chat-input"><input placeholder="Ask AI to help..." /><button class="send-btn">&#9654;</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SCREEN 7: SETTINGS — EMAIL SEQUENCES ══════════ -->
+<div class="screen" id="screen-s7">
+
+  <!-- 7A: List -->
+  <div id="s7-7A">
+    <div class="app-shell">
+      <div class="topbar"><span class="back">&#8592;</span><span class="brand">SeekOut</span><span style="color:var(--gray-300);">—</span><span class="req-name">Senior FE @ SeekOut</span><span class="spacer"></span><button class="mock-toggle">Mock</button><button class="icon-btn">&#128172;</button><button class="icon-btn">&#128276;</button><div class="avatar">TC</div></div>
+      <div class="app-body">
+        <div class="sidebar"><ul class="sidebar-nav"><li><span class="nav-icon">&#9673;</span> Intake</li><li><span class="nav-icon">&#128269;</span> Source</li><li><span class="nav-icon">&#9654;</span> Engage</li><li><span class="nav-icon">&#9638;</span> Views</li><li class="active"><span class="nav-icon">&#9881;</span> Settings</li></ul></div>
+        <div class="content-area">
+          <div class="seg-control"><button class="seg-btn">Sender Identity</button><button class="seg-btn active">Email Sequences</button><button class="seg-btn">Screening Settings</button><button class="seg-btn">Email Preferences</button></div>
+          <div class="content-main">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+              <div style="font-size:14px;font-weight:700;">Email Sequences</div>
+              <button class="btn-primary" style="font-size:11px;padding:6px 14px;">+ New</button>
+            </div>
+            <div class="seq-card">
+              <div class="seq-card-header"><span class="expand-icon">&#9654;</span><span class="seq-name">Senior FE — 3-touch</span><span class="seq-meta">3 stages &middot; Mar 18</span><div class="seq-stats"><span>&#128200; 62% open</span><span>&#128172; 18% reply</span></div><button class="menu-btn">&#8942;</button></div>
+            </div>
+            <div class="seq-card">
+              <div class="seq-card-header"><span class="expand-icon">&#9654;</span><span class="seq-name">Platform SWE — 3-touch</span><span class="seq-meta">3 stages &middot; Mar 10</span><div class="seq-stats"><span>55% open</span><span>12% reply</span></div><button class="menu-btn">&#8942;</button></div>
+            </div>
+            <div class="seq-card">
+              <div class="seq-card-header"><span class="expand-icon">&#9654;</span><span class="seq-name">Passive candidate — warm</span><span class="seq-meta">2 stages &middot; Feb 28</span><div class="seq-stats"><span>71% open</span><span>24% reply</span></div><button class="menu-btn">&#8942;</button></div>
+            </div>
+            <div style="font-size:10px;color:var(--gray-500);margin-top:12px;">&#9889; At least one sequence required for email operations</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7B: Expanded -->
+  <div id="s7-7B" class="hidden">
+    <div class="app-shell">
+      <div class="topbar"><span class="back">&#8592;</span><span class="brand">SeekOut</span><span style="color:var(--gray-300);">—</span><span class="req-name">Senior FE @ SeekOut</span><span class="spacer"></span><button class="mock-toggle">Mock</button><button class="icon-btn">&#128172;</button><button class="icon-btn">&#128276;</button><div class="avatar">TC</div></div>
+      <div class="app-body">
+        <div class="sidebar"><ul class="sidebar-nav"><li><span class="nav-icon">&#9673;</span> Intake</li><li><span class="nav-icon">&#128269;</span> Source</li><li><span class="nav-icon">&#9654;</span> Engage</li><li><span class="nav-icon">&#9638;</span> Views</li><li class="active"><span class="nav-icon">&#9881;</span> Settings</li></ul></div>
+        <div class="content-area">
+          <div class="seg-control"><button class="seg-btn">Sender Identity</button><button class="seg-btn active">Email Sequences</button><button class="seg-btn">Screening Settings</button><button class="seg-btn">Email Preferences</button></div>
+          <div class="content-main">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+              <div style="font-size:14px;font-weight:700;">Email Sequences</div>
+              <button class="btn-primary" style="font-size:11px;padding:6px 14px;">+ New</button>
+            </div>
+            <div class="seq-card">
+              <div class="seq-card-header expanded"><span class="expand-icon">&#9654;</span><span class="seq-name">Senior FE — 3-touch</span><span class="seq-meta">3 stages &middot; Mar 18</span><div class="seq-stats"><span>62% open</span><span>18% reply</span><span>0% bounce</span></div><button class="menu-btn">&#8942;</button></div>
+              <div class="seq-detail">
+                <div class="seq-stage">
+                  <div class="ss-label">Stage 1: First Touch</div>
+                  <div class="ss-delay">Day 0 (immediate)</div>
+                  <div class="ss-template">Template: "Initial Outreach — Personalized"</div>
+                  <div class="ss-preview"><strong>Subject:</strong> Your work on {{company_name}}'s {{recent_project}} —<br><strong>Body:</strong> Hi {{candidate_name}}, I came across your work at {{company_name}} and was impressed by...</div>
+                </div>
+                <div class="seq-connector">&#8595; Wait 3 days</div>
+                <div class="seq-stage">
+                  <div class="ss-label">Stage 2: Second Touch</div>
+                  <div class="ss-delay">3 days after Stage 1</div>
+                  <div class="ss-template">Template: "Follow-up — Value Add"</div>
+                  <div class="ss-preview"><strong>Subject:</strong> Following up — {{job_title}} at {{company_name}}<br><strong>Body:</strong> Just wanted to resurface this — {{company_name}} is building something exciting in...</div>
+                </div>
+                <div class="seq-connector">&#8595; Wait 7 days</div>
+                <div class="seq-stage">
+                  <div class="ss-label">Stage 3: Third Touch</div>
+                  <div class="ss-delay">7 days after Stage 2</div>
+                  <div class="ss-template">Template: "Final Touch — Soft Close"</div>
+                  <div class="ss-preview"><strong>Subject:</strong> Last note — no worries if not a fit<br><strong>Body:</strong> I'll keep this brief, {{candidate_name}}...</div>
+                </div>
+              </div>
+            </div>
+            <div class="seq-card">
+              <div class="seq-card-header"><span class="expand-icon">&#9654;</span><span class="seq-name">Platform SWE — 3-touch</span><span class="seq-meta">3 stages &middot; Mar 10</span><div class="seq-stats"><span>55% open</span><span>12% reply</span></div><button class="menu-btn">&#8942;</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SCREEN 8: SETTINGS — EMAIL PREFERENCES ══════════ -->
+<div class="screen" id="screen-s8">
+  <div id="s8-8A">
+    <div class="app-shell">
+      <div class="topbar"><span class="back">&#8592;</span><span class="brand">SeekOut</span><span style="color:var(--gray-300);">—</span><span class="req-name">Senior FE @ SeekOut</span><span class="spacer"></span><button class="mock-toggle">Mock</button><button class="icon-btn">&#128172;</button><button class="icon-btn">&#128276;</button><div class="avatar">TC</div></div>
+      <div class="app-body">
+        <div class="sidebar"><ul class="sidebar-nav"><li><span class="nav-icon">&#9673;</span> Intake</li><li><span class="nav-icon">&#128269;</span> Source</li><li><span class="nav-icon">&#9654;</span> Engage</li><li><span class="nav-icon">&#9638;</span> Views</li><li class="active"><span class="nav-icon">&#9881;</span> Settings</li></ul></div>
+        <div class="content-area">
+          <div class="seg-control"><button class="seg-btn">Sender Identity</button><button class="seg-btn">Email Sequences</button><button class="seg-btn">Screening Settings</button><button class="seg-btn active">Email Preferences</button></div>
+          <div class="content-main">
+            <div style="font-size:11px;color:var(--gray-500);margin-bottom:12px;">&#8592; Settings</div>
+            <div class="settings-form">
+              <div class="form-group">
+                <div class="form-label">Sending Window <span class="req">*</span></div>
+                <div class="working-hours">
+                  <div class="wh-field">Start: <input type="time" value="09:00"></div>
+                  <div class="wh-field">End: <input type="time" value="18:00"></div>
+                  <div class="wh-field">Timezone: <select class="form-select" style="width:180px;display:inline-block;"><option>America/New_York</option></select></div>
+                </div>
+                <div class="day-checks">
+                  <label class="day-check"><input type="checkbox" checked> M</label>
+                  <label class="day-check"><input type="checkbox" checked> T</label>
+                  <label class="day-check"><input type="checkbox" checked> W</label>
+                  <label class="day-check"><input type="checkbox" checked> Th</label>
+                  <label class="day-check"><input type="checkbox" checked> F</label>
+                  <label class="day-check"><input type="checkbox"> Sa</label>
+                  <label class="day-check"><input type="checkbox"> Su</label>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="form-label">Daily Send Limit <span class="req">*</span></div>
+                <select class="form-select" style="width:120px;"><option>50</option><option>25</option><option>100</option></select>
+              </div>
+              <div class="check-group">
+                <div class="cg-label">Default Stop Conditions</div>
+                <div class="check-item"><input type="checkbox" checked> Stop when candidate replies</div>
+                <div class="check-item"><input type="checkbox" checked> Stop when candidate books meeting</div>
+                <div class="check-item"><input type="checkbox"> Stop after X opens without reply</div>
+              </div>
+              <div class="form-group">
+                <div class="form-label">Scheduler Link</div>
+                <input class="form-input" value="https://calendly.com/taylor">
+                <div style="margin-top:8px;">
+                  <div class="check-item"><input type="checkbox" checked> Auto-include in outreach emails</div>
+                  <div class="check-item"><input type="checkbox" checked> Show real-time availability</div>
+                </div>
+              </div>
+              <div class="check-group">
+                <div class="cg-label">Email Tracking</div>
+                <div class="check-item"><input type="checkbox" checked> Track email opens</div>
+                <div class="check-item"><input type="checkbox" checked> Track link clicks</div>
+                <div class="check-item"><input type="checkbox" checked> Notify on candidate reply</div>
+                <div class="check-item"><input type="checkbox" checked> Notify on email bounce</div>
+              </div>
+              <div style="font-size:10px;color:var(--gray-500);margin-bottom:14px;">* = Required for email operations</div>
+              <button class="btn-primary">Save Preferences</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SCREEN 9: NOTIFICATIONS ══════════ -->
+<div class="screen" id="screen-s9">
+  <div id="s9-9A">
+    <div class="app-shell" style="position:relative;">
+      <div class="topbar"><span class="back">&#8592;</span><span class="brand">SeekOut</span><span style="color:var(--gray-300);">—</span><span class="req-name">Senior FE @ SeekOut</span><span class="spacer"></span><button class="mock-toggle">Mock</button><button class="icon-btn">&#128172;</button><button class="icon-btn" style="background:var(--blue-light);color:var(--blue);">&#128276;<span class="dot"></span></button><div class="avatar">TC</div></div>
+      <div class="notif-dropdown">
+        <div class="notif-header"><h4>Notifications</h4><span class="mark-read">Mark all read</span></div>
+        <div class="notif-filters">
+          <span class="notif-filter active">All</span>
+          <span class="notif-filter">Replied</span>
+          <span class="notif-filter">Bounced</span>
+          <span class="notif-filter">Sent</span>
+          <span class="notif-filter">Calendar</span>
+          <span class="notif-filter">Meeting</span>
+        </div>
+        <div class="notif-list">
+          <div class="notif-item"><span class="ni-icon" style="color:var(--green);">&#128994;</span><div class="ni-text"><strong>Maya Rodriguez</strong> replied to your outreach<div class="ni-sub">Sr FE @ SeekOut</div></div><span class="ni-time">2m ago</span></div>
+          <div class="notif-item"><span class="ni-icon">&#128197;</span><div class="ni-text"><strong>Kevin Tran</strong> booked a screening<div class="ni-sub">Mar 26, 3pm &middot; Sr FE @ SeekOut</div></div><span class="ni-time">1h ago</span></div>
+          <div class="notif-item"><span class="ni-icon">&#128231;</span><div class="ni-text">Step 2 sent to <strong>David Kim</strong><div class="ni-sub">SWE-Platform @ Meridian</div></div><span class="ni-time">3h ago</span></div>
+          <div class="notif-item"><span class="ni-icon" style="color:var(--red);">&#128308;</span><div class="ni-text">Email to <strong>sarah.j@old.co</strong> bounced<div class="ni-sub">SWE-Platform @ Meridian</div></div><span class="ni-time">1d ago</span></div>
+          <div class="notif-item"><span class="ni-icon">&#128197;</span><div class="ni-text"><strong>Priya Sharma</strong> — interview in 30 min<div class="ni-sub">SWE-Platform @ Meridian</div></div><span class="ni-time">Upcoming</span></div>
+        </div>
+      </div>
+      <div class="app-body">
+        <div class="sidebar"><ul class="sidebar-nav"><li><span class="nav-icon">&#9673;</span> Intake</li><li><span class="nav-icon">&#128269;</span> Source</li><li class="active"><span class="nav-icon">&#9654;</span> Engage</li><li><span class="nav-icon">&#9638;</span> Views</li><li><span class="nav-icon">&#9881;</span> Settings</li></ul></div>
+        <div class="content-area">
+          <div class="seg-control"><button class="seg-btn active">List</button><button class="seg-btn">Email</button><button class="seg-btn">Calendar</button><button class="seg-btn">Kanban</button><button class="seg-btn">Metrics</button></div>
+          <div class="content-main" style="opacity:0.4;pointer-events:none;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SCREEN 10: BOOKING PAGE (CANDIDATE-FACING) ══════════ -->
+<div class="screen" id="screen-s10">
+
+  <!-- 10A: Select Time -->
+  <div id="s10-10A">
+    <div class="booking-page">
+      <div class="bp-logo">SPOT</div>
+      <h2>Book a Screening with Taylor Chen</h2>
+      <div class="bp-sub">Senior Technical Recruiter, SeekOut</div>
+      <div class="bp-msg">Looking forward to connecting!</div>
+      <div class="bp-duration">Duration: 30 minutes</div>
+      <div style="text-align:left;">
+        <div class="bp-week-nav"><button>&#9664;</button> Week of Mar 23 <button>&#9654;</button></div>
+        <div class="bp-day">
+          <div class="bp-day-label">Mon, Mar 23</div>
+          <div class="bp-slots"><button class="bp-slot">10:00 AM</button><button class="bp-slot">11:00 AM</button><button class="bp-slot">2:00 PM</button></div>
+        </div>
+        <div class="bp-day">
+          <div class="bp-day-label">Tue, Mar 24</div>
+          <div class="bp-slots"><button class="bp-slot">9:00 AM</button><button class="bp-slot">3:00 PM</button></div>
+        </div>
+        <div class="bp-day">
+          <div class="bp-day-label">Wed, Mar 25</div>
+          <div class="bp-slots"><button class="bp-slot">10:00 AM</button><button class="bp-slot">1:00 PM</button><button class="bp-slot">4:00 PM</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10B: Confirmed -->
+  <div id="s10-10B" class="hidden">
+    <div class="booking-page">
+      <div class="bp-confirmed">
+        <div class="bp-check" style="color:var(--green);">&#10003;</div>
+        <h2>You're booked!</h2>
+        <div class="bp-details">
+          <strong>Monday, March 23 at 10:00 AM</strong><br>
+          with Taylor Chen<br><br>
+          A confirmation has been sent to your email.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SCREEN 11: SEQUENCE CREATION WIZARD ══════════ -->
+<div class="screen" id="screen-s11">
+
+  <!-- 11A: Step 1 Context -->
+  <div id="s11-11A">
+    <div class="wizard">
+      <div class="wizard-header"><h2>Create Email Sequence</h2></div>
+      <div class="wizard-steps">
+        <div class="wizard-step active"><span class="wdot"></span> Context</div>
+        <div class="wizard-step-line"></div>
+        <div class="wizard-step"><span class="wdot"></span> Review Steps</div>
+        <div class="wizard-step-line"></div>
+        <div class="wizard-step"><span class="wdot"></span> Settings</div>
+        <div class="wizard-step-line"></div>
+        <div class="wizard-step"><span class="wdot"></span> Save</div>
+      </div>
+      <div class="wizard-body">
+        <div style="background:var(--blue-light);border-radius:var(--radius);padding:14px;text-align:center;margin-bottom:18px;">
+          <div style="font-size:20px;margin-bottom:4px;">&#128231;</div>
+          <div style="font-size:12px;color:var(--gray-700);">Pre-filled from <strong>Senior Frontend Engineer @ SeekOut</strong></div>
+        </div>
+        <div class="form-grid">
+          <div class="form-group"><div class="form-label">Tone</div><select class="form-select"><option>Direct</option><option>Warm</option><option>Technical</option></select></div>
+          <div class="form-group"><div class="form-label">Number of Touches</div><select class="form-select"><option>3</option><option>1</option><option>2</option><option>4</option></select></div>
+        </div>
+      </div>
+      <div class="wizard-footer"><button class="btn-primary">Generate sequence &#8594;</button></div>
+    </div>
+  </div>
+
+  <!-- 11B: Step 2 Review Steps -->
+  <div id="s11-11B" class="hidden">
+    <div class="wizard">
+      <div class="wizard-header"><h2>Create Email Sequence</h2></div>
+      <div class="wizard-steps">
+        <div class="wizard-step completed"><span class="wdot"></span> Context</div>
+        <div class="wizard-step-line"></div>
+        <div class="wizard-step active"><span class="wdot"></span> Review Steps</div>
+        <div class="wizard-step-line"></div>
+        <div class="wizard-step"><span class="wdot"></span> Settings</div>
+        <div class="wizard-step-line"></div>
+        <div class="wizard-step"><span class="wdot"></span> Save</div>
+      </div>
+      <div class="wizard-body">
+        <div class="seq-stage" style="margin-top:0;"><div class="ss-label">Step 1: Day 0 &middot; Email &middot; Auto-send</div><div class="ss-preview" style="font-size:11px;"><strong>Subject:</strong> [editable] &nbsp;&nbsp;<strong>Body:</strong> [editable]</div><div style="display:flex;gap:6px;margin-top:6px;"><button class="btn-secondary" style="padding:3px 10px;font-size:10px;">Edit</button><button class="btn-secondary" style="padding:3px 10px;font-size:10px;color:var(--red);border-color:var(--red);">Delete</button></div></div>
+        <div class="seq-connector">&#8595; Wait 4 days</div>
+        <div class="seq-stage"><div class="ss-label">Step 2: Day 4 &middot; Email &middot; Auto-send</div><div class="ss-preview" style="font-size:11px;"><strong>Subject:</strong> [editable] &nbsp;&nbsp;<strong>Body:</strong> [editable]</div><div style="display:flex;gap:6px;margin-top:6px;"><button class="btn-secondary" style="padding:3px 10px;font-size:10px;">Edit</button><button class="btn-secondary" style="padding:3px 10px;font-size:10px;color:var(--red);border-color:var(--red);">Delete</button></div></div>
+        <div class="seq-connector">&#8595; Wait 7 days</div>
+        <div class="seq-stage"><div class="ss-label">Step 3: Day 11 &middot; Email &middot; Auto-send</div><div class="ss-preview" style="font-size:11px;"><strong>Subject:</strong> [editable] &nbsp;&nbsp;<strong>Body:</strong> [editable]</div><div style="display:flex;gap:6px;margin-top:6px;"><button class="btn-secondary" style="padding:3px 10px;font-size:10px;">Edit</button><button class="btn-secondary" style="padding:3px 10px;font-size:10px;color:var(--red);border-color:var(--red);">Delete</button></div></div>
+        <div style="margin-top:10px;"><button class="btn-secondary" style="font-size:11px;">+ Add step</button></div>
+      </div>
+      <div class="wizard-footer"><button class="btn-secondary">&#8592; Back</button><button class="btn-primary">Continue &#8594;</button></div>
+    </div>
+  </div>
+
+  <!-- 11C: Step 3 Settings -->
+  <div id="s11-11C" class="hidden">
+    <div class="wizard">
+      <div class="wizard-header"><h2>Create Email Sequence</h2></div>
+      <div class="wizard-steps">
+        <div class="wizard-step completed"><span class="wdot"></span> Context</div>
+        <div class="wizard-step-line"></div>
+        <div class="wizard-step completed"><span class="wdot"></span> Review Steps</div>
+        <div class="wizard-step-line"></div>
+        <div class="wizard-step active"><span class="wdot"></span> Settings</div>
+        <div class="wizard-step-line"></div>
+        <div class="wizard-step"><span class="wdot"></span> Save</div>
+      </div>
+      <div class="wizard-body">
+        <div class="form-group"><div class="form-label">Sequence Name</div><input class="form-input" value="Senior FE — 3-touch"></div>
+        <div class="check-group">
+          <div class="cg-label">Stop Conditions</div>
+          <div class="check-item"><input type="checkbox" checked> Replies to any email (default ON)</div>
+          <div class="check-item"><input type="checkbox" checked> Books a meeting (default ON)</div>
+          <div class="check-item"><input type="checkbox"> Opens without replying after step 2</div>
+        </div>
+        <div class="form-group">
+          <div class="form-label">Sending Window</div>
+          <div style="font-size:12px;color:var(--gray-700);">Weekdays &middot; 9am-6pm (America/Los_Angeles)</div>
+        </div>
+        <div class="check-item"><input type="checkbox" checked> Include scheduler link</div>
+      </div>
+      <div class="wizard-footer"><button class="btn-secondary">&#8592; Back</button><button class="btn-primary">Continue &#8594;</button></div>
+    </div>
+  </div>
+
+  <!-- 11D: Step 4 Save -->
+  <div id="s11-11D" class="hidden">
+    <div class="wizard">
+      <div class="wizard-header"><h2>Create Email Sequence</h2></div>
+      <div class="wizard-steps">
+        <div class="wizard-step completed"><span class="wdot"></span> Context</div>
+        <div class="wizard-step-line"></div>
+        <div class="wizard-step completed"><span class="wdot"></span> Review Steps</div>
+        <div class="wizard-step-line"></div>
+        <div class="wizard-step completed"><span class="wdot"></span> Settings</div>
+        <div class="wizard-step-line"></div>
+        <div class="wizard-step active"><span class="wdot"></span> Save</div>
+      </div>
+      <div class="wizard-body" style="text-align:center;">
+        <div style="font-size:32px;color:var(--green);margin-bottom:10px;">&#10003;</div>
+        <div style="font-size:14px;font-weight:700;margin-bottom:6px;">Sequence ready</div>
+        <div style="font-size:12px;color:var(--gray-600);margin-bottom:20px;">"Senior FE — 3-touch" &middot; 3 steps &middot; Auto-send</div>
+        <div style="display:flex;gap:8px;justify-content:center;">
+          <button class="btn-secondary">Save to library</button>
+          <button class="btn-primary">Use this time only</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SCREEN 12: PREREQUISITES ══════════ -->
+<div class="screen" id="screen-s12">
+
+  <!-- 12A: Blocked -->
+  <div id="s12-12A">
+    <div class="app-shell">
+      <div class="topbar"><span class="back">&#8592;</span><span class="brand">SeekOut</span><span style="color:var(--gray-300);">—</span><span class="req-name">Senior FE @ SeekOut</span><span class="spacer"></span><button class="mock-toggle">Mock</button><button class="icon-btn">&#128172;</button><button class="icon-btn">&#128276;</button><div class="avatar">TC</div></div>
+      <div class="app-body">
+        <div class="sidebar"><ul class="sidebar-nav"><li><span class="nav-icon">&#9673;</span> Intake</li><li><span class="nav-icon">&#128269;</span> Source</li><li class="active"><span class="nav-icon">&#9654;</span> Engage</li><li><span class="nav-icon">&#9638;</span> Views</li><li><span class="nav-icon">&#9881;</span> Settings</li></ul></div>
+        <div class="content-area">
+          <div class="seg-control"><button class="seg-btn active">List</button><button class="seg-btn">Email</button><button class="seg-btn">Calendar</button><button class="seg-btn">Kanban</button><button class="seg-btn">Metrics</button></div>
+          <div class="content-main" style="display:flex;align-items:center;justify-content:center;">
+            <div class="prereq-check">
+              <h3>&#9888;&#65039; Settings Required</h3>
+              <p style="font-size:12px;color:var(--gray-600);text-align:center;margin-bottom:16px;">Set up your sender identity, email sequences, and email preferences before sending emails.</p>
+              <div class="prereq-item pending"><span class="pi-icon">&#9744;</span><div class="pi-text"><div class="pi-name">Sender Identity</div><div class="pi-desc">Full name, email address, signature</div></div></div>
+              <div class="prereq-item pending"><span class="pi-icon">&#9744;</span><div class="pi-text"><div class="pi-name">Email Sequences</div><div class="pi-desc">At least one active sequence with templates</div></div></div>
+              <div class="prereq-item pending"><span class="pi-icon">&#9744;</span><div class="pi-text"><div class="pi-name">Email Preferences</div><div class="pi-desc">Send window, daily send limit</div></div></div>
+              <div style="text-align:center;margin-top:16px;"><button class="btn-primary">Go to Settings &#8594;</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 12B: Partial -->
+  <div id="s12-12B" class="hidden">
+    <div class="app-shell">
+      <div class="topbar"><span class="back">&#8592;</span><span class="brand">SeekOut</span><span style="color:var(--gray-300);">—</span><span class="req-name">Senior FE @ SeekOut</span><span class="spacer"></span><button class="mock-toggle">Mock</button><button class="icon-btn">&#128172;</button><button class="icon-btn">&#128276;</button><div class="avatar">TC</div></div>
+      <div class="app-body">
+        <div class="sidebar"><ul class="sidebar-nav"><li><span class="nav-icon">&#9673;</span> Intake</li><li><span class="nav-icon">&#128269;</span> Source</li><li class="active"><span class="nav-icon">&#9654;</span> Engage</li><li><span class="nav-icon">&#9638;</span> Views</li><li><span class="nav-icon">&#9881;</span> Settings</li></ul></div>
+        <div class="content-area">
+          <div class="seg-control"><button class="seg-btn active">List</button><button class="seg-btn">Email</button><button class="seg-btn">Calendar</button><button class="seg-btn">Kanban</button><button class="seg-btn">Metrics</button></div>
+          <div class="content-main" style="display:flex;align-items:center;justify-content:center;">
+            <div class="prereq-check">
+              <h3>&#9888;&#65039; Almost There</h3>
+              <p style="font-size:12px;color:var(--gray-600);text-align:center;margin-bottom:16px;">Configure remaining settings to enable email operations.</p>
+              <div class="prereq-item done"><span class="pi-icon" style="color:var(--green);">&#9745;</span><div class="pi-text"><div class="pi-name">Sender Identity</div><div class="pi-desc">Configured</div></div></div>
+              <div class="prereq-item done"><span class="pi-icon" style="color:var(--green);">&#9745;</span><div class="pi-text"><div class="pi-name">Email Sequences</div><div class="pi-desc">1 active sequence</div></div></div>
+              <div class="prereq-item pending"><span class="pi-icon">&#9744;</span><div class="pi-text"><div class="pi-name">Email Preferences</div><div class="pi-desc">Send window, daily send limit</div></div></div>
+              <div style="text-align:center;margin-top:16px;"><button class="btn-primary">Go to Settings &#8594;</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /canvas -->
+
+<!-- ═══ JavaScript ═══ -->
+<script>
+function showScreen(id) {
+  // Hide all screens
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.state-bar').forEach(b => b.classList.add('hidden'));
+  document.querySelectorAll('.screen-tab').forEach(t => t.classList.remove('active'));
+
+  // Show target screen
+  document.getElementById('screen-' + id).classList.add('active');
+  const stateBar = document.getElementById('state-bar-' + id);
+  if (stateBar) stateBar.classList.remove('hidden');
+
+  // Activate tab
+  const tabs = document.querySelectorAll('.screen-tab');
+  tabs.forEach(t => {
+    if (t.getAttribute('onclick') === "showScreen('" + id + "')") t.classList.add('active');
+  });
+
+  // Show first state
+  const firstStateBtn = stateBar ? stateBar.querySelector('.state-btn') : null;
+  if (firstStateBtn) firstStateBtn.click();
+}
+
+function showState(screenId, stateId) {
+  const screen = document.getElementById('screen-' + screenId);
+  // Hide all states in this screen
+  screen.querySelectorAll('[id^="' + screenId + '-"]').forEach(s => s.classList.add('hidden'));
+  // Show target state
+  const target = document.getElementById(stateId);
+  if (target) target.classList.remove('hidden');
+
+  // Update state buttons
+  const stateBar = document.getElementById('state-bar-' + screenId);
+  if (stateBar) {
+    stateBar.querySelectorAll('.state-btn').forEach(b => b.classList.remove('active'));
+    stateBar.querySelectorAll('.state-btn').forEach(b => {
+      if (b.getAttribute('onclick') === "showState('" + screenId + "','" + stateId + "')") b.classList.add('active');
+    });
+  }
+}
+
+// Initialize: show first screen with first state visible
+document.addEventListener('DOMContentLoaded', () => {
+  showScreen('s1');
+});
+</script>
+</body>
+</html>
