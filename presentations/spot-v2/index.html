@@ -96,7 +96,7 @@
 
     /* Show screen-1 by default when nothing is targeted */
     #s1 { display: block; }
-    body:has(:target) #s1 { display: none; }
+    body:has(:target) #s1:not(:target) { display: none; }
     .screen:target { display: block; }
   </style>
 </head>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{Project Name}} - Wireframes</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: monospace; display: flex; height: 100vh; overflow: hidden; }
+
+    /* --- Left nav panel --- */
+    nav {
+      width: 220px;
+      min-width: 220px;
+      height: 100vh;
+      overflow-y: auto;
+      border-right: 2px solid #ddd;
+      padding: 16px 0;
+      background: #f8f8f8;
+    }
+    nav h1 { font-size: 14px; padding: 0 12px 12px; border-bottom: 1px solid #ddd; }
+    nav .section-label {
+      display: block;
+      padding: 10px 12px 4px;
+      font-weight: bold;
+      font-size: 11px;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    nav a {
+      display: block;
+      padding: 6px 12px;
+      text-decoration: none;
+      color: #333;
+      font-size: 13px;
+      border-left: 3px solid transparent;
+    }
+    nav a:hover { background: #eee; }
+    nav a:target-within,
+    nav a.active { background: #e0e7ff; border-left-color: #4F46E5; font-weight: bold; }
+
+    /* Highlight the nav link whose href matches the current target.
+       CSS-only: use :has() on body to detect :target, then style the matching nav link.
+       ─── HOW TO ADD MORE SCREENS ───
+       For each new screen #sN, add a line:
+         :has(#sN:target) nav a[href="#sN"],
+       before the closing block's opening brace. Keep #flow as the last entry. */
+    :has(#s1:target) nav a[href="#s1"],
+    :has(#s2:target) nav a[href="#s2"],
+    :has(#s3:target) nav a[href="#s3"],
+    :has(#s4:target) nav a[href="#s4"],
+    :has(#s5:target) nav a[href="#s5"],
+    :has(#flow:target) nav a[href="#flow"] {
+      background: #e0e7ff;
+      border-left-color: #4F46E5;
+      font-weight: bold;
+    }
+    /* Default: highlight #s1 link when no target is set */
+    nav a[href="#s1"] { background: #e0e7ff; border-left-color: #4F46E5; font-weight: bold; }
+    body:has(:target) nav a[href="#s1"] { background: transparent; border-left-color: transparent; font-weight: normal; }
+
+    /* --- Main content area --- */
+    main {
+      flex: 1;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 30px 20px;
+    }
+
+    .screen { display: none; text-align: center; max-width: 750px; margin: 0 auto; }
+    .screen h2 { margin-bottom: 4px; font-size: 18px; }
+    .screen p.desc { color: #666; margin-bottom: 24px; font-size: 13px; }
+    .screen pre { display: inline-block; text-align: left; font-size: 13px; line-height: 1.4; }
+    .screen .nav-row { margin-top: 24px; }
+    .screen .nav-row a { margin: 0 12px; color: #4F46E5; }
+
+    /* Show screen-1 by default when nothing is targeted */
+    #s1 { display: block; }
+    /* When any screen is targeted, hide the default */
+    body:has(:target) #s1:not(:target) { display: none; }
+    /* Show the targeted screen */
+    .screen:target { display: block; }
+  </style>
+</head>
+<body>
+
+<!--
+  ═══════════════════════════════════════════════════════════
+  ASCII WIREFRAME CONVENTIONS (from /screen-diagrams)
+  ═══════════════════════════════════════════════════════════
+
+  Symbol          Meaning
+  ──────          ─────────────────────────────────
+  [Button Text]   Clickable button or CTA
+  (* Option)      Selected radio / active option
+  (o Option)      Unselected radio / inactive option
+  [x] Item        Completed checkbox
+  [ ] Item        Unchecked checkbox
+  [Field value]   Text input with value
+  v               Dropdown indicator
+  X               Close button
+  <- / ->         Navigation arrows
+  #               Active/highlighted nav item
+  o               Inactive nav item
+  ...             Truncated or repeating content
+
+  Box drawing: use Unicode box-drawing characters (┌ ┐ └ ┘ │ ─)
+  Target width: 60-70 characters per screen
+  ═══════════════════════════════════════════════════════════
+-->
+
+<nav>
+  <h1>{{Short Name}}</h1>
+  <span class="section-label">Core Screens</span>
+  <a href="#s1">1. Main View</a>
+  <a href="#s2">2. Form / Input</a>
+  <a href="#s3">3. State Variation</a>
+  <span class="section-label">Overview</span>
+  <a href="#flow">Flow Diagram</a>
+</nav>
+
+<main>
+
+<!-- ============================================ -->
+<div class="screen" id="s1">
+  <h2>1. Main View</h2>
+  <p class="desc">Primary screen the user sees. Replace with your project's main view.</p>
+<pre>
+┌──────────────────────────────────────────────────────────┐
+│  Logo                          [User Name v]  [Logout]  │
+├──────────────────────────────────────────────────────────┤
+│                                                          │
+│  Page Title                                              │
+│  ──────────────────────────────────────────────────────  │
+│                                                          │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐              │
+│  │ Card 1   │  │ Card 2   │  │ Card 3   │              │
+│  │          │  │          │  │          │              │
+│  │ Content  │  │ Content  │  │ Content  │              │
+│  │          │  │          │  │          │              │
+│  └──────────┘  └──────────┘  └──────────┘              │
+│                                                          │
+│                                                          │
+│  ┌──────────────────────────────────────────────────┐   │
+│  │ List Item 1                          [Action]    │   │
+│  ├──────────────────────────────────────────────────┤   │
+│  │ List Item 2                          [Action]    │   │
+│  ├──────────────────────────────────────────────────┤   │
+│  │ List Item 3                          [Action]    │   │
+│  └──────────────────────────────────────────────────┘   │
+│                                                          │
+│                        [Primary CTA]                     │
+│                                                          │
+└──────────────────────────────────────────────────────────┘
+</pre>
+  <div class="nav-row"><a href="#s2">Next →</a></div>
+</div>
+
+<!-- ============================================ -->
+<div class="screen" id="s2">
+  <h2>2. Form / Input</h2>
+  <p class="desc">Screen with text fields, dropdowns, and checkboxes. Replace with your project's form.</p>
+<pre>
+┌──────────────────────────────────────────────────────────┐
+│  Logo                          [User Name v]  [Logout]  │
+├──────────────────────────────────────────────────────────┤
+│                                                          │
+│  Form Title                                              │
+│  ──────────────────────────────────────────────────────  │
+│                                                          │
+│  Label                                                   │
+│  ┌──────────────────────────────────────────────────┐   │
+│  │ [Placeholder text                             ]  │   │
+│  └──────────────────────────────────────────────────┘   │
+│                                                          │
+│  Label                                                   │
+│  ┌──────────────────────────────────────────────────┐   │
+│  │ [Selected option                            v ]  │   │
+│  └──────────────────────────────────────────────────┘   │
+│                                                          │
+│  Label                                                   │
+│  ┌──────────────────────────────────────────────────┐   │
+│  │                                                  │   │
+│  │ [Multi-line text area                         ]  │   │
+│  │                                                  │   │
+│  └──────────────────────────────────────────────────┘   │
+│                                                          │
+│  [x] I agree to the terms                                │
+│  [ ] Subscribe to updates                                │
+│                                                          │
+│                  [Cancel]    [Submit]                     │
+│                                                          │
+└──────────────────────────────────────────────────────────┘
+</pre>
+  <div class="nav-row"><a href="#s1">← Prev</a> <a href="#s3">Next →</a></div>
+</div>
+
+<!-- ============================================ -->
+<div class="screen" id="s3">
+  <h2>3. State Variation</h2>
+  <p class="desc">Shows empty, loading, and error states for the same screen area.</p>
+<pre>
+EMPTY STATE
+┌──────────────────────────────────────────────────────────┐
+│                                                          │
+│                                                          │
+│                    (empty icon)                           │
+│                                                          │
+│               No items found yet.                        │
+│         Add your first item to get started.              │
+│                                                          │
+│                  [Add First Item]                         │
+│                                                          │
+│                                                          │
+└──────────────────────────────────────────────────────────┘
+
+LOADING STATE
+┌──────────────────────────────────────────────────────────┐
+│                                                          │
+│  ┌──────────────────────────────────────────────────┐   │
+│  │ ░░░░░░░░░░░░░░░░░░░░░░░░░░░░                    │   │
+│  ├──────────────────────────────────────────────────┤   │
+│  │ ░░░░░░░░░░░░░░░░░░░░                            │   │
+│  ├──────────────────────────────────────────────────┤   │
+│  │ ░░░░░░░░░░░░░░░░░░░░░░░░░                       │   │
+│  └──────────────────────────────────────────────────┘   │
+│                                                          │
+└──────────────────────────────────────────────────────────┘
+
+ERROR STATE
+┌──────────────────────────────────────────────────────────┐
+│                                                          │
+│  ┌──────────────────────────────────────────────────┐   │
+│  │  ⚠ Something went wrong                         │   │
+│  │                                                  │   │
+│  │  We couldn't load your data. Please try again.   │   │
+│  │                                                  │   │
+│  │              [Retry]   [Go Back]                  │   │
+│  └──────────────────────────────────────────────────┘   │
+│                                                          │
+└──────────────────────────────────────────────────────────┘
+</pre>
+  <div class="nav-row"><a href="#s2">← Prev</a> <a href="#flow">Next →</a></div>
+</div>
+
+<!-- ============================================ -->
+<div class="screen" id="flow">
+  <h2>Flow Diagram</h2>
+  <p class="desc">End-to-end screen flow showing happy path and error branches.</p>
+<pre>
+HAPPY PATH
+══════════
+
+  ┌─────────────┐     ┌─────────────┐     ┌─────────────┐
+  │  Main View  │────>│ Form/Input  │────>│   Success   │
+  │   (s1)      │     │   (s2)      │     │   State     │
+  └─────────────┘     └──────┬──────┘     └─────────────┘
+                             │
+                             │ validation
+                             │ error
+                             v
+                       ┌─────────────┐
+                       │ Error State │
+                       │   (s3)      │
+                       └──────┬──────┘
+                              │
+                              │ retry
+                              │
+                              v
+                       ┌─────────────┐
+                       │ Form/Input  │
+                       │   (s2)      │
+                       └─────────────┘
+
+
+EDGE CASES
+══════════
+
+  • Empty state → shown on first visit before any data exists
+  • Loading state → shown while data is being fetched
+  • Error state → shown on network/server failure, with retry option
+</pre>
+  <div class="nav-row"><a href="#s3">← Prev</a></div>
+</div>
+
+</main>
+</body>
+</html>
