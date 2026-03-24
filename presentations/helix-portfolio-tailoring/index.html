@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Helix Portfolio Tailoring — Wireframes</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: monospace; display: flex; height: 100vh; overflow: hidden; }
+
+    /* --- Left nav panel --- */
+    nav {
+      width: 220px;
+      min-width: 220px;
+      height: 100vh;
+      overflow-y: auto;
+      border-right: 2px solid #ddd;
+      padding: 16px 0;
+      background: #f8f8f8;
+    }
+    nav h1 { font-size: 14px; padding: 0 12px 12px; border-bottom: 1px solid #ddd; }
+    nav .section-label {
+      display: block;
+      padding: 10px 12px 4px;
+      font-weight: bold;
+      font-size: 11px;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    nav a {
+      display: block;
+      padding: 6px 12px;
+      text-decoration: none;
+      color: #333;
+      font-size: 12px;
+      border-left: 3px solid transparent;
+    }
+    nav a:hover { background: #eee; }
+
+    :has(#s1:target) nav a[href="#s1"],
+    :has(#s2:target) nav a[href="#s2"],
+    :has(#s3:target) nav a[href="#s3"],
+    :has(#s4:target) nav a[href="#s4"],
+    :has(#s5:target) nav a[href="#s5"],
+    :has(#s6:target) nav a[href="#s6"],
+    :has(#s7:target) nav a[href="#s7"],
+    :has(#s8:target) nav a[href="#s8"],
+    :has(#s9:target) nav a[href="#s9"],
+    :has(#s10:target) nav a[href="#s10"],
+    :has(#s11:target) nav a[href="#s11"],
+    :has(#s12:target) nav a[href="#s12"],
+    :has(#s13:target) nav a[href="#s13"],
+    :has(#s14:target) nav a[href="#s14"],
+    :has(#s15:target) nav a[href="#s15"],
+    :has(#s16:target) nav a[href="#s16"],
+    :has(#s17:target) nav a[href="#s17"] {
+      background: #e0e7ff;
+      border-left-color: #4F46E5;
+      font-weight: bold;
+    }
+    /* Default: highlight #s1 link when no target is set */
+    nav a[href="#s1"] { background: #e0e7ff; border-left-color: #4F46E5; font-weight: bold; }
+    body:has(:target) nav a[href="#s1"] { background: transparent; border-left-color: transparent; font-weight: normal; }
+
+    /* --- Main content area --- */
+    main {
+      flex: 1;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 30px 20px;
+    }
+
+    .screen { display: none; text-align: center; max-width: 900px; margin: 0 auto; }
+    .screen h2 { margin-bottom: 4px; font-size: 18px; }
+    .screen p.desc { color: #666; margin-bottom: 24px; font-size: 13px; }
+    .screen pre { display: inline-block; text-align: left; font-size: 12px; line-height: 1.35; }
+    .screen .nav-row { margin-top: 24px; }
+    .screen .nav-row a { margin: 0 12px; color: #4F46E5; }
+
+    /* Show screen-1 by default when nothing is targeted */
+    #s1 { display: block; }
+    body:has(:target) #s1:not(:target) { display: none; }
+    .screen:target { display: block; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <h1>Helix Tailoring</h1>
+  <span class="section-label">Onboarding</span>
+  <a href="#s1">1. Value Prop</a>
+  <a href="#s2">2. Wizard — Add Details</a>
+  <a href="#s3">3. Wizard — Try an Edit</a>
+  <a href="#s4">4. Portfolio View</a>
+  <span class="section-label">Share Flow</span>
+  <a href="#s5">5. Share Decision</a>
+  <a href="#s6">6. JD Input</a>
+  <a href="#s7">7. Tailoring Progress</a>
+  <a href="#s8">8. Tailored Preview</a>
+  <a href="#s9">9. As-Is Share</a>
+  <span class="section-label">Post-Share</span>
+  <a href="#s10">10. Share Confirmation</a>
+  <a href="#s11">11. Applications Page</a>
+  <span class="section-label">User Flows</span>
+  <a href="#s12">12. Happy Path</a>
+  <a href="#s13">13. Skip Edit Path</a>
+  <a href="#s14">14. As-Is Share</a>
+  <a href="#s15">15. Edit Loop</a>
+  <a href="#s16">16. Career Coach Entry</a>
+  <a href="#s17">17. Chat-Initiated Share</a>
+</nav>
+
+<main>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- Screen 1: Value Prop -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="screen" id="s1">
+  <h2>1. Value Prop Screen</h2>
+  <p class="desc">Entry point from signup. Introduces the unified portfolio concept.</p>
+<pre>
+┌──────────────────────────────────────────────────────────────────────┐
+│  seekout&gt;                                                            │
+│                                                                      │
+│                                                                      │
+│                    Your career, one portfolio.                        │
+│                                                                      │
+│           ┌────────────────────────────────────────────┐             │
+│           │                                            │             │
+│           │         (illustration / graphic)           │             │
+│           │    AI-powered resume · GitHub · Links ·    │             │
+│           │    Video · Tailored for every job          │             │
+│           │                                            │             │
+│           └────────────────────────────────────────────┘             │
+│                                                                      │
+│           ✦ AI resume builder — fix, improve, tailor                 │
+│           ✦ One portfolio, tailored for every opportunity            │
+│           ✦ Track who views your shared links                        │
+│           ✦ Share anywhere — LinkedIn, email, direct                 │
+│                                                                      │
+│                                                                      │
+│                       [Get Started →]                                │
+│                                                                      │
+│                                                                      │
+└──────────────────────────────────────────────────────────────────────┘
+</pre>
+  <div class="nav-row"><a href="#s2">Next &rarr;</a></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- Screen 2: Wizard — Add Details -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="screen" id="s2">
+  <h2>2. Wizard — Add Details</h2>
+  <p class="desc">Resume upload, diagnosis, template selection, GitHub, portfolio URL, and links.</p>
+<pre>
+STATE 2A: EMPTY (NO RESUME YET)
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│                                                                          │
+│  Create your AI-forward profile                                          │
+│                                                                          │
+│       (Resume Details)─────(Links &amp; resources)─────(Try an edit)  [✕]   │
+│        ● active              ○                      ○                    │
+│                                                                          │
+│  ┌──────────────────────────────────────────────────────────────────────┐ │
+│  │                          📋                                         │ │
+│  │          First, let us know the basics of your background           │ │
+│  │          We use this to create your modern profile                  │ │
+│  └──────────────────────────────────────────────────────────────────────┘ │
+│                                                                          │
+│  Resume                                                                  │
+│  ┌──────────────────────────────────────────────────────────────────────┐ │
+│  │                                                                      │ │
+│  │              📄 Click to upload or drag your resume                  │ │
+│  │                           PDF only                                   │ │
+│  │                                                                      │ │
+│  └──────────────────────────────────────────────────────────────────────┘ │
+│                                                                          │
+│  Github Profile                    Add Portfolio                         │
+│  ┌────────────────────────────┐    ┌────────────────────────────────┐    │
+│  │                            │    │                                │    │
+│  └────────────────────────────┘    └────────────────────────────────┘    │
+│                                                                          │
+│  Additional Links                                                        │
+│  ┌──────────────────────────────────────────────────────────────────────┐ │
+│  │ You can paste multiple links here                                    │ │
+│  └──────────────────────────────────────────────────────────────────────┘ │
+│                                                                          │
+│  ───────────────────────────────────────────────────────────────────────  │
+│                                                         [Next →]         │
+│                                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
+
+
+STATE 2B: RESUME UPLOADED, ANALYZING
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│                                                                          │
+│  Create your AI-forward profile                                          │
+│                                                                          │
+│       (Resume Details)─────(Links &amp; resources)─────(Try an edit)  [✕]   │
+│        ● active              ○                      ○                    │
+│                                                                          │
+│  Resume                                                                  │
+│  ┌────────────────────────────┐                                          │
+│  │ Sarah_Resume.pdf  ✓       │                                          │
+│  └────────────────────────────┘                                          │
+│                                                                          │
+│  ┌──────────────────────────────────────────────────────────────────────┐ │
+│  │ ⚡ Analyzing your resume...                             Helix AI    │ │
+│  │                                                                      │ │
+│  │      ● Extracting content                                ✓          │ │
+│  │      ● Checking ATS compatibility                        ◌          │ │
+│  │      ● Identifying improvement opportunities             ◌          │ │
+│  │                                                                      │ │
+│  └──────────────────────────────────────────────────────────────────────┘ │
+│                                                                          │
+│  Github Profile                    Add Portfolio                         │
+│  ┌────────────────────────────┐    ┌────────────────────────────────┐    │
+│  │                            │    │                                │    │
+│  └────────────────────────────┘    └────────────────────────────────┘    │
+│                                                                          │
+│  ───────────────────────────────────────────────────────────────────────  │
+│                                                         [Next →]         │
+│                                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
+
+
+STATE 2C: DIAGNOSIS READY + TEMPLATE SELECTION
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│                                                                          │
+│  Create your AI-forward profile                                          │
+│                                                                          │
+│       (Resume Details)─────(Links &amp; resources)─────(Try an edit)  [✕]   │
+│        ● active              ○                      ○                    │
+│                                                                          │
+│  Resume                                                                  │
+│  ┌────────────────────────────┐                                          │
+│  │ Sarah_Resume.pdf  ✓       │                                          │
+│  └────────────────────────────┘                                          │
+│                                                                          │
+│  ┌──────────────────────────────────────────────────────────────────────┐ │
+│  │ ⚡ Resume Analysis                                      Helix AI    │ │
+│  │                                                                      │ │
+│  │  Your resume has a few areas we can optimize:                        │ │
+│  │                                                                      │ │
+│  │  ⚠ ATS compatibility — formatting may cause parsing issues          │ │
+│  │  ⚠ Inconsistent date formatting across 3 roles                     │ │
+│  │  💡 3 bullet points could be strengthened with measurable impact    │ │
+│  │                                                                      │ │
+│  │  Choose a template and we'll create an optimized, editable          │ │
+│  │  version of your resume:                                             │ │
+│  │                                                                      │ │
+│  │   ┌────────────┐   ┌────────────┐   ┌────────────┐                  │ │
+│  │   │ ┌────────┐ │   │ ┌────────┐ │   │ ┌────────┐ │                  │ │
+│  │   │ │ Modern │ │   │ │Classic │ │   │ │Minimal │ │                  │ │
+│  │   │ │ ────── │ │   │ │ ────── │ │   │ │        │ │                  │ │
+│  │   │ │ ▪ ▪ ▪  │ │   │ │ ▪ ▪ ▪  │ │   │ │ ▪ ▪ ▪  │ │                  │ │
+│  │   │ │ ▪ ▪ ▪  │ │   │ │ ▪ ▪ ▪  │ │   │ │ ▪ ▪ ▪  │ │                  │ │
+│  │   │ └────────┘ │   │ └────────┘ │   │ └────────┘ │                  │ │
+│  │   │  ● Modern  │   │  ○ Classic │   │  ○ Minimal │                  │ │
+│  │   └────────────┘   └────────────┘   └────────────┘                  │ │
+│  │                                                                      │ │
+│  │  ℹ We'll fix formatting issues automatically. Content suggestions   │ │
+│  │    will be available for you to review after your profile is ready.  │ │
+│  └──────────────────────────────────────────────────────────────────────┘ │
+│                                                                          │
+│  Github Profile                    Add Portfolio                         │
+│  ┌────────────────────────────┐    ┌────────────────────────────────┐    │
+│  │ github.com/sarahc          │    │ portfolio.dev/sarahc           │    │
+│  └────────────────────────────┘    └────────────────────────────────┘    │
+│                                                                          │
+│  ───────────────────────────────────────────────────────────────────────  │
+│                                                         [Next →]         │
+│                                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
+</pre>
+  <div class="nav-row"><a href="#s1">&larr; Prev</a> <a href="#s3">Next &rarr;</a></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- Screen 3: Wizard — Try an Edit -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="screen" id="s3">
+  <h2>3. Wizard — Try an Edit</h2>
+  <p class="desc">Split view: resume preview + NL editor with starter prompts. Optional step.</p>
+<pre>
+STATE 3A: LOADING (CONVERSION NOT READY)
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│                                                                          │
+│  Create your AI-forward profile                                          │
+│                                                                          │
+│       (Resume Details)─────(Links &amp; resources)─────(Try an edit)  [✕]   │
+│        ✓                    ✓                      ● active              │
+│                                                                          │
+│  ┌──────────────────────────────┬───────────────────────────────────────┐ │
+│  │                              │                                       │ │
+│  │                              │  ✨ Try an edit                        │ │
+│  │                              │                                       │ │
+│  │                              │  Once your resume is ready, you can   │ │
+│  │    ⚡ Preparing your         │  try editing it with AI. Here are     │ │
+│  │    resume for editing...     │  some suggestions based on your       │ │
+│  │                              │  resume analysis:                     │ │
+│  │    ● Applying template       │                                       │ │
+│  │    ● Fixing ATS formatting   │  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░     │ │
+│  │    ● Typesetting content     │  ░░░░░░░░░░░░░░░░░░░░░░░░           │ │
+│  │                              │  ░░░░░░░░░░░░░░░░░░░░░░░░░░░        │ │
+│  │    This usually takes a      │                                       │ │
+│  │    few seconds.              │                                       │ │
+│  │                              │                                       │ │
+│  │                              │                                       │ │
+│  │                              │  ┌─────────────────────────────────┐  │ │
+│  │                              │  │ Type your edit...               │  │ │
+│  │                              │  └─────────────────────────────────┘  │ │
+│  └──────────────────────────────┴───────────────────────────────────────┘ │
+│                                                                          │
+│  ───────────────────────────────────────────────────────────────────────  │
+│                                     [Skip →]    [Create Portfolio →]     │
+│                                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
+
+
+STATE 3B: READY (CONVERSION COMPLETE)
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│                                                                          │
+│  Create your AI-forward profile                                          │
+│                                                                          │
+│       (Resume Details)─────(Links &amp; resources)─────(Try an edit)  [✕]   │
+│        ✓                    ✓                      ● active              │
+│                                                                          │
+│  ┌──────────────────────────────┬───────────────────────────────────────┐ │
+│  │                              │                                       │ │
+│  │                              │  ✨ Try an edit                        │ │
+│  │   Sarah Chen                 │                                       │ │
+│  │   Product Manager | Seattle  │  We found a few things to improve.    │ │
+│  │   sarah@email.com            │  Try one of these edits:              │ │
+│  │                              │                                       │ │
+│  │   ── Experience ──────────   │  [Make my summary more specific       │ │
+│  │                              │   to product management            ]  │ │
+│  │   Product Manager            │                                       │ │
+│  │   Acme Corp  2022-Present    │  [Add metrics to my role at Google ]  │ │
+│  │   • Led product strategy     │                                       │ │
+│  │     for enterprise platform  │  [Strengthen my education section  ]  │ │
+│  │   • Managed team of 8        │                                       │ │
+│  │                              │  Or type your own:                    │ │
+│  │   Software Engineer          │                                       │ │
+│  │   Google  2019-2022          │  ┌─────────────────────────────────┐  │ │
+│  │   • Built data pipeline      │  │ Type your edit...               │  │ │
+│  │   • Improved latency by 40%  │  └─────────────────────────────────┘  │ │
+│  │                              │                                       │ │
+│  │   ── Skills ──────────────   │  This step is optional — you can      │ │
+│  │   Strategy  SQL  Analytics   │  always edit from your portfolio.      │ │
+│  └──────────────────────────────┴───────────────────────────────────────┘ │
+│                                                                          │
+│  ───────────────────────────────────────────────────────────────────────  │
+│                                     [Skip →]    [Create Portfolio →]     │
+│                                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
+
+
+STATE 3C: AFTER EDIT
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│                                                                          │
+│  Create your AI-forward profile                                          │
+│                                                                          │
+│       (Resume Details)─────(Links &amp; resources)─────(Try an edit)  [✕]   │
+│        ✓                    ✓                      ● active              │
+│                                                                          │
+│  ┌──────────────────────────────┬───────────────────────────────────────┐ │
+│  │                              │                                       │ │
+│  │                              │  ✨ Try an edit                        │ │
+│  │   Sarah Chen                 │                                       │ │
+│  │   Product Manager | Seattle  │  ┌─────────────────────────────────┐  │ │
+│  │   sarah@email.com            │  │ 👤 Make my summary more        │  │ │
+│  │                              │  │ specific to product management  │  │ │
+│  │ ┌─ UPDATED ───────────────┐  │  └─────────────────────────────────┘  │ │
+│  │ │ Product leader with 5+  │  │                                       │ │
+│  │ │ years driving strategy  │  │  ┌─────────────────────────────────┐  │ │
+│  │ │ and execution across    │  │  │ ✅ Updated your summary to     │  │ │
+│  │ │ enterprise B2B...       │  │  │ emphasize product leadership,  │  │ │
+│  │ │ └───────────────────────┘  │  │ cross-functional collaboration │  │ │
+│  │                              │  │ and measurable impact.         │  │ │
+│  │   ── Experience ──────────   │  └─────────────────────────────────┘  │ │
+│  │                              │                                       │ │
+│  │   Product Manager            │  Try another:                         │ │
+│  │   Acme Corp  2022-Present    │  [Add metrics to my role at Google ]  │ │
+│  │   • Led product strategy     │                                       │ │
+│  │     for enterprise platform  │  ┌─────────────────────────────────┐  │ │
+│  │   • Managed team of 8        │  │ Type your edit...               │  │ │
+│  │                              │  └─────────────────────────────────┘  │ │
+│  └──────────────────────────────┴───────────────────────────────────────┘ │
+│                                                                          │
+│  ───────────────────────────────────────────────────────────────────────  │
+│                                     [Skip →]    [Create Portfolio →]     │
+│                                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
+</pre>
+  <div class="nav-row"><a href="#s2">&larr; Prev</a> <a href="#s4">Next &rarr;</a></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- Screen 4: Portfolio View -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="screen" id="s4">
+  <h2>4. Portfolio View</h2>
+  <p class="desc">Main screen after onboarding. Always-on AI chat panel on the right. 9 states.</p>
+<pre>
+STATE 4A: DEFAULT (EDIT RESUME ACTIVE, SUGGESTIONS SHOWN)
+
+┌─────────────┬────────────────────────────────────┬──────────────────────────────┐
+│             │                                    │                              │
+│ seekout&gt;    │  My Portfolio       [Share][⬇ DL]  │  [Edit Resume] [Career Coach]│
+│             │                                    │                              │
+│ Jobseekers  │  Overview · Resume · Github ·      │  ✨ Suggestions               │
+│             │  Links · Video                     │                              │
+│ ■ Portfolio │  ──────────────────────────────     │  Based on your resume:       │
+│ ○ Apps      │                                    │                              │
+│             │  ┌──────────────────────────────┐   │  [Strengthen your summary    │
+│ ─────────── │  │                              │   │   for PM roles            ]  │
+│ ⚙ Settings  │  │   Sarah Chen                 │   │                              │
+│             │  │   Product Manager | Seattle   │   │  [Add metrics to your       │
+│ ─────────── │  │   sarah@email.com             │   │   Google role             ]  │
+│             │  │                              │   │                              │
+│ Tasks       │  │   ── Summary ────────────    │   │  [Rewrite education section  │
+│             │  │   Product leader with 5+     │   │   to highlight relevance  ]  │
+│ [ ] Edit    │  │   years driving strategy     │   │                              │
+│     resume  │  │   and execution...           │   │                              │
+│ [ ] Share   │  │                              │   │                              │
+│     portfolio│  │   ── Experience ──────────   │   │                              │
+│ [ ] Try AI  │  │                              │   │                              │
+│     Career  │  │   Product Manager            │   │                              │
+│     Coach   │  │   Acme Corp  2022-Present    │   │                              │
+│ [ ] Tailor  │  │   • Led product strategy...  │   │                              │
+│     for a   │  │   • Managed team of 8...     │   │                              │
+│     job     │  │                              │   │                              │
+│             │  │   Software Engineer           │   │                              │
+│ ─────────── │  │   Google  2019-2022          │   │                              │
+│             │  │   • Built data pipeline...   │   │                              │
+│ (avatar)    │  │                              │   │  ┌────────────────────────┐  │
+│ Sarah C.    │  └──────────────────────────────┘   │  │ Type a message...      │  │
+│             │                                    │  └────────────────────────┘  │
+└─────────────┴────────────────────────────────────┴──────────────────────────────┘
+
+
+STATE 4B: GITHUB TAB ACTIVE (TAB-AWARE SUGGESTIONS)
+
+                                    │                                    │                              │
+                                    │  Overview · Resume · [Github] ·   │  ✨ Suggestions               │
+                                    │  Links · Video                    │                              │
+                                    │  ──────────────────────────────    │  Based on your GitHub:       │
+                                    │                                    │                              │
+                                    │  GitHub Profile                    │  [Link your top             │
+                                    │  ┌──────────────────────────────┐  │   repositories            ]  │
+                                    │  │ github.com/sarahc             │  │                              │
+                                    │  │                              │  │  [Add descriptions to       │
+                                    │  │ (no repositories linked yet) │  │   pinned repos            ]  │
+                                    │  │                              │  │                              │
+                                    │  │        [Link Repos]          │  │  [Highlight your open       │
+                                    │  │                              │  │   source contributions   ]  │
+                                    │  └──────────────────────────────┘  │                              │
+
+
+STATE 4C: LINKS TAB ACTIVE (TAB-AWARE SUGGESTIONS)
+
+                                    │                                    │                              │
+                                    │  Overview · Resume · Github ·     │  ✨ Suggestions               │
+                                    │  [Links] · Video                  │                              │
+                                    │  ──────────────────────────────    │  Based on your links:        │
+                                    │                                    │                              │
+                                    │  Portfolio Links                   │  [Add your portfolio         │
+                                    │  ┌──────────────────────────────┐  │   website                 ]  │
+                                    │  │ portfolio.dev/sarahc          │  │                              │
+                                    │  │                              │  │  [Include a case study     │
+                                    │  │ [+ Add Link]                 │  │   or writing sample      ]  │
+                                    │  └──────────────────────────────┘  │                              │
+
+
+STATE 4D: VIDEO TAB ACTIVE (TAB-AWARE SUGGESTIONS)
+
+                                    │                                    │                              │
+                                    │  Overview · Resume · Github ·     │  ✨ Suggestions               │
+                                    │  Links · [Video]                  │                              │
+                                    │  ──────────────────────────────    │  Intro videos help you       │
+                                    │                                    │  stand out:                   │
+                                    │  Intro Video                       │                              │
+                                    │  ┌──────────────────────────────┐  │  [Record a 60-second        │
+                                    │  │                              │  │   intro video             ]  │
+                                    │  │    (no video recorded yet)   │  │                              │
+                                    │  │                              │  │  [Get script suggestions   │
+                                    │  │   [Record Video] [Upload]   │  │   for your intro          ]  │
+                                    │  │                              │  │                              │
+                                    │  └──────────────────────────────┘  │                              │
+
+
+STATE 4E: AFTER EDITS (SUGGESTIONS UPDATED)
+
+┌─────────────┬────────────────────────────────────┬──────────────────────────────┐
+│             │                                    │                              │
+│ seekout&gt;    │  My Portfolio       [Share][⬇ DL]  │  [Edit Resume] [Career Coach]│
+│             │                                    │                              │
+│ Jobseekers  │  Overview · [Resume] · Github ·    │  ┌────────────────────────┐  │
+│             │  Links · Video                     │  │ 👤 Strengthen my       │  │
+│ ■ Portfolio │  ──────────────────────────────     │  │ summary for PM roles   │  │
+│ ○ Apps      │                                    │  └────────────────────────┘  │
+│             │  ┌──────────────────────────────┐   │                              │
+│ ─────────── │  │                              │   │  ┌────────────────────────┐  │
+│ ⚙ Settings  │  │   Sarah Chen                 │   │  │ ✅ Updated your       │  │
+│             │  │   Product Manager | Seattle   │   │  │ summary to emphasize  │  │
+│ ─────────── │  │                              │   │  │ product leadership     │  │
+│             │  │ ┌─ UPDATED ───────────────┐  │   │  │ and cross-functional   │  │
+│ Tasks       │  │ │ Product leader with 5+  │  │   │  │ collaboration.        │  │
+│             │  │ │ years driving strategy  │  │   │  └────────────────────────┘  │
+│ [x] Edit    │  │ │ and execution across    │  │   │                              │
+│     resume  │  │ │ enterprise B2B...       │  │   │  More suggestions:           │
+│ [ ] Share   │  │ └────────────────────────┘  │   │                              │
+│     portfolio│  │                              │   │  [Add metrics to your       │
+│ [ ] Try AI  │  │   ── Experience ──────────   │   │   Google role             ]  │
+│     Career  │  │                              │   │                              │
+│     Coach   │  │   Product Manager            │   │  [Highlight leadership      │
+│ [ ] Tailor  │  │   Acme Corp  2022-Present    │   │   across your experience ]  │
+│     for a   │  │   • Led product strategy...  │   │                              │
+│     job     │  │   • Managed team of 8...     │   │                              │
+│             │  │                              │   │                              │
+│ ─────────── │  │   ...                        │   │  ┌────────────────────────┐  │
+│ (avatar)    │  │                              │   │  │ Type a message...      │  │
+│ Sarah C.    │  └──────────────────────────────┘   │  └────────────────────────┘  │
+└─────────────┴────────────────────────────────────┴──────────────────────────────┘
+
+
+STATE 4F: LLM ASKING CLARIFICATION
+
+                                                    │                              │
+                                                    │  ┌────────────────────────┐  │
+                                                    │  │ 👤 Add my AWS         │  │
+                                                    │  │ certification          │  │
+                                                    │  └────────────────────────┘  │
+                                                    │                              │
+                                                    │  ┌────────────────────────┐  │
+                                                    │  │ 🟡 Which AWS          │  │
+                                                    │  │ certification do you   │  │
+                                                    │  │ have? And when did     │  │
+                                                    │  │ you earn it?           │  │
+                                                    │  │                        │  │
+                                                    │  │ Common ones:           │  │
+                                                    │  │ • Solutions Architect  │  │
+                                                    │  │ • Developer Associate  │  │
+                                                    │  │ • Cloud Practitioner   │  │
+                                                    │  └────────────────────────┘  │
+                                                    │                              │
+                                                    │  ┌────────────────────────┐  │
+                                                    │  │ Type a message...      │  │
+                                                    │  └────────────────────────┘  │
+
+
+STATE 4G: LLM ERROR (MALFORMED TYPST)
+
+                                                    │                              │
+                                                    │  ┌────────────────────────┐  │
+                                                    │  │ 👤 Reorganize into    │  │
+                                                    │  │ two columns            │  │
+                                                    │  └────────────────────────┘  │
+                                                    │                              │
+                                                    │  ┌────────────────────────┐  │
+                                                    │  │ ⚠ That change          │  │
+                                                    │  │ couldn't be applied.   │  │
+                                                    │  │ Your resume has been   │  │
+                                                    │  │ restored to the last   │  │
+                                                    │  │ working version.       │  │
+                                                    │  │                        │  │
+                                                    │  │ Try rephrasing your    │  │
+                                                    │  │ request, or try a      │  │
+                                                    │  │ different change.      │  │
+                                                    │  │                        │  │
+                                                    │  │         [Retry]        │  │
+                                                    │  └────────────────────────┘  │
+                                                    │                              │
+                                                    │  ┌────────────────────────┐  │
+                                                    │  │ Type a message...      │  │
+                                                    │  └────────────────────────┘  │
+
+
+STATE 4H: CHAT-INITIATED SHARE PROMPT
+
+                                                    │                              │
+                                                    │  ✅ Updated your summary.    │
+                                                    │                              │
+                                                    │  ┌────────────────────────┐  │
+                                                    │  │ Your portfolio is       │  │
+                                                    │  │ looking great! Ready    │  │
+                                                    │  │ to share it?            │  │
+                                                    │  │                        │  │
+                                                    │  │    [Share it →]        │  │
+                                                    │  └────────────────────────┘  │
+                                                    │                              │
+                                                    │  ┌────────────────────────┐  │
+                                                    │  │ Type a message...      │  │
+                                                    │  └────────────────────────┘  │
+
+
+STATE 4I: ALL TASKS COMPLETE (KUDOS STATE)
+
+┌─────────────┬────────────────────────────────────┬──────────────────────────────┐
+│             │                                    │                              │
+│ seekout&gt;    │  My Portfolio       [Share][⬇ DL]  │  [Edit Resume] [Career Coach]│
+│             │                                    │                              │
+│ Jobseekers  │  Overview · [Resume] · Github ·    │  You're all set! Keep your   │
+│             │  Links · Video                     │  portfolio updated and share  │
+│ ■ Portfolio │  ──────────────────────────────     │  it for new opportunities.   │
+│ ○ Apps      │                                    │                              │
+│             │  ┌──────────────────────────────┐   │  [Improve my summary      ]  │
+│ ─────────── │  │                              │   │                              │
+│ ⚙ Settings  │  │   Sarah Chen                 │   │  [Tailor for another job  ]  │
+│             │  │   Product Manager | Seattle   │   │                              │
+│ ─────────── │  │   sarah@email.com             │   │                              │
+│             │  │                              │   │                              │
+│  🚀 Kudos   │  │   ── Summary ────────────    │   │                              │
+│  you are    │  │   Product leader with 5+     │   │                              │
+│  all set!   │  │   years driving strategy...  │   │                              │
+│             │  │                              │   │                              │
+│ [x] Edit    │  │   ── Experience ──────────   │   │                              │
+│     resume  │  │   ...                        │   │                              │
+│ [x] Share   │  │                              │   │                              │
+│     portfolio│  └──────────────────────────────┘   │                              │
+│ [x] Try AI  │                                    │                              │
+│     Career  │                                    │                              │
+│     Coach   │                                    │  ┌────────────────────────┐  │
+│ [x] Tailor  │  Track your shared links           │  │ Type a message...      │  │
+│     for a   │  in the dashboard →                │  └────────────────────────┘  │
+│     job     │                                    │                              │
+└─────────────┴────────────────────────────────────┴──────────────────────────────┘
+</pre>
+  <div class="nav-row"><a href="#s3">&larr; Prev</a> <a href="#s5">Next &rarr;</a></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- Screen 5: Share Decision Modal -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="screen" id="s5">
+  <h2>5. Share Decision Modal</h2>
+  <p class="desc">Modal triggered by [Share] button or chat suggestion. Two paths: tailored or as-is.</p>
+<pre>
+┌──────────────────────────────────────────────────────────────────────────┐
+│                                                                          │
+│                        Share Your Portfolio                               │
+│                                                                          │
+│  ┌──────────────────────────────────────────────────────────────────────┐ │
+│  │                                                                      │ │
+│  │     Do you have a specific job in mind?                              │ │
+│  │                                                                      │ │
+│  │     We can tailor your portfolio for the role — this increases       │ │
+│  │     your chances by 35%.                                             │ │
+│  │                                                                      │ │
+│  │  ┌──────────────────────────────────────────────────────────────┐    │ │
+│  │  │                                                              │    │ │
+│  │  │  ✦ Tailored for a specific job                              │    │ │
+│  │  │                                                              │    │ │
+│  │  │  We'll adjust your summary, reorder experience, and          │    │ │
+│  │  │  highlight matching skills — never fabricate.                │    │ │
+│  │  │                                                              │    │ │
+│  │  │                    [Yes, tailor for a job]                    │    │ │
+│  │  │                                                              │    │ │
+│  │  └──────────────────────────────────────────────────────────────┘    │ │
+│  │                                                                      │ │
+│  │  ┌──────────────────────────────────────────────────────────────┐    │ │
+│  │  │                                                              │    │ │
+│  │  │  Share as-is                                                 │    │ │
+│  │  │                                                              │    │ │
+│  │  │  Share your current portfolio without tailoring.             │    │ │
+│  │  │                                                              │    │ │
+│  │  │                       [No, share as-is]                      │    │ │
+│  │  │                                                              │    │ │
+│  │  └──────────────────────────────────────────────────────────────┘    │ │
+│  │                                                                      │ │
+│  └──────────────────────────────────────────────────────────────────────┘ │
+│                                                                          │
+│                              [✕ Cancel]                                  │
+│                                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
+</pre>
+  <div class="nav-row"><a href="#s4">&larr; Prev</a> <a href="#s6">Next &rarr;</a></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- Screen 6: JD Input -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="screen" id="s6">
+  <h2>6. JD Input</h2>
+  <p class="desc">Paste job posting URL or full job description to start tailoring.</p>
+<pre>
+┌──────────────────────────────────────────────────────────────────────────┐
+│                                                                          │
+│                        Tailor for a Job                                   │
+│                                                                          │
+│  Step 1 of 3: Add the job details                                        │
+│                                                                          │
+│  ┌──────────────────────────────────────────────────────────────────────┐ │
+│  │                                                                      │ │
+│  │  Paste the job posting URL                                           │ │
+│  │  ┌──────────────────────────────────────────────────────────────┐    │ │
+│  │  │ https://                                                     │    │ │
+│  │  └──────────────────────────────────────────────────────────────┘    │ │
+│  │                                                                      │ │
+│  │  ──────────── or ────────────                                        │ │
+│  │                                                                      │ │
+│  │  Paste the job description                                           │ │
+│  │  ┌──────────────────────────────────────────────────────────────┐    │ │
+│  │  │                                                              │    │ │
+│  │  │  Paste the full job description here...                     │    │ │
+│  │  │                                                              │    │ │
+│  │  │                                                              │    │ │
+│  │  │                                                              │    │ │
+│  │  └──────────────────────────────────────────────────────────────┘    │ │
+│  │                                                                      │ │
+│  └──────────────────────────────────────────────────────────────────────┘ │
+│                                                                          │
+│                        [← Back]    [Tailor My Portfolio →]               │
+│                                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
+</pre>
+  <div class="nav-row"><a href="#s5">&larr; Prev</a> <a href="#s7">Next &rarr;</a></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- Screen 7: Tailoring Progress -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="screen" id="s7">
+  <h2>7. Tailoring Progress</h2>
+  <p class="desc">Pipeline steps with inline tailoring education during wait time. Auto-advances on completion.</p>
+<pre>
+┌──────────────────────────────────────────────────────────────────────────┐
+│                                                                          │
+│                        Tailoring Your Portfolio                           │
+│                                                                          │
+│  ┌──────────────────────────────────────────────────────────────────────┐ │
+│  │                                                                      │ │
+│  │  ✓ Analyzing job description                                        │ │
+│  │  ◉ Evaluating fit...                                                │ │
+│  │  ○ Tailoring your portfolio                                         │ │
+│  │  ○ Preview                                                          │ │
+│  │                                                                      │ │
+│  ├──────────────────────────────────────────────────────────────────────┤ │
+│  │                                                                      │ │
+│  │   What happens during tailoring?                                     │ │
+│  │                                                                      │ │
+│  │   We analyze the job requirements and adjust your portfolio          │ │
+│  │   to put your best foot forward:                                     │ │
+│  │                                                                      │ │
+│  │   ✦ Reorder experience to lead with what matters most               │ │
+│  │   ✦ Rewrite bullet points to mirror the job's language              │ │
+│  │   ✦ Emphasize matching skills and qualifications                    │ │
+│  │   ✦ Adjust your summary for the specific role                       │ │
+│  │                                                                      │ │
+│  │   We never fabricate — everything comes from your real experience.   │ │
+│  │                                                                      │ │
+│  │   ┌──────────────────────────────────────────────────────────────┐   │ │
+│  │   │  Before               →          After                      │   │ │
+│  │   │                                                              │   │ │
+│  │   │  "Managed team"       →  "Led cross-functional team of 8    │   │ │
+│  │   │                           engineers and designers to ship    │   │ │
+│  │   │                           enterprise features quarterly"    │   │ │
+│  │   └──────────────────────────────────────────────────────────────┘   │ │
+│  │                                                                      │ │
+│  │   Tailored portfolios get 35% more interviews.                       │ │
+│  │                                                                      │ │
+│  └──────────────────────────────────────────────────────────────────────┘ │
+│                                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
+</pre>
+  <div class="nav-row"><a href="#s6">&larr; Prev</a> <a href="#s8">Next &rarr;</a></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- Screen 8: Tailored Preview + Share -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="screen" id="s8">
+  <h2>8. Tailored Preview + Share</h2>
+  <p class="desc">Read-only preview of tailored result with change summary and sharing options.</p>
+<pre>
+┌──────────────────────────────────────────────────────────────────────────┐
+│                                                                          │
+│                        Tailored Preview                                   │
+│                                                                          │
+│  Google — Senior Product Manager                                         │
+│                                                                          │
+│  ┌──────────────────────────┬───────────────────────────────────────────┐ │
+│  │                          │                                           │ │
+│  │   Sarah Chen             │  Changes made:                            │ │
+│  │   Product Manager        │                                           │ │
+│  │                          │  ✦ Summary rewritten to emphasize        │ │
+│  │ ┌─ TAILORED ──────────┐ │    product strategy and data-driven      │ │
+│  │ │ Product strategist   │ │    decision making                       │ │
+│  │ │ with 5+ years        │ │                                           │ │
+│  │ │ driving data-driven  │ │  ✦ Experience reordered — Google role    │ │
+│  │ │ product decisions... │ │    moved to top (most relevant)          │ │
+│  │ └────────────────────┘ │ │                                           │ │
+│  │                          │  ✦ 4 bullet points rewritten to          │ │
+│  │   ── Experience ───────  │    mirror JD language                     │ │
+│  │                          │                                           │ │
+│  │   Software Engineer      │  ✦ Skills reordered — SQL, Analytics,    │ │
+│  │   Google  2019-2022      │    Strategy moved to front               │ │
+│  │   • Built data pipeline  │                                           │ │
+│  │     serving 10M daily    │                                           │ │
+│  │     queries...           │                                           │ │
+│  │                          │                                           │ │
+│  │   Product Manager        │                                           │ │
+│  │   Acme Corp  2022-Pres   │                                           │ │
+│  │   • Led product strategy │                                           │ │
+│  │     for enterprise...    │                                           │ │
+│  │                          │                                           │ │
+│  └──────────────────────────┴───────────────────────────────────────────┘ │
+│                                                                          │
+│  Share via:                                                              │
+│  ┌──────────────────────────────────────────────────────────────────────┐ │
+│  │  [● LinkedIn]  [○ X]  [○ Facebook]  [○ Reddit]  [○ Copy Link]      │ │
+│  │                                                                      │ │
+│  │  ┌──────────────────────────────────────────────────────────────┐    │ │
+│  │  │ Hi, I'm excited to share my portfolio tailored for the      │    │ │
+│  │  │ Senior PM role at Google. I bring 5+ years of product       │    │ │
+│  │  │ strategy experience with a data-driven approach...          │    │ │
+│  │  └──────────────────────────────────────────────────────────────┘    │ │
+│  │                                                                      │ │
+│  │              [↻ Regenerate Message]           [Share →]              │ │
+│  └──────────────────────────────────────────────────────────────────────┘ │
+│                                                                          │
+│                        [← Back to Portfolio]                             │
+│                                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
+</pre>
+  <div class="nav-row"><a href="#s7">&larr; Prev</a> <a href="#s9">Next &rarr;</a></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- Screen 9: As-Is Share Modal -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="screen" id="s9">
+  <h2>9. As-Is Share Modal</h2>
+  <p class="desc">Share current portfolio without tailoring. Name the share for tracking.</p>
+<pre>
+┌──────────────────────────────────────────────────────────────────────────┐
+│                                                                          │
+│                        Share Your Portfolio                               │
+│                                                                          │
+│  ┌──────────────────────────────────────────────────────────────────────┐ │
+│  │                                                                      │ │
+│  │  Name this share (for your tracking)                                 │ │
+│  │  ┌──────────────────────────────────────────────────────────────┐    │ │
+│  │  │ e.g., "Networking — General" or "Recruiter Outreach"         │    │ │
+│  │  └──────────────────────────────────────────────────────────────┘    │ │
+│  │                                                                      │ │
+│  └──────────────────────────────────────────────────────────────────────┘ │
+│                                                                          │
+│  Share via:                                                              │
+│  ┌──────────────────────────────────────────────────────────────────────┐ │
+│  │  [● LinkedIn]  [○ X]  [○ Facebook]  [○ Reddit]  [○ Copy Link]      │ │
+│  │                                                                      │ │
+│  │  ┌──────────────────────────────────────────────────────────────┐    │ │
+│  │  │ Check out my portfolio — I'd love to connect about product  │    │ │
+│  │  │ management opportunities. Here's a look at my experience    │    │ │
+│  │  │ and projects...                                              │    │ │
+│  │  └──────────────────────────────────────────────────────────────┘    │ │
+│  │                                                                      │ │
+│  │              [↻ Regenerate Message]           [Share →]              │ │
+│  └──────────────────────────────────────────────────────────────────────┘ │
+│                                                                          │
+│                        [← Back to Portfolio]                             │
+│                                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
+</pre>
+  <div class="nav-row"><a href="#s8">&larr; Prev</a> <a href="#s10">Next &rarr;</a></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- Screen 10: Share Confirmation -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="screen" id="s10">
+  <h2>10. Share Confirmation</h2>
+  <p class="desc">Celebration moment after sharing. Shows tracking link and next steps.</p>
+<pre>
+┌──────────────────────────────────────────────────────────────────────────┐
+│                                                                          │
+│  ┌──────────────────────────────────────────────────────────────────────┐ │
+│  │                                                                      │ │
+│  │                        🎉                                            │ │
+│  │                                                                      │ │
+│  │               Congratulations!                                       │ │
+│  │                                                                      │ │
+│  │        Your portfolio has been shared.                               │ │
+│  │                                                                      │ │
+│  │   ┌──────────────────────────────────────────────────────────────┐   │ │
+│  │   │  Google — Senior Product Manager          Tailored          │   │ │
+│  │   │  seekout.ai/p/sarahc/google-sr-pm                           │   │ │
+│  │   │                                            [Copy Link]      │   │ │
+│  │   └──────────────────────────────────────────────────────────────┘   │ │
+│  │                                                                      │ │
+│  │   The link will be updated with data upon visitor arrival.           │ │
+│  │   Track views, clicks, and engagement in your dashboard.            │ │
+│  │                                                                      │ │
+│  │                                                                      │ │
+│  │              [View in Applications →]    [Back to Portfolio]         │ │
+│  │                                                                      │ │
+│  └──────────────────────────────────────────────────────────────────────┘ │
+│                                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
+</pre>
+  <div class="nav-row"><a href="#s9">&larr; Prev</a> <a href="#s11">Next &rarr;</a></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- Screen 11: Applications Page -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="screen" id="s11">
+  <h2>11. Applications Page</h2>
+  <p class="desc">List of all shared portfolios with metadata and activity tracking.</p>
+<pre>
+LIST VIEW
+
+┌─────────────┬────────────────────────────────────────────────────────────────┐
+│             │                                                                │
+│ seekout&gt;    │  Applications                                                  │
+│             │                                                                │
+│ Jobseekers  │  ┌────────────────────────────────────────────────────────────┐ │
+│             │  │                                                            │ │
+│ ○ Portfolio │  │  Google — Sr. Product Manager                              │ │
+│ ■ Apps      │  │  Tailored · Mar 24 · 12 views · Recruiter: Jane D.        │ │
+│             │  │  seekout.ai/p/sarahc/google-sr-pm         [Copy] [View]   │ │
+│ ─────────── │  │                                                            │ │
+│ ⚙ Settings  │  ├────────────────────────────────────────────────────────────┤ │
+│             │  │                                                            │ │
+│             │  │  Meta — Product Designer                                   │ │
+│             │  │  Tailored · Mar 20 · 3 views · Direct share               │ │
+│             │  │  seekout.ai/p/sarahc/meta-pd              [Copy] [View]   │ │
+│             │  │                                                            │ │
+│             │  ├────────────────────────────────────────────────────────────┤ │
+│             │  │                                                            │ │
+│             │  │  Networking — General                                      │ │
+│             │  │  As-is · Mar 18 · 7 views · Direct share                  │ │
+│             │  │  seekout.ai/p/sarahc/networking            [Copy] [View]   │ │
+│             │  │                                                            │ │
+│             │  └────────────────────────────────────────────────────────────┘ │
+│             │                                                                │
+│ (avatar)    │                                                                │
+│ Sarah C.    │                                                                │
+└─────────────┴────────────────────────────────────────────────────────────────┘
+
+
+EXPANDED APPLICATION DETAIL (ACTIVITY FEED)
+
+│  ┌────────────────────────────────────────────────────────────────────────┐ │
+│  │                                                                        │ │
+│  │  Google — Sr. Product Manager                              [Collapse] │ │
+│  │  Tailored · Mar 24 · 12 views · Recruiter: Jane D.                   │ │
+│  │  seekout.ai/p/sarahc/google-sr-pm                    [Copy] [View]   │ │
+│  │                                                                        │ │
+│  │  Activity                                                              │ │
+│  │  ──────────────────────────────────────────────────────                │ │
+│  │  Mar 24  3:42pm  👁 Viewed portfolio          San Francisco, CA       │ │
+│  │  Mar 24  3:44pm  📄 Downloaded resume         San Francisco, CA       │ │
+│  │  Mar 24  3:45pm  🎬 Played intro video (45s)  San Francisco, CA       │ │
+│  │  Mar 25  9:15am  👁 Viewed portfolio          New York, NY            │ │
+│  │  Mar 25  9:17am  🔗 Clicked GitHub link       New York, NY            │ │
+│  │  ...                                                                   │ │
+│  │                                                                        │ │
+│  └────────────────────────────────────────────────────────────────────────┘ │
+</pre>
+  <div class="nav-row"><a href="#s10">&larr; Prev</a> <a href="#s12">Next &rarr;</a></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- Flow 1: Happy Path -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="screen" id="s12">
+  <h2>12. Flow: Happy Path</h2>
+  <p class="desc">Onboarding through first tailored share.</p>
+<pre>
+Website → Signup
+    │
+    ▼
+(1) Value Prop Screen
+    │
+    ▼ [Get Started →]
+(2) Wizard — Add Details
+    │  Upload resume → Diagnosis + Template selection
+    │
+    ▼ [Next →]
+(3) Wizard — Try an Edit [optional]
+    │
+    ├── Prospect makes an edit → [Create Portfolio →]
+    │
+    ▼
+(4) Portfolio View (chat panel shows suggestions)
+    │
+    ▼ [Share]
+(5) Share Decision Modal → [Yes, tailor for a job]
+    │
+    ▼
+(6) JD Input → [Tailor My Portfolio →]
+    │
+    ▼
+(7) Tailoring Progress (with inline education content)
+    │
+    ▼ (auto-advances)
+(8) Tailored Preview + Share → [Share →]
+    │
+    ▼
+(10) Share Confirmation → [View in Applications →]
+    │
+    ▼
+(11) Applications Page
+</pre>
+  <div class="nav-row"><a href="#s11">&larr; Prev</a> <a href="#s13">Next &rarr;</a></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- Flow 2: Skip Edit Path -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="screen" id="s13">
+  <h2>13. Flow: Skip Edit Path</h2>
+  <p class="desc">User skips the Try an Edit step during onboarding.</p>
+<pre>
+(2) Wizard — Add Details → [Next →]
+    │
+    ▼
+(3) Wizard — Try an Edit
+    │
+    ▼ [Skip →]
+(4) Portfolio View
+    (chat panel shows diagnosis-based suggestions immediately)
+</pre>
+  <div class="nav-row"><a href="#s12">&larr; Prev</a> <a href="#s14">Next &rarr;</a></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- Flow 3: As-Is Share -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="screen" id="s14">
+  <h2>14. Flow: As-Is Share</h2>
+  <p class="desc">Share portfolio without tailoring for a specific job.</p>
+<pre>
+(4) Portfolio View → [Share]
+    │
+    ▼
+(5) Share Decision Modal → [No, share as-is]
+    │
+    ▼
+(9) As-Is Share Modal → [Share →]
+    │
+    ▼
+(10) Share Confirmation → [View in Applications →]
+    │
+    ▼
+(11) Applications Page
+</pre>
+  <div class="nav-row"><a href="#s13">&larr; Prev</a> <a href="#s15">Next &rarr;</a></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- Flow 4: Post-Onboarding Edit Loop -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="screen" id="s15">
+  <h2>15. Flow: Edit Loop</h2>
+  <p class="desc">Post-onboarding editing via chat panel with LLM decisions.</p>
+<pre>
+(4) Portfolio View
+    │
+    ├── Click suggestion chip or type edit in chat panel
+    │
+    ▼
+LLM decides:
+    │
+    ├── update_resume → Typst recompiles → portfolio updates
+    │   → new tab-aware suggestions appear
+    │   → State 4E
+    │
+    ├── ask_clarification → question shown in chat
+    │   → prospect responds → loop back to LLM
+    │   → State 4F
+    │
+    └── On error:
+        → malformed Typst → revert to last working version
+        → error message + [Retry] in chat
+        → State 4G
+</pre>
+  <div class="nav-row"><a href="#s14">&larr; Prev</a> <a href="#s16">Next &rarr;</a></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- Flow 5: AI Career Coach Entry -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="screen" id="s16">
+  <h2>16. Flow: Career Coach Entry</h2>
+  <p class="desc">Entry point to separate Career Coach feature from portfolio view.</p>
+<pre>
+(4) Portfolio View → click [Career Coach] in chat panel header
+    │
+    ▼
+Career Coach UI opens (separate team's feature)
+</pre>
+  <div class="nav-row"><a href="#s15">&larr; Prev</a> <a href="#s17">Next &rarr;</a></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- Flow 6: Chat-Initiated Share -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="screen" id="s17">
+  <h2>17. Flow: Chat-Initiated Share</h2>
+  <p class="desc">Chat panel suggests sharing based on portfolio completeness.</p>
+<pre>
+(4) Portfolio View
+    │
+    ├── Chat panel suggests "Your portfolio is looking great! [Share it →]"
+    │   (based on portfolio completeness / checklist state)
+    │
+    ▼ [Share it →]
+(5) Share Decision Modal
+    │
+    ├── [Yes, tailor for a job] → Flow 1 from step 6
+    └── [No, share as-is] → Flow 3 from step 9
+</pre>
+  <div class="nav-row"><a href="#s16">&larr; Prev</a></div>
+</div>
+
+</main>
+</body>
+</html>
