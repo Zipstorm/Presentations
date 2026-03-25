@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Helix Notifications — Wireframes</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: monospace; display: flex; height: 100vh; overflow: hidden; }
+
+    /* --- Left nav panel --- */
+    nav {
+      width: 220px;
+      min-width: 220px;
+      height: 100vh;
+      overflow-y: auto;
+      border-right: 2px solid #ddd;
+      padding: 16px 0;
+      background: #f8f8f8;
+    }
+    nav h1 { font-size: 14px; padding: 0 12px 12px; border-bottom: 1px solid #ddd; }
+    nav .section-label {
+      display: block;
+      padding: 10px 12px 4px;
+      font-weight: bold;
+      font-size: 11px;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    nav a {
+      display: block;
+      padding: 6px 12px;
+      text-decoration: none;
+      color: #333;
+      font-size: 12px;
+      border-left: 3px solid transparent;
+    }
+    nav a:hover { background: #eee; }
+
+    :has(#s1:target) nav a[href="#s1"],
+    :has(#s2:target) nav a[href="#s2"],
+    :has(#s3:target) nav a[href="#s3"],
+    :has(#s4:target) nav a[href="#s4"],
+    :has(#s5:target) nav a[href="#s5"],
+    :has(#s6:target) nav a[href="#s6"],
+    :has(#s7:target) nav a[href="#s7"],
+    :has(#s8:target) nav a[href="#s8"],
+    :has(#s9:target) nav a[href="#s9"],
+    :has(#s10:target) nav a[href="#s10"] {
+      background: #e0e7ff;
+      border-left-color: #4F46E5;
+      font-weight: bold;
+    }
+    /* Default: highlight #s1 link when no target is set */
+    nav a[href="#s1"] { background: #e0e7ff; border-left-color: #4F46E5; font-weight: bold; }
+    body:has(:target) nav a[href="#s1"] { background: transparent; border-left-color: transparent; font-weight: normal; }
+
+    /* --- Main content area --- */
+    main {
+      flex: 1;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 30px 20px;
+    }
+
+    .screen { display: none; text-align: center; max-width: 900px; margin: 0 auto; }
+    .screen h2 { margin-bottom: 4px; font-size: 18px; }
+    .screen p.desc { color: #666; margin-bottom: 24px; font-size: 13px; }
+    .screen pre { display: inline-block; text-align: left; font-size: 12px; line-height: 1.35; }
+    .screen .nav-row { margin-top: 24px; }
+    .screen .nav-row a { margin: 0 12px; color: #4F46E5; }
+
+    /* Show screen-1 by default when nothing is targeted */
+    #s1 { display: block; }
+    body:has(:target) #s1:not(:target) { display: none; }
+    .screen:target { display: block; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <h1>Helix Notifications</h1>
+  <span class="section-label">Settings</span>
+  <a href="#s1">1. Prefs — HM-only</a>
+  <a href="#s2">2. Prefs — Dual-Persona</a>
+  <a href="#s3">3. Prefs — Empty State</a>
+  <span class="section-label">In-App</span>
+  <a href="#s4">4. Notification Panel</a>
+  <span class="section-label">Email Templates</span>
+  <a href="#s5">5. Collaborator Invited</a>
+  <a href="#s6">6. Weekly Digest</a>
+  <span class="section-label">User Flows</span>
+  <a href="#s7">7. Prefs Discovery</a>
+  <a href="#s8">8. New Candidates</a>
+  <a href="#s9">9. Portfolio Viewed</a>
+  <a href="#s10">10. Weekly Digest</a>
+</nav>
+
+<main>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- Screen 1: Settings — Notification Preferences (HM-only User) -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="screen" id="s1">
+  <h2>1. Settings — Notification Preferences (HM-only User)</h2>
+  <p class="desc">Notification preferences section in Settings, below Slack integration.</p>
+<pre>
+┌──────────────────────────────────────────────────────┐
+│  seekout&gt;                           [Sarah C.] [⚙]  │
+├──────────────┬───────────────────────────────────────┤
+│              │                                       │
+│  Job postings│  Settings                             │
+│              │                                       │
+│  ■ Sr. Prod  │  Slack Integration                    │
+│    Designer  │  ┌─────────────────────────────────┐  │
+│              │  │ ✓ Connected to Acme Workspace   │  │
+│ ──────────── │  │ [Test] [Disconnect]             │  │
+│              │  └─────────────────────────────────┘  │
+│  ⚙ Settings  │                                       │
+│              │  ─────────────────────────────────── │
+│              │                                       │
+│              │  Email Notifications                  │
+│              │                                       │
+│              │  Choose which events send you an      │
+│              │  email. In-app notifications are      │
+│              │  always on.                           │
+│              │                                       │
+│              │  As a hiring manager                  │
+│              │                                       │
+│              │  ┌─────────────────────────────────┐  │
+│              │  │                        Email    │  │
+│              │  │ New candidates         [■ ON]   │  │
+│              │  │ ─────────────────────────────── │  │
+│              │  │ AI screening results   [■ ON]   │  │
+│              │  │ ─────────────────────────────── │  │
+│              │  │ Updates from teammates [■ ON]   │  │
+│              │  │ ─────────────────────────────── │  │
+│              │  │ Collaboration invites  Always   │  │
+│              │  │ ─────────────────────────────── │  │
+│              │  │ Weekly digest          [■ ON]   │  │
+│              │  └─────────────────────────────────┘  │
+│              │                                       │
+└──────────────┴───────────────────────────────────────┘
+</pre>
+  <p class="desc" style="margin-top: 16px; text-align: left; display: inline-block;">
+    <strong>Key Elements:</strong> Slack section (unchanged) · "Email Notifications" header with helper text · "As a hiring manager" role label<br>
+    <strong>Toggleable rows:</strong> New candidates, AI screening results, Updates from teammates, Weekly digest — all default ON<br>
+    <strong>Mandatory row:</strong> Collaboration invites shows "Always" (no toggle)<br>
+    <strong>Save feedback:</strong> Toggles show brief inline "Saved" confirmation (no save button)
+  </p>
+  <div class="nav-row"><a href="#s2">Next &rarr;</a></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- Screen 2: Settings — Notification Preferences (Dual-Persona User) -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="screen" id="s2">
+  <h2>2. Settings — Notification Preferences (Dual-Persona)</h2>
+  <p class="desc">Both role sections visible. Mandatory events show "Always". Digest toggle appears once in General section.</p>
+<pre>
+┌──────────────────────────────────────────────────────┐
+│  seekout&gt;                           [Sarah C.] [⚙]  │
+├──────────────┬───────────────────────────────────────┤
+│              │                                       │
+│  Job postings│  Settings                             │
+│              │                                       │
+│  ■ Sr. Prod  │  Slack Integration                    │
+│    Designer  │  ┌─────────────────────────────────┐  │
+│ ──────────── │  │ ✓ Connected to Acme Workspace   │  │
+│              │  └─────────────────────────────────┘  │
+│  Jobseekers  │                                       │
+│  ■ Portfolio │  ─────────────────────────────────── │
+│  ■ Apps      │                                       │
+│ ──────────── │  Email Notifications                  │
+│              │                                       │
+│  ⚙ Settings  │  Choose which events send you an      │
+│              │  email. In-app notifications are      │
+│              │  always on.                           │
+│              │                                       │
+│              │  As a hiring manager                  │
+│              │                                       │
+│              │  ┌─────────────────────────────────┐  │
+│              │  │                        Email    │  │
+│              │  │ New candidates         [■ ON]   │  │
+│              │  │ ─────────────────────────────── │  │
+│              │  │ AI screening results   [■ ON]   │  │
+│              │  │ ─────────────────────────────── │  │
+│              │  │ Updates from teammates [■ ON]   │  │
+│              │  │ ─────────────────────────────── │  │
+│              │  │ Collaboration invites  Always   │  │
+│              │  └─────────────────────────────────┘  │
+│              │                                       │
+│              │  As a job seeker                      │
+│              │                                       │
+│              │  ┌─────────────────────────────────┐  │
+│              │  │                        Email    │  │
+│              │  │ Portfolio viewed        Always   │  │
+│              │  │ ─────────────────────────────── │  │
+│              │  │ Application advancing  Always   │  │
+│              │  │ ─────────────────────────────── │  │
+│              │  │ Not selected            Always   │  │
+│              │  ├─────────────────────────────────┤  │
+│              │  │ ℹ These are always on to keep   │  │
+│              │  │   you in the loop on your       │  │
+│              │  │   applications.                 │  │
+│              │  └─────────────────────────────────┘  │
+│              │                                       │
+│              │  ─────────────────────────────────── │
+│              │                                       │
+│              │  General                              │
+│              │                                       │
+│              │  ┌─────────────────────────────────┐  │
+│              │  │ Weekly digest          [■ ON]   │  │
+│              │  └─────────────────────────────────┘  │
+│              │                                       │
+└──────────────┴───────────────────────────────────────┘
+</pre>
+  <p class="desc" style="margin-top: 16px; text-align: left; display: inline-block;">
+    <strong>Sidebar:</strong> Both HM nav (Job postings) and Prospect nav (Portfolio, Apps)<br>
+    <strong>HM section:</strong> 3 toggleable + 1 mandatory event<br>
+    <strong>Prospect section:</strong> 3 mandatory events with "Always" label + info note<br>
+    <strong>General section:</strong> Weekly digest toggle (one toggle, controls combined digest)
+  </p>
+  <div class="nav-row"><a href="#s1">&larr; Prev</a> <a href="#s3">Next &rarr;</a></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- Screen 3: Settings — Notification Preferences (Empty State) -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="screen" id="s3">
+  <h2>3. Settings — Notification Preferences (Empty State)</h2>
+  <p class="desc">User has no jobs and no applications.</p>
+<pre>
+┌──────────────────────────────────────────────────────┐
+│  seekout&gt;                           [Sarah C.] [⚙]  │
+├──────────────┬───────────────────────────────────────┤
+│              │                                       │
+│  Job postings│  Settings                             │
+│              │                                       │
+│ ──────────── │  Slack Integration                    │
+│              │  ┌─────────────────────────────────┐  │
+│  ⚙ Settings  │  │ [Connect Slack]                 │  │
+│              │  └─────────────────────────────────┘  │
+│              │                                       │
+│              │  ─────────────────────────────────── │
+│              │                                       │
+│              │  Email Notifications                  │
+│              │                                       │
+│              │  ┌─────────────────────────────────┐  │
+│              │  │                                 │  │
+│              │  │  Notification preferences will   │  │
+│              │  │  appear here once you start      │  │
+│              │  │  using SeekOut.                   │  │
+│              │  │                                 │  │
+│              │  │  [Create a job →]               │  │
+│              │  │                                 │  │
+│              │  └─────────────────────────────────┘  │
+│              │                                       │
+└──────────────┴───────────────────────────────────────┘
+</pre>
+  <div class="nav-row"><a href="#s2">&larr; Prev</a> <a href="#s4">Next &rarr;</a></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- Screen 4: Notification Panel (Unified Feed) -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="screen" id="s4">
+  <h2>4. Notification Panel (Unified Feed)</h2>
+  <p class="desc">Single notification panel for all users. Dual-persona users see HM and prospect events interleaved chronologically with role indicators.</p>
+<pre>
+┌──────────────────────────────────────────────────────┐
+│  seekout&gt;                           [Sarah C.] [⚙]  │
+├──────────────┬───────────────────────────────────────┤
+│              │                                       │
+│  Job postings│  ← Job postings                       │
+│              │  Senior Product Designer              │
+│  ■ Sr. Prod  │                                       │
+│    Designer  │  ...                                  │
+│ ──────────── │                                       │
+│  Jobseekers  │                                       │
+│  ■ Portfolio │                                       │
+│  ■ Apps      │                                       │
+│ ──────────── │                                       │
+│  ⚙ Settings  │                                       │
+│              │                                       │
+│  🔔 5        │                                       │
+│  ┌───────────┴───────────────────────────────────┐   │
+│  │ Notifications              [Mark all read]    │   │
+│  │                                               │   │
+│  │ ● Your portfolio was viewed 3 times in        │   │
+│  │   the last hour                               │   │
+│  │   Job seeking · 25 min ago                    │   │
+│  │ ─────────────────────────────────────────     │   │
+│  │ ● 5 new candidates for Sr. Product            │   │
+│  │   Designer                                    │   │
+│  │   Hiring · 30 min ago                         │   │
+│  │ ─────────────────────────────────────────     │   │
+│  │ ● Jordan Lee invited you to collaborate       │   │
+│  │   on ML Engineer                              │   │
+│  │   Hiring · 1 hr ago                           │   │
+│  │ ─────────────────────────────────────────     │   │
+│  │ ● Your application is progressing             │   │
+│  │   Senior Designer at Acme Corp                │   │
+│  │   Job seeking · Yesterday                     │   │
+│  │ ─────────────────────────────────────────     │   │
+│  │ ○ Alex reviewed 4 candidates in               │   │
+│  │   Sr. Product Designer                        │   │
+│  │   Hiring · Yesterday                          │   │
+│  │                                               │   │
+│  │            [Notification preferences]         │   │
+│  └───────────────────────────────────────────────┘   │
+│              │                                       │
+└──────────────┴───────────────────────────────────────┘
+</pre>
+  <p class="desc" style="margin-top: 16px; text-align: left; display: inline-block;">
+    <strong>Bell badge:</strong> Combined unread count across all roles (red badge, "99+" if &gt;99)<br>
+    <strong>Role indicator:</strong> "Hiring" or "Job seeking" tag on metadata line. Hidden for single-persona users.<br>
+    <strong>Unread indicator:</strong> ● = unread, ○ = read<br>
+    <strong>States:</strong> Empty ("No notifications yet") · All read (badge hidden) · Overflow (paginated, 20/load)
+  </p>
+  <div class="nav-row"><a href="#s3">&larr; Prev</a> <a href="#s5">Next &rarr;</a></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- Screen 5: Email — Collaborator Invited -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="screen" id="s5">
+  <h2>5. Email — Collaborator Invited</h2>
+  <p class="desc">Mandatory email when a HM invites an existing user to collaborate on a job.</p>
+<pre>
+┌──────────────────────────────────────────────────┐
+│ ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ │
+│ ▓  seekout&gt;                              Helix ▓ │
+│ ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ │
+│                                                  │
+│  Hi Jordan,                                      │
+│                                                  │
+│  Sarah Chen invited you to collaborate on         │
+│  the Senior Product Designer role.                │
+│                                                  │
+│  ┌──────────────────────────────────────────┐    │
+│  │  Senior Product Designer                 │    │
+│  │  Bellevue, WA · Hybrid                   │    │
+│  └──────────────────────────────────────────┘    │
+│                                                  │
+│          [  View Job  ]                           │
+│                                                  │
+│  ──────────────────────────────────────────────  │
+│  © Helix — AI-powered professional networking    │
+│                                                  │
+└──────────────────────────────────────────────────┘
+</pre>
+  <p class="desc" style="margin-top: 16px; text-align: left; display: inline-block;">
+    <strong>Header:</strong> Purple (#7c3aed) branded bar with Helix wordmark<br>
+    <strong>Body:</strong> Who invited, which job, job location card<br>
+    <strong>CTA:</strong> "View Job" deep-links to the job dashboard<br>
+    <strong>Footer:</strong> No preferences link (mandatory event)
+  </p>
+  <div class="nav-row"><a href="#s4">&larr; Prev</a> <a href="#s6">Next &rarr;</a></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- Screen 6: Email — Weekly Digest -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="screen" id="s6">
+  <h2>6. Email — Weekly Digest</h2>
+  <p class="desc">Combined weekly summary. Sections only appear if there's activity. Each persona gets an action-first lead-in.</p>
+<pre>
+┌──────────────────────────────────────────────────┐
+│ ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ │
+│ ▓  seekout&gt;                              Helix ▓ │
+│ ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ │
+│                                                  │
+│  Hi Sarah, here's your week in review.           │
+│  Mar 17 – Mar 23, 2026                           │
+│                                                  │
+│  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  │
+│  Your jobs                                       │
+│  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  │
+│                                                  │
+│  ⚡ 3 candidates need your review                │
+│  [Review candidates →]                           │
+│                                                  │
+│  Senior Product Designer                         │
+│  ┌──────────────────────────────────────────┐    │
+│  │  5 new candidates                        │    │
+│  │  3 evaluations completed                 │    │
+│  │  2 advanced, 1 rejected                  │    │
+│  └──────────────────────────────────────────┘    │
+│  [Review candidates →]                           │
+│                                                  │
+│  ML Engineer                                     │
+│  ┌──────────────────────────────────────────┐    │
+│  │  2 new candidates                        │    │
+│  │  1 evaluation completed                  │    │
+│  └──────────────────────────────────────────┘    │
+│  [Review candidates →]                           │
+│                                                  │
+│  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  │
+│  Your applications                               │
+│  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  │
+│                                                  │
+│  ⚡ 2 applications had activity this week        │
+│                                                  │
+│  ┌──────────────────────────────────────────┐    │
+│  │  Google — Sr. PM                         │    │
+│  │  ✓ Portfolio viewed 4 times              │    │
+│  │  ✓ Application advancing                │    │
+│  ├──────────────────────────────────────────┤    │
+│  │  Meta — Product Designer                 │    │
+│  │  ⏳ Still under review (10 days)         │    │
+│  ├──────────────────────────────────────────┤    │
+│  │  Acme — ML Engineer                      │    │
+│  │  ✗ Not selected                          │    │
+│  └──────────────────────────────────────────┘    │
+│  [View applications →]                           │
+│                                                  │
+│  ──────────────────────────────────────────────  │
+│  © Helix — AI-powered professional networking    │
+│  Manage notification preferences                 │
+│                                                  │
+└──────────────────────────────────────────────────┘
+</pre>
+  <p class="desc" style="margin-top: 16px; text-align: left; display: inline-block;">
+    <strong>Your jobs:</strong> Action-first lead: "N candidates need your review." Per-job summary cards.<br>
+    <strong>Your applications:</strong> Action-first lead: "N applications had activity." Per-application status including "Still under review (N days)"<br>
+    <strong>CTAs:</strong> Deep-links to job dashboard or applications page<br>
+    <strong>States:</strong> HM-only · Prospect-only · Dual-persona · No activity (email not sent)
+  </p>
+  <div class="nav-row"><a href="#s5">&larr; Prev</a> <a href="#s7">Next &rarr;</a></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- Screen 7: Flow — Preferences Discovery & Configuration -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="screen" id="s7">
+  <h2>7. Preferences Discovery &amp; Configuration</h2>
+  <p class="desc">How users find and configure their notification preferences.</p>
+<pre>
+User receives notification
+        │
+        ▼
+Notification Panel (Screen 4)
+        │
+        ├──→ Clicks [Notification preferences]
+        │           │
+        │           ▼
+        │    Settings — Preferences (Screen 1/2)
+        │           │
+        │           ├──→ Toggles email OFF for an event
+        │           │    (inline "Saved" confirmation)
+        │           │
+        │           └──→ Leaves defaults (all ON)
+        │
+        └──→ Clicks notification → deep-link
+</pre>
+  <div class="nav-row"><a href="#s6">&larr; Prev</a> <a href="#s8">Next &rarr;</a></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- Screen 8: Flow — New Candidates -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="screen" id="s8">
+  <h2>8. New Candidates Flow</h2>
+  <p class="desc">Event pipeline for new candidate notifications with 30-min debounce.</p>
+<pre>
+Candidate applies / sync finds new candidates
+        │
+        ▼
+emit("new_candidates") → 30 min debounce
+        │
+        ▼
+Window expires → aggregate count
+        │
+        ├──→ IN_APP → SSE → bell badge + toast
+        ├──→ EMAIL (if ON in prefs) → deep-link
+        └──→ SLACK (if connected) → DM
+</pre>
+  <div class="nav-row"><a href="#s7">&larr; Prev</a> <a href="#s9">Next &rarr;</a></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- Screen 9: Flow — Portfolio Viewed -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="screen" id="s9">
+  <h2>9. Portfolio Viewed Flow</h2>
+  <p class="desc">Event pipeline for portfolio view notifications with 1-hr debounce.</p>
+<pre>
+Someone views prospect's portfolio
+        │
+        ├──→ Inside seekout.ai
+        └──→ Via application tracking link
+                    │
+                    ▼
+              emit("portfolio_viewed") → 1 hr debounce
+                    │
+                    ▼
+              Aggregate count → "Viewed 3 times"
+                    │
+                    ├──→ IN_APP: always
+                    └──→ EMAIL: always (mandatory)
+</pre>
+  <div class="nav-row"><a href="#s8">&larr; Prev</a> <a href="#s10">Next &rarr;</a></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- Screen 10: Flow — Weekly Digest -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="screen" id="s10">
+  <h2>10. Weekly Digest Flow</h2>
+  <p class="desc">How the weekly digest email is assembled and sent.</p>
+<pre>
+Monday 9 AM (user-local time)
+        │
+        ▼
+Query activity since last digest
+        │
+        ├──→ No activity → skip
+        └──→ Activity found → build by role
+                    │
+                    ├──→ Has jobs → "Your jobs" section
+                    ├──→ Has apps → "Your applications"
+                    └──→ Send email (Screen 6)
+</pre>
+  <div class="nav-row"><a href="#s9">&larr; Prev</a></div>
+</div>
+
+</main>
+</body>
+</html>
