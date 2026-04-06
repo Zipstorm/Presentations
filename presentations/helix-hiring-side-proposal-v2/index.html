@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Helix Hiring Side Proposal V2 - Wireframes</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: monospace; display: flex; height: 100vh; overflow: hidden; }
+
+    /* --- Left nav panel --- */
+    nav {
+      width: 220px;
+      min-width: 220px;
+      height: 100vh;
+      overflow-y: auto;
+      border-right: 2px solid #ddd;
+      padding: 16px 0;
+      background: #f8f8f8;
+    }
+    nav h1 { font-size: 14px; padding: 0 12px 12px; border-bottom: 1px solid #ddd; }
+    nav .section-label {
+      display: block;
+      padding: 10px 12px 4px;
+      font-weight: bold;
+      font-size: 11px;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    nav a {
+      display: block;
+      padding: 6px 12px;
+      text-decoration: none;
+      color: #333;
+      font-size: 13px;
+      border-left: 3px solid transparent;
+    }
+    nav a:hover { background: #eee; }
+
+    :has(#s1:target) nav a[href="#s1"],
+    :has(#s2:target) nav a[href="#s2"],
+    :has(#s3:target) nav a[href="#s3"],
+    :has(#s4:target) nav a[href="#s4"],
+    :has(#s5:target) nav a[href="#s5"],
+    :has(#s6:target) nav a[href="#s6"],
+    :has(#s7:target) nav a[href="#s7"] {
+      background: #e0e7ff;
+      border-left-color: #4F46E5;
+      font-weight: bold;
+    }
+    /* Default: highlight #s1 link when no target is set */
+    nav a[href="#s1"] { background: #e0e7ff; border-left-color: #4F46E5; font-weight: bold; }
+    body:has(:target) nav a[href="#s1"] { background: transparent; border-left-color: transparent; font-weight: normal; }
+
+    /* --- Main content area --- */
+    main {
+      flex: 1;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 30px 20px;
+    }
+
+    .screen { display: none; text-align: center; max-width: 750px; margin: 0 auto; }
+    .screen h2 { margin-bottom: 4px; font-size: 18px; }
+    .screen p.desc { color: #666; margin-bottom: 24px; font-size: 13px; }
+    .screen pre { display: inline-block; text-align: left; font-size: 13px; line-height: 1.4; }
+    .screen .nav-row { margin-top: 24px; }
+    .screen .nav-row a { margin: 0 12px; color: #4F46E5; }
+
+    /* Show screen-1 by default when nothing is targeted */
+    #s1 { display: block; }
+    /* When any screen is targeted, hide the default */
+    body:has(:target) #s1:not(:target) { display: none; }
+    /* Show the targeted screen */
+    .screen:target { display: block; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <h1>Persona Reframing v2</h1>
+  <span class="section-label">Navigation</span>
+  <a href="#s1">1. Side Navigation</a>
+  <span class="section-label">Onboarding</span>
+  <a href="#s2">2. Option A — Step 1</a>
+  <a href="#s3">3. Option A — Step 2</a>
+  <a href="#s4">4. Option B — Nested</a>
+  <span class="section-label">Hiring Surface</span>
+  <a href="#s5">5. Hiring Manager</a>
+  <a href="#s6">6. Recruiter</a>
+  <span class="section-label">Settings</span>
+  <a href="#s7">7. Role Switcher</a>
+</nav>
+
+<main>
+
+<!-- ============================================ -->
+<div class="screen" id="s1">
+  <h2>1. Side Navigation — Two Surfaces</h2>
+  <p class="desc">No persona switcher. Two surfaces only.</p>
+<pre>
+┌──────────────┐
+│  ■ Hiring    │
+│  ○ Applying  │
+│ ──────────── │
+│  ⚙ Settings  │
+└──────────────┘
+</pre>
+  <div class="nav-row"><a href="#s2">Next &rarr;</a></div>
+</div>
+
+<!-- ============================================ -->
+<div class="screen" id="s2">
+  <h2>2. Onboarding Option A — Step 1</h2>
+  <p class="desc">Two-step selection: surface choice first.</p>
+<pre>
+┌──────────────────────────────────────────────────────────────────────────────┐
+│  seekout&gt;                                                                    │
+│                                                                              │
+│                        What brings you to SeekOut?                           │
+│                                                                              │
+│        ┌─────────────────────────────┐  ┌─────────────────────────────┐     │
+│        │                             │  │                             │     │
+│        │        I'm Hiring           │  │     I'm Looking for        │     │
+│        │                             │  │        a Job               │     │
+│        │  Find and evaluate          │  │                             │     │
+│        │  qualified candidates       │  │  Build your portfolio      │     │
+│        │  with AI                    │  │  and apply with AI         │     │
+│        │                             │  │  coaching                  │     │
+│        │                             │  │                             │     │
+│        └─────────────────────────────┘  └─────────────────────────────┘     │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+</pre>
+  <div class="nav-row"><a href="#s1">&larr; Prev</a> <a href="#s3">Next &rarr;</a></div>
+</div>
+
+<!-- ============================================ -->
+<div class="screen" id="s3">
+  <h2>3. Onboarding Option A — Step 2</h2>
+  <p class="desc">(Hiring only) Choose your role: Hiring Manager or Recruiter.</p>
+<pre>
+┌──────────────────────────────────────────────────────────────────────────────┐
+│  seekout&gt;                                                                    │
+│                                                                              │
+│                     What's your role in hiring?                              │
+│                                                                              │
+│        ┌─────────────────────────────┐  ┌─────────────────────────────┐     │
+│        │                             │  │                             │     │
+│        │     Hiring Manager          │  │       Recruiter             │     │
+│        │                             │  │                             │     │
+│        │  I'm hiring for my team.    │  │  I recruit for my           │     │
+│        │  Create AI-powered job      │  │  company. Import jobs       │     │
+│        │  postings and find          │  │  from your ATS, run AI     │     │
+│        │  qualified candidates.      │  │  evaluations, and curate   │     │
+│        │                             │  │  top talent for hiring     │     │
+│        │                             │  │  managers.                  │     │
+│        │                             │  │                             │     │
+│        └─────────────────────────────┘  └─────────────────────────────┘     │
+│                                                                              │
+│              You can always change this later in Settings.                   │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+</pre>
+  <div class="nav-row"><a href="#s2">&larr; Prev</a> <a href="#s4">Next &rarr;</a></div>
+</div>
+
+<!-- ============================================ -->
+<div class="screen" id="s4">
+  <h2>4. Onboarding Option B — Nested Cards</h2>
+  <p class="desc">One screen. Hiring is a larger card with two sub-options; Applying is standalone.</p>
+<pre>
+┌──────────────────────────────────────────────────────────────────────────────┐
+│  seekout&gt;                                                                    │
+│                                                                              │
+│                        What brings you to SeekOut?                           │
+│                                                                              │
+│   ┌──────────────────────────────────────────────┐  ┌────────────────────┐  │
+│   │                                              │  │                    │  │
+│   │   I'm Hiring                                 │  │  I'm Looking for  │  │
+│   │                                              │  │     a Job         │  │
+│   │   ┌───────────────────┐ ┌──────────────────┐ │  │                    │  │
+│   │   │                   │ │                  │ │  │  Build your        │  │
+│   │   │  Hiring Manager   │ │   Recruiter      │ │  │  portfolio and    │  │
+│   │   │                   │ │                  │ │  │  apply with AI    │  │
+│   │   │  I'm hiring for   │ │  I recruit for   │ │  │  coaching         │  │
+│   │   │  my team.         │ │  my company.     │ │  │                    │  │
+│   │   │                   │ │                  │ │  │                    │  │
+│   │   │  Create job       │ │  Import from     │ │  │                    │  │
+│   │   │  postings and     │ │  ATS, run AI     │ │  │                    │  │
+│   │   │  find candidates  │ │  evaluations,    │ │  │                    │  │
+│   │   │                   │ │  curate talent   │ │  │                    │  │
+│   │   │                   │ │                  │ │  │                    │  │
+│   │   └───────────────────┘ └──────────────────┘ │  │                    │  │
+│   │                                              │  │                    │  │
+│   └──────────────────────────────────────────────┘  └────────────────────┘  │
+│                                                                              │
+│              You can always change this later in Settings.                   │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+</pre>
+  <div class="nav-row"><a href="#s3">&larr; Prev</a> <a href="#s5">Next &rarr;</a></div>
+</div>
+
+<!-- ============================================ -->
+<div class="screen" id="s5">
+  <h2>5. Hiring Surface — Hiring Manager</h2>
+  <p class="desc">Jobs created via wizard + Sam voice. Scoped to jobs the HM owns.</p>
+<pre>
+┌──────────────┬───────────────────────────────────────────────────────────────┐
+│              │                                                               │
+│  ■ Hiring    │  My Jobs                                        [+ New Job]  │
+│              │                                                               │
+│  ○ Applying  │  ┌───────────────────────────────────────────────────────┐   │
+│              │  │  Senior Product Designer                              │   │
+│ ──────────── │  │  Bellevue, WA · Hybrid                               │   │
+│              │  │  12 candidates · 3 unreviewed                        │   │
+│  ⚙ Settings  │  ├───────────────────────────────────────────────────────┤   │
+│              │  │  Staff Engineer — AI/ML                               │   │
+│              │  │  Seattle, WA · Remote                                 │   │
+│              │  │  8 candidates · 5 unreviewed                         │   │
+│              │  └───────────────────────────────────────────────────────┘   │
+│              │                                                               │
+└──────────────┴───────────────────────────────────────────────────────────────┘
+
+Actions: share, review candidates, invite collaborators
+</pre>
+  <div class="nav-row"><a href="#s4">&larr; Prev</a> <a href="#s6">Next &rarr;</a></div>
+</div>
+
+<!-- ============================================ -->
+<div class="screen" id="s6">
+  <h2>6. Hiring Surface — Recruiter</h2>
+  <p class="desc">Jobs imported from ATS. Org-wide scope (all connected ATS jobs).</p>
+<pre>
+┌──────────────┬───────────────────────────────────────────────────────────────┐
+│              │                                                               │
+│  ■ Hiring    │  Jobs                                    [+ Import from ATS] │
+│              │                                                               │
+│  ○ Applying  │  ┌───────────────────────────────────────────────────────┐   │
+│              │  │  Recruiting Coordinator          ATS: Greenhouse      │   │
+│ ──────────── │  │  San Francisco, CA · Onsite                           │   │
+│              │  │  34 candidates · 12 unreviewed                       │   │
+│  ⚙ Settings  │  ├───────────────────────────────────────────────────────┤   │
+│              │  │  Data Analyst                    ATS: Greenhouse      │   │
+│              │  │  New York, NY · Hybrid                                │   │
+│              │  │  21 candidates · 8 unreviewed                        │   │
+│              │  ├───────────────────────────────────────────────────────┤   │
+│              │  │  Frontend Developer              ATS: Greenhouse      │   │
+│              │  │  Bellevue, WA · Hybrid                               │   │
+│              │  │  47 candidates · 19 unreviewed                       │   │
+│              │  └───────────────────────────────────────────────────────┘   │
+│              │                                                               │
+└──────────────┴───────────────────────────────────────────────────────────────┘
+
+Actions: run AI evaluation, curate shortlists, send to HM for review
+</pre>
+  <div class="nav-row"><a href="#s5">&larr; Prev</a> <a href="#s7">Next &rarr;</a></div>
+</div>
+
+<!-- ============================================ -->
+<div class="screen" id="s7">
+  <h2>7. Settings — Role Switcher</h2>
+  <p class="desc">Users can change their hiring role at any time.</p>
+<pre>
+┌─────────────────────────────────────────────────────────────┐
+│  Settings &gt; Account                                         │
+│                                                             │
+│  Hiring Role                                                │
+│  ┌─────────────────────────────────────────────────────┐   │
+│  │  ○ Hiring Manager                                    │   │
+│  │    See and manage jobs you create                    │   │
+│  │                                                      │   │
+│  │  ● Recruiter                                         │   │
+│  │    Access ATS-imported jobs across your organization │   │
+│  └─────────────────────────────────────────────────────┘   │
+│                                                             │
+│  [Save]                                                     │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+</pre>
+  <div class="nav-row"><a href="#s6">&larr; Prev</a></div>
+</div>
+
+</main>
+</body>
+</html>
