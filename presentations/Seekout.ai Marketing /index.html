@@ -179,6 +179,34 @@
   }
   .waitlist-mechanic:last-child { border-bottom: none; }
 
+  .archetype-header {
+    display: flex; align-items: center; gap: 10px; margin: 28px 0 6px;
+  }
+  .archetype-header h3 { margin: 0; }
+  .search-queries { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 16px; }
+  .search-queries code {
+    background: var(--bg3); padding: 3px 10px; border-radius: 6px;
+    font-size: 12px; color: var(--text2); font-family: 'SF Mono', Monaco, monospace;
+  }
+  .check-list { list-style: none; padding-left: 0; }
+  .check-list li { padding: 3px 0; }
+  .check-list li::before { margin-right: 6px; }
+  .check-list li.good::before { content: "✅"; }
+  .check-list li.warn::before { content: "🚩"; }
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin: 12px 0; }
+  .stat-card { background: var(--bg2); border-radius: 8px; padding: 12px 16px; }
+  .stat-card .stat-val { font-size: 20px; font-weight: 700; color: var(--accent); }
+  .stat-card .stat-label { font-size: 12px; color: var(--text3); margin-top: 2px; }
+  .section-divider { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+  .toc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; margin: 16px 0; }
+  .toc-item {
+    background: var(--bg2); border-radius: 8px; padding: 12px 16px; cursor: default;
+    font-size: 13px; font-weight: 500; color: var(--text);
+  }
+  .toc-item span { display: block; font-size: 11px; color: var(--text3); font-weight: 400; margin-top: 2px; }
+  table.compact { font-size: 12px; }
+  table.compact th, table.compact td { padding: 8px 10px; }
+
   @media (max-width: 800px) {
     .sidebar { display: none; }
     .main { margin-left: 0; padding: 20px; }
@@ -209,6 +237,8 @@
   <div class="nav-group">Measurement</div>
   <button class="nav-item" onclick="showSection('metrics')">Metrics framework</button>
   <button class="nav-item" onclick="showSection('success')">90-day success criteria</button>
+  <div class="nav-group">Research</div>
+  <button class="nav-item" onclick="showSection('influencer')">Influencer marketing</button>
 </nav>
 
 <main class="main">
@@ -552,6 +582,534 @@
     <div class="callout">
       We're not setting specific signup number targets yet. We'll set those together after the first 2 weeks of public launch data, when we understand baseline organic growth.
     </div>
+  </div>
+
+  <!-- INFLUENCER MARKETING RESEARCH -->
+  <div id="influencer" class="section">
+    <h2>Influencer Marketing Research</h2>
+    <p class="subtitle">Helix India Launch &mdash; Influencer Research Playbook &middot; April 2026</p>
+
+    <div class="callout">
+      <strong>Objective:</strong> Map the Indian influencer landscape for the career/jobs niche to drive jobseeker signups for SeekOut.ai. Budget: <strong>$250K</strong> across ~120&ndash;170 creators.
+    </div>
+
+    <div class="toc-grid">
+      <div class="toc-item">1. Discovery Tools <span>India-specific &amp; global platforms</span></div>
+      <div class="toc-item">2. Tiers &amp; Budget <span>Pricing benchmarks &amp; allocation</span></div>
+      <div class="toc-item">3. Creator Archetypes <span>8 archetypes with starter lists</span></div>
+      <div class="toc-item">4. Platform Playbooks <span>YouTube, Instagram, LinkedIn, X</span></div>
+      <div class="toc-item">5. Communities <span>Reddit, Telegram, Blind</span></div>
+      <div class="toc-item">6. Benchmarks <span>Case studies &amp; expected ROI</span></div>
+    </div>
+
+    <!-- 1. DISCOVERY TOOLS -->
+    <hr class="section-divider">
+    <h3>1. Discovery Tools &amp; Platforms</h3>
+
+    <h4>India-Specific Influencer Platforms</h4>
+    <table class="compact">
+      <thead>
+        <tr><th>Tool</th><th>What It Does</th><th>Pricing</th><th>How to Use for Career Niche</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Qoruz</strong></td>
+          <td>AI-driven discovery, 7M+ Indian creator profiles. Filters by audience language, geography, brand affinity, fake follower detection.</td>
+          <td>Premium subscription</td>
+          <td>Filter by "Education" or "Business/Career", audience location India, engagement &gt;3%. Use competitor research to see what Apna, Unstop are doing.</td>
+        </tr>
+        <tr>
+          <td><strong>Winkl</strong></td>
+          <td>Built for teams new to influencer marketing. Creator rate benchmarking &amp; ASCI compliance prompts.</td>
+          <td>Budget-friendly SaaS</td>
+          <td>Best starting point for a 2-person team. Search "career coach", "resume", "placement". Use rate benchmarking to validate quotes.</td>
+        </tr>
+        <tr>
+          <td><strong>Influencer.in</strong></td>
+          <td>India's established influencer marketplace. End-to-end campaign management.</td>
+          <td>Contact for pricing</td>
+          <td>Browse by category, filter by city/region. Good for mid-tier creators.</td>
+        </tr>
+        <tr>
+          <td><strong>CreatorsXchange</strong></td>
+          <td>AI-powered marketplace, manual curation + algorithm matching. Covers IG, YT, LinkedIn, blogs.</td>
+          <td>Contact for pricing</td>
+          <td>Use AI matching with brief like "career advice for white-collar Indian professionals".</td>
+        </tr>
+        <tr>
+          <td><strong>Chtrbox</strong></td>
+          <td>Cost-effective influencer discovery and campaign management.</td>
+          <td>Budget-friendly</td>
+          <td>Good for nano/micro creators in career niche at lower rates.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4>Global Platforms with India Coverage</h4>
+    <table class="compact">
+      <thead>
+        <tr><th>Tool</th><th>What It Does</th><th>Pricing</th><th>How to Use</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Modash</strong></td>
+          <td>200M+ creator profiles across IG, YT, TikTok. Filter by audience demographics.</td>
+          <td>From $120/mo <span class="badge badge-green" style="font-size:10px">14-day free trial</span></td>
+          <td><strong>Start here.</strong> Filter: Audience India, Category Education/Business/Career, 10K&ndash;500K followers, sort by engagement.</td>
+        </tr>
+        <tr>
+          <td><strong>HypeAuditor</strong></td>
+          <td>68M+ accounts. Strong fake follower detection &amp; audience quality analysis.</td>
+          <td>From $299/mo</td>
+          <td>Use the India Business &amp; Careers ranking page as a free starting point.</td>
+        </tr>
+        <tr>
+          <td><strong>Favikon</strong></td>
+          <td>Creator ranking (scores /100). <strong>Best tool for LinkedIn influencer discovery</strong> &mdash; rare capability.</td>
+          <td>Free rankings, paid for full</td>
+          <td>Use India LinkedIn and Instagram rankings. Filter by niche.</td>
+        </tr>
+        <tr>
+          <td><strong>NoxInfluencer</strong></td>
+          <td>YouTube-specific analytics. Channel comparisons, growth tracking.</td>
+          <td>Free tier available</td>
+          <td>Search YT channels by India + Education/Career. Compare growth rates.</td>
+        </tr>
+        <tr>
+          <td><strong>Social Blade</strong></td>
+          <td>Free YT/IG/Twitter stats. Historical subscriber/follower data.</td>
+          <td>Free</td>
+          <td>Verify growth trajectory before outreach.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="card">
+      <h4 style="margin-top:0">Recommended Research Sequence</h4>
+      <ol style="font-size:13px">
+        <li><strong>Start with free tools:</strong> Modash 14-day trial + HypeAuditor rankings + Favikon rankings + Social Blade</li>
+        <li><strong>Evaluate paid India tools:</strong> Winkl (easiest for small team) or Qoruz (deepest India data)</li>
+        <li><strong>Use native platform search</strong> (see Platform Playbooks below) in parallel throughout</li>
+      </ol>
+    </div>
+
+    <!-- 2. TIERS & BUDGET -->
+    <hr class="section-divider">
+    <h3>2. Influencer Tiers &amp; Budget</h3>
+
+    <h4>Pricing Benchmarks (India, 2025&ndash;2026)</h4>
+    <table class="compact">
+      <thead>
+        <tr><th>Tier</th><th>Followers</th><th>IG Post/Reel</th><th>YT Integration</th><th>YT Dedicated</th><th>LinkedIn Post</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="badge badge-green" style="font-size:10px">Nano</span></td><td>1K&ndash;10K</td><td>&#8377;2K&ndash;5K ($24&ndash;60)</td><td>&#8377;5K&ndash;15K ($60&ndash;180)</td><td>N/A</td><td>&#8377;2K&ndash;5K ($24&ndash;60)</td></tr>
+        <tr><td><span class="badge badge-teal" style="font-size:10px">Micro</span></td><td>10K&ndash;100K</td><td>&#8377;5K&ndash;25K ($60&ndash;300)</td><td>&#8377;15K&ndash;50K ($180&ndash;600)</td><td>&#8377;30K&ndash;80K ($360&ndash;960)</td><td>&#8377;10K&ndash;30K ($120&ndash;360)</td></tr>
+        <tr><td><span class="badge badge-blue" style="font-size:10px">Mid</span></td><td>100K&ndash;500K</td><td>&#8377;30K&ndash;1L ($360&ndash;1.2K)</td><td>&#8377;50K&ndash;2L ($600&ndash;2.4K)</td><td>&#8377;1L&ndash;3L ($1.2K&ndash;3.6K)</td><td>&#8377;30K&ndash;1L ($360&ndash;1.2K)</td></tr>
+        <tr><td><span class="badge badge-purple" style="font-size:10px">Macro</span></td><td>500K&ndash;1M</td><td>&#8377;1L&ndash;3L ($1.2K&ndash;3.6K)</td><td>&#8377;2L&ndash;5L ($2.4K&ndash;6K)</td><td>&#8377;3L&ndash;8L ($3.6K&ndash;9.6K)</td><td>&#8377;1L&ndash;2L ($1.2K&ndash;2.4K)</td></tr>
+        <tr><td><span class="badge badge-coral" style="font-size:10px">Mega</span></td><td>1M+</td><td>&#8377;2L&ndash;10L+ ($2.4K&ndash;12K+)</td><td>&#8377;5L+ ($6K+)</td><td>&#8377;5L&ndash;20L+ ($6K&ndash;24K+)</td><td>&#8377;2L+ ($2.4K+)</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:12px;color:var(--text3)">Career/education niche typically costs less than fashion/beauty/finance niches.</p>
+
+    <h4>Recommended Budget Allocation ($250K)</h4>
+    <table>
+      <thead>
+        <tr><th>Tier</th><th># Creators</th><th>Avg. Cost/Creator</th><th>Budget</th><th>Expected Impact</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Mega (1M+)</strong></td><td>3&ndash;5</td><td>$8K&ndash;15K (2&ndash;3 posts)</td><td><span class="badge badge-coral" style="font-size:10px">$45K (18%)</span></td><td>Awareness + credibility anchor</td></tr>
+        <tr><td><strong>Macro (500K&ndash;1M)</strong></td><td>8&ndash;12</td><td>$3K&ndash;5K (2&ndash;3 posts)</td><td><span class="badge badge-purple" style="font-size:10px">$50K (20%)</span></td><td>Broad reach</td></tr>
+        <tr><td><strong>Mid (100K&ndash;500K)</strong></td><td>20&ndash;30</td><td>$1.5K&ndash;2.5K (2&ndash;3 posts)</td><td><span class="badge badge-blue" style="font-size:10px">$60K (24%)</span></td><td>Reach + engagement</td></tr>
+        <tr><td><strong>Micro (10K&ndash;100K)</strong></td><td>80&ndash;120</td><td>$300&ndash;600 (1&ndash;2 posts)</td><td><span class="badge badge-teal" style="font-size:10px">$50K (20%)</span></td><td>Highest conversion rate</td></tr>
+        <tr><td><strong>Paid amplification</strong></td><td>&mdash;</td><td>Boosting top content</td><td><span class="badge badge-amber" style="font-size:10px">$30K (12%)</span></td><td>Extends best content</td></tr>
+        <tr><td><strong>Contingency / tools</strong></td><td>&mdash;</td><td>Platforms, tracking, support</td><td><span class="badge badge-green" style="font-size:10px">$15K (6%)</span></td><td>&mdash;</td></tr>
+      </tbody>
+    </table>
+
+    <div class="card">
+      <p style="font-size:13px;margin-bottom:8px"><strong>Signup benchmarks:</strong> With a free product and compelling hook, expect 1&ndash;3% click-to-signup conversion. Micro-influencers consistently deliver 3x better ROI than mega-influencers on conversion.</p>
+      <h4 style="font-size:13px">Reference case studies</h4>
+      <ul style="font-size:13px">
+        <li><strong>Meesho:</strong> 67K app downloads via micro-influencers in 30 days targeting Tier 2/3 cities</li>
+        <li><strong>Meesho:</strong> 30M+ reach with under 20 creators in just 2 weeks</li>
+        <li><strong>CRED:</strong> 50% boost in app downloads through influencer marketing</li>
+        <li><strong>Apna app:</strong> Used YouTube integrated content specifically for driving app installs</li>
+      </ul>
+    </div>
+
+    <!-- 3. CREATOR ARCHETYPES -->
+    <hr class="section-divider">
+    <h3>3. Creator Archetypes</h3>
+
+    <!-- Archetype 1 -->
+    <div class="card" style="margin-top:16px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+        <span class="badge badge-purple">Archetype 1</span>
+        <h4 style="margin:0">Career Coaches &amp; Resume Experts</h4>
+      </div>
+      <p style="font-size:12px;color:var(--text3);margin-bottom:10px">Direct audience overlap &mdash; highest conversion potential. | YouTube, Instagram, LinkedIn | 10K&ndash;500K followers</p>
+      <table class="compact">
+        <thead><tr><th>Creator</th><th>Platform</th><th>Followers</th><th>Focus</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Meher Sindhu Batra</strong></td><td>YT + IG (@msbvision)</td><td>Growing</td><td>Resume building, interview hacks, career coaching. Mentored 5,000+ students.</td></tr>
+          <tr><td><strong>Komal Ahuja</strong></td><td>Instagram</td><td>Mid-tier</td><td>Resume building, interview prep, professional etiquette</td></tr>
+          <tr><td><strong>Prachi Mishra</strong></td><td>LinkedIn</td><td>Mid-tier</td><td>Resume writing, placement advice</td></tr>
+          <tr><td><strong>Arjun Prakash</strong></td><td>LinkedIn</td><td>Growing</td><td>Career transitions, resume optimization, job search strategies</td></tr>
+          <tr><td><strong>Neha Malhotra</strong></td><td>LinkedIn</td><td>563K</td><td>Career coaching, recruitment, talent development</td></tr>
+        </tbody>
+      </table>
+      <div class="search-queries">
+        <code>resume tips India</code><code>career coach India</code><code>placement preparation</code><code>how to get a job</code>
+      </div>
+    </div>
+
+    <!-- Archetype 2 -->
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+        <span class="badge badge-teal">Archetype 2</span>
+        <h4 style="margin:0">Tech Educators &amp; Coding Channels</h4>
+      </div>
+      <p style="font-size:12px;color:var(--text3);margin-bottom:10px">Large, engaged audiences of white-collar job seekers. High trust. | YouTube, LinkedIn | 100K&ndash;4M+ followers</p>
+      <table class="compact">
+        <thead><tr><th>Creator</th><th>Platform</th><th>Followers</th><th>Focus</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Ankur Warikoo</strong></td><td>YT + LI + IG</td><td>4M+ YT, 13M+ total</td><td>Entrepreneurship, career advice, personal growth. LinkedIn Top Voice India.</td></tr>
+          <tr><td><strong>Shradha Khapra</strong></td><td>YT + LI (Apna College)</td><td>600K+ students</td><td>Coding education, tech careers. Favikon 100/100.</td></tr>
+          <tr><td><strong>Aman Dhattarwal</strong></td><td>YouTube</td><td>3M+ YT, 10M+ total</td><td>Student career guidance, board exams, placements</td></tr>
+          <tr><td><strong>Akshay Saini</strong></td><td>YT + LI (NamasteDev)</td><td>1.7M YT</td><td>JavaScript education, tech careers. Favikon 100/100.</td></tr>
+          <tr><td><strong>Ishan Sharma</strong></td><td>YT + IG</td><td>1.5M+ total</td><td>Tech, startups, productivity, career content</td></tr>
+          <tr><td><strong>Arpit Bhayani</strong></td><td>LinkedIn</td><td>Favikon 99.7/100</td><td>System design, engineering careers. DiceDB founder.</td></tr>
+          <tr><td><strong>Abhishek Veeramalla</strong></td><td>YT + LI</td><td>300K+ YT</td><td>DevOps, Kubernetes, cloud careers. Favikon 99.7/100.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Archetype 3 -->
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+        <span class="badge badge-coral">Archetype 3</span>
+        <h4 style="margin:0">Finance &amp; Personal Branding Creators</h4>
+      </div>
+      <p style="font-size:12px;color:var(--text3);margin-bottom:10px">Adjacent audience &mdash; young professionals thinking about career growth &amp; earning potential. | YouTube, Instagram | 500K&ndash;3M+</p>
+      <table class="compact">
+        <thead><tr><th>Creator</th><th>Platform</th><th>Followers</th><th>Focus</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Sharan Hegde</strong></td><td>YT + IG + LI</td><td>3M+ YT, 3.9M+ total</td><td>Personal finance for young professionals. 100K+ newsletter readers.</td></tr>
+          <tr><td><strong>Raj Shamani</strong></td><td>YT + IG</td><td>Large</td><td>Finance, entrepreneurship, personal branding</td></tr>
+          <tr><td><strong>Pranjal Kamra</strong></td><td>YouTube</td><td>Large</td><td>Finance, career guidance, investing</td></tr>
+          <tr><td><strong>Radhika Gupta</strong></td><td>LinkedIn</td><td>Large, Favikon 100/100</td><td>CEO Edelweiss MF, Shark Tank India. Financial literacy.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Archetype 4 -->
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+        <span class="badge badge-amber">Archetype 4</span>
+        <h4 style="margin:0">&ldquo;Day in My Life&rdquo; Corporate Creators</h4>
+      </div>
+      <p style="font-size:12px;color:var(--text3);margin-bottom:10px">Relatable content for white-collar workers. Good for aspirational professional lifestyle. | IG Reels, YT Shorts | 10K&ndash;300K</p>
+      <table class="compact">
+        <thead><tr><th>Creator</th><th>Platform</th><th>Followers</th><th>Focus</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Vanshika Pandey</strong></td><td>IG (@codecrookshanks)</td><td>292K</td><td>Tech, AI &amp; career knowledge. "Turn knowledge into real opportunities"</td></tr>
+          <tr><td><strong>Miti Shah</strong></td><td>IG (@mitishah11)</td><td>79.2K</td><td>Freelancing, student mentorship, skill development</td></tr>
+        </tbody>
+      </table>
+      <div class="search-queries">
+        <code>day in my life India corporate</code><code>work life Bangalore</code><code>tech job India vlog</code><code>consulting life India</code>
+      </div>
+    </div>
+
+    <!-- Archetype 5 -->
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+        <span class="badge badge-blue">Archetype 5</span>
+        <h4 style="margin:0">HR / Recruiter-Side Creators</h4>
+      </div>
+      <p style="font-size:12px;color:var(--text3);margin-bottom:10px">Credibility signal &mdash; when an HR person recommends a resume tool, jobseekers trust it. | LinkedIn, Instagram | 10K&ndash;500K</p>
+      <table class="compact">
+        <thead><tr><th>Creator</th><th>Platform</th><th>Followers</th><th>Focus</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Harjeet Khanduja</strong></td><td>LinkedIn</td><td>Large</td><td>SVP HR at Reliance Jio. Decision-making, employee management.</td></tr>
+          <tr><td><strong>Ritika Singh</strong></td><td>LinkedIn</td><td>Mid-tier</td><td>Workplace wellness, inclusive hiring</td></tr>
+          <tr><td><strong>Amit Pandey</strong></td><td>LinkedIn</td><td>Mid-tier</td><td>CHRO. Talent acquisition, employer branding, HR tech.</td></tr>
+        </tbody>
+      </table>
+      <div class="search-queries">
+        <code>HR influencer India</code><code>recruiter tips India LinkedIn</code><code>what recruiters look for</code><code>hiring manager advice India</code>
+      </div>
+    </div>
+
+    <!-- Archetype 6 -->
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+        <span class="badge badge-pink">Archetype 6</span>
+        <h4 style="margin:0">LinkedIn Personal Brand Builders</h4>
+      </div>
+      <p style="font-size:12px;color:var(--text3);margin-bottom:10px">Their value prop is "build your professional brand" &mdash; SeekOut.ai is a natural tool rec. | LinkedIn | 50K&ndash;500K+</p>
+      <table class="compact">
+        <thead><tr><th>Creator</th><th>Platform</th><th>Followers</th><th>Focus</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Niharikaa Kaur Sodhi</strong></td><td>LinkedIn</td><td>Growing</td><td>Personal branding, writing strategies, authentic content</td></tr>
+          <tr><td><strong>Saheli Chatterjee</strong></td><td>LinkedIn</td><td>377K</td><td>Marketing, organic growth, brand strategies</td></tr>
+          <tr><td><strong>Ayush Shukla</strong></td><td>LinkedIn</td><td>Growing</td><td>Creator economy, brand storytelling, monetization</td></tr>
+          <tr><td><strong>Vrinda Gupta</strong></td><td>LinkedIn</td><td>132K</td><td>Soft skills training, career coaching</td></tr>
+          <tr><td><strong>Shreyaa Kapoor</strong></td><td>LinkedIn</td><td>Growing</td><td>Early-career guidance, productivity, networking</td></tr>
+          <tr><td><strong>Tanvi Bhasin</strong></td><td>LinkedIn</td><td>Growing</td><td>Leadership development, communication skills</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Archetype 7 -->
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+        <span class="badge badge-red" style="background:var(--red-bg);color:var(--red-text)">Archetype 7</span>
+        <h4 style="margin:0">Motivational / Mass-Audience Educators</h4>
+      </div>
+      <p style="font-size:12px;color:var(--text3);margin-bottom:10px">Massive reach for awareness, lower conversion. Good as "anchor" creators for launch buzz. | YouTube | 1M&ndash;20M+</p>
+      <table class="compact">
+        <thead><tr><th>Creator</th><th>Platform</th><th>Followers</th><th>Focus</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Dr. Vivek Bindra</strong></td><td>YouTube</td><td>20M+ subs</td><td>Business education, entrepreneurship, motivation</td></tr>
+          <tr><td><strong>Sandeep Maheshwari</strong></td><td>YouTube</td><td>Very large</td><td>Career and life motivation</td></tr>
+          <tr><td><strong>Abhi and Niyu</strong></td><td>YouTube</td><td>6M+ subs</td><td>Educational, career help, social commentary</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:var(--text3);margin-top:8px">Use sparingly &mdash; broad audience means lower conversion rate per impression.</p>
+    </div>
+
+    <!-- Archetype 8 -->
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+        <span class="badge badge-green">Archetype 8</span>
+        <h4 style="margin:0">Study Abroad / Higher Ed Creators</h4>
+      </div>
+      <p style="font-size:12px;color:var(--text3);margin-bottom:10px">Audience is actively making career decisions and needs a strong CV/portfolio. | YouTube | 100K&ndash;1M</p>
+      <table class="compact">
+        <thead><tr><th>Creator</th><th>Platform</th><th>Followers</th><th>Focus</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Chetna Vasishth</strong></td><td>YT (ChetChat)</td><td>Mid-large</td><td>Study abroad, career paths, higher education options</td></tr>
+          <tr><td><strong>Kushal Lodha</strong></td><td>LinkedIn</td><td>Growing</td><td>Financial literacy, personal development for beginners</td></tr>
+        </tbody>
+      </table>
+      <div class="search-queries">
+        <code>study abroad India YouTube</code><code>MBA preparation India</code><code>MS in US from India</code><code>career options after engineering</code>
+      </div>
+    </div>
+
+    <!-- 4. PLATFORM PLAYBOOKS -->
+    <hr class="section-divider">
+    <h3>4. Platform-Specific Playbooks</h3>
+
+    <!-- YouTube -->
+    <div class="card" style="margin-top:16px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+        <span class="badge badge-red" style="background:var(--red-bg);color:var(--red-text)">YouTube</span>
+        <span style="font-size:12px;color:var(--text3)">Primary &mdash; Highest trust, 462M+ Indian users</span>
+      </div>
+      <h4 style="font-size:13px">Search queries to run</h4>
+      <div class="search-queries">
+        <code>resume tips India</code><code>how to get a job in India 2026</code><code>career advice for freshers</code><code>placement preparation tips</code><code>LinkedIn profile tips India</code><code>AI tools for job search</code><code>resume kaise banaye</code><code>portfolio building tips</code>
+      </div>
+      <h4 style="font-size:13px">What to look for</h4>
+      <ul class="check-list" style="font-size:13px">
+        <li class="good">Videos with 50K+ views on career/resume topics</li>
+        <li class="good">Comment sections full of questions (= engaged job-seeking audience)</li>
+        <li class="good">Creator does product integrations/sponsorships</li>
+        <li class="good">Consistent upload schedule (weekly+)</li>
+        <li class="warn">Subscriber count growing but views declining = disengaged audience</li>
+        <li class="warn">Comment section full of bots or generic praise</li>
+        <li class="warn">No sponsored content history = might be hard to partner with</li>
+      </ul>
+      <h4 style="font-size:13px">5 starting accounts</h4>
+      <ol style="font-size:13px">
+        <li><strong>Ankur Warikoo</strong> &mdash; 4M+ subs. Career/entrepreneurship. Does sponsorships. Highest reach.</li>
+        <li><strong>Aman Dhattarwal</strong> &mdash; 3M+ subs. Student/fresher audience. Placement-focused.</li>
+        <li><strong>Ishan Sharma</strong> &mdash; 1.5M+. Tech/startup career content. Young audience.</li>
+        <li><strong>Akshay Saini</strong> (NamasteDev) &mdash; 1.7M subs. Developer careers.</li>
+        <li><strong>Meher Sindhu Batra</strong> &mdash; Growing. Pure career coaching. Most niche-relevant.</li>
+      </ol>
+    </div>
+
+    <!-- Instagram -->
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+        <span class="badge badge-pink">Instagram</span>
+        <span style="font-size:12px;color:var(--text3)">Primary &mdash; Best for short-form career content, strong with 22&ndash;35 age group</span>
+      </div>
+      <h4 style="font-size:13px">Hashtags &amp; searches to explore</h4>
+      <div class="search-queries">
+        <code>#CareerAdviceIndia</code><code>#ResumeTips</code><code>#JobSearchIndia</code><code>#PlacementPreparation</code><code>#LinkedInTips</code><code>#CorporateLifeIndia</code><code>#FresherJobs</code>
+      </div>
+      <h4 style="font-size:13px">What to look for</h4>
+      <ul class="check-list" style="font-size:13px">
+        <li class="good">Reels getting 10K+ views consistently</li>
+        <li class="good">High saves/shares ratio (career content gets saved a lot)</li>
+        <li class="good">Carousel posts that get shared (educational content)</li>
+        <li class="good">Link in bio is a Linktree or similar (= drives traffic offsite)</li>
+        <li class="warn">High followers but low Reel views = bought followers</li>
+        <li class="warn">Engagement mostly from other creators, not jobseekers</li>
+      </ul>
+      <h4 style="font-size:13px">5 starting accounts</h4>
+      <ol style="font-size:13px">
+        <li><strong>@codecrookshanks</strong> (Vanshika Pandey) &mdash; 292K. Tech/AI/career. Young, engaged audience.</li>
+        <li><strong>@msbvision</strong> (Meher Sindhu Batra) &mdash; Resume building, interview prep. Niche-perfect.</li>
+        <li><strong>@mitishah11</strong> (Miti Shah) &mdash; 79.2K. Freelancing, mentorship. Micro-influencer sweet spot.</li>
+        <li><strong>@shreyapattar</strong> (Shreya Pattar) &mdash; Freelancing, writing careers. Engaged community.</li>
+        <li><strong>@unnatibagga</strong> (Unnati Bagga) &mdash; Personal branding, freelancing, career content.</li>
+      </ol>
+    </div>
+
+    <!-- LinkedIn -->
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+        <span class="badge badge-blue">LinkedIn</span>
+        <span style="font-size:12px;color:var(--text3)">Primary for this product &mdash; audience already in "career mode", partnerships underpriced</span>
+      </div>
+      <h4 style="font-size:13px">Search queries to run</h4>
+      <div class="search-queries">
+        <code>"resume tips" &rarr; filter India</code><code>"job search" &rarr; sort by engagement</code><code>"career coach" &rarr; Creator mode ON, 10K+</code><code>#OpenToWork</code>
+      </div>
+      <h4 style="font-size:13px">What to look for</h4>
+      <ul class="check-list" style="font-size:13px">
+        <li class="good">Posts regularly getting 500+ reactions and 50+ comments</li>
+        <li class="good">Creator Mode enabled (bell icon, follower count visible)</li>
+        <li class="good">"Top Voice" badge in career/professional development</li>
+        <li class="good">Content about resumes, career transitions, job hunting</li>
+        <li class="warn">Posts mostly get reactions from other influencers, not regular professionals</li>
+        <li class="warn">Content is all motivational fluff, no actionable career advice</li>
+      </ul>
+      <h4 style="font-size:13px">5 starting accounts</h4>
+      <ol style="font-size:13px">
+        <li><strong>Ankur Warikoo</strong> &mdash; 2M+ LI followers. Career/growth. LinkedIn Top Voice India.</li>
+        <li><strong>Neha Malhotra</strong> &mdash; 563K followers. Career coaching, talent development.</li>
+        <li><strong>Arjun Prakash</strong> &mdash; Resume optimization, career transitions. Niche-perfect.</li>
+        <li><strong>Saheli Chatterjee</strong> &mdash; 377K followers. Marketing, professional growth.</li>
+        <li><strong>Niharikaa Kaur Sodhi</strong> &mdash; Personal branding, writing strategies.</li>
+      </ol>
+    </div>
+
+    <!-- Twitter/X -->
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+        <span class="badge badge-amber">Twitter / X</span>
+        <span style="font-size:12px;color:var(--text3)">Secondary &mdash; smaller career ecosystem, but good for tech audience &amp; seeding conversations</span>
+      </div>
+      <h4 style="font-size:13px">Search queries to run</h4>
+      <div class="search-queries">
+        <code>resume tips India</code><code>career advice lang:en near India</code><code>#JobSearch India</code><code>#TechLayoffs India</code>
+      </div>
+      <h4 style="font-size:13px">What to look for</h4>
+      <ul class="check-list" style="font-size:13px">
+        <li class="good">Threads that go viral about career advice / job market</li>
+        <li class="good">Accounts that reply-engage with followers (not just broadcast)</li>
+        <li class="good">Accounts that cross-post from LinkedIn (common in India)</li>
+        <li class="warn">Twitter reach in India is smaller for career content &mdash; use for amplification, not primary</li>
+      </ul>
+    </div>
+
+    <!-- 5. COMMUNITIES -->
+    <hr class="section-divider">
+    <h3>5. Communities to Monitor &amp; Seed</h3>
+    <p style="font-size:13px;color:var(--text3);margin-bottom:12px">Not influencer partnerships &mdash; organic communities where jobseekers congregate. Good for understanding language, pain points, and organic seeding.</p>
+
+    <table>
+      <thead>
+        <tr><th>Community</th><th>Platform</th><th>Size</th><th>How to Use</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>r/developersIndia</strong></td><td>Reddit</td><td>1M+ members</td><td>Monitor resume/career questions. Potential for organic posts or AMA.</td></tr>
+        <tr><td><strong>r/india</strong></td><td>Reddit</td><td>Very large</td><td>Search "resume", "job search", "placement" &mdash; see what advice gets traction.</td></tr>
+        <tr><td><strong>r/IndianJobs</strong></td><td>Reddit</td><td>Growing</td><td>Direct audience overlap.</td></tr>
+        <tr><td><strong>@jobsdevindia</strong></td><td>Telegram</td><td>Active</td><td>Curated developer job openings. Good for understanding job-seeker language.</td></tr>
+        <tr><td><strong>@remotewfh_india</strong></td><td>Telegram</td><td>Active</td><td>Remote-first roles. Remote workers = strong portfolio use case.</td></tr>
+        <tr><td><strong>@startup_jobs_india</strong></td><td>Telegram</td><td>Active</td><td>Startup roles. Early-career audience.</td></tr>
+        <tr><td><strong>@sde_jobs_india</strong></td><td>Telegram</td><td>Large</td><td>SDE positions across levels. Core tech job seeker audience.</td></tr>
+        <tr><td><strong>Blind / Grapevine</strong></td><td>App</td><td>Significant</td><td>Monitor for pain points. "Resume went into a black hole" sentiment.</td></tr>
+      </tbody>
+    </table>
+
+    <!-- 6. BENCHMARKS -->
+    <hr class="section-divider">
+    <h3>6. Benchmarks &amp; Case Studies</h3>
+
+    <h4>India Influencer Campaign Benchmarks</h4>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-val">&#8377;100&ndash;500</div>
+        <div class="stat-label">CPM (micro) &mdash; $1.20&ndash;$6</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">2&ndash;5%</div>
+        <div class="stat-label">Click-through rate (career content)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">15&ndash;30%</div>
+        <div class="stat-label">Landing page &rarr; signup (free tool)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">$0.36&ndash;$1.20</div>
+        <div class="stat-label">Cost per signup (micro)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">$0.96&ndash;$3.60</div>
+        <div class="stat-label">Cost per signup (macro)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">$4.12</div>
+        <div class="stat-label">ROI per $1 spent (India IG avg)</div>
+      </div>
+    </div>
+
+    <h4>Reference Case Studies</h4>
+    <div class="card-grid">
+      <div class="card">
+        <span class="badge badge-teal">Meesho</span>
+        <h4 style="margin-top:8px;font-size:13px">Micro-Influencer Blitz</h4>
+        <ul style="font-size:12px;margin-top:6px">
+          <li>67K app downloads in 30 days</li>
+          <li>Targeted Tier 2 &amp; 3 cities with regional content</li>
+          <li>30M+ reach with under 20 creators in 2 weeks</li>
+        </ul>
+        <p style="font-size:12px;color:var(--teal);margin-top:6px"><strong>Lesson:</strong> Micro + regional = high conversion at low cost</p>
+      </div>
+      <div class="card">
+        <span class="badge badge-purple">CRED</span>
+        <h4 style="margin-top:8px;font-size:13px">Influencer-Led Launch</h4>
+        <ul style="font-size:12px;margin-top:6px">
+          <li>50% increase in app downloads</li>
+          <li>Humor-driven content, celebrity + micro mix</li>
+        </ul>
+        <p style="font-size:12px;color:var(--accent);margin-top:6px"><strong>Lesson:</strong> Creative, shareable format &gt; follower count</p>
+      </div>
+      <div class="card">
+        <span class="badge badge-coral">Apna App</span>
+        <h4 style="margin-top:8px;font-size:13px">YouTube Integration</h4>
+        <ul style="font-size:12px;margin-top:6px">
+          <li>YT integrated content (not standalone ads)</li>
+          <li>Partnered with career/education creators</li>
+        </ul>
+        <p style="font-size:12px;color:var(--coral);margin-top:6px"><strong>Lesson:</strong> "How to use" content converts better than "check this out"</p>
+      </div>
+    </div>
+
+    <!-- NEXT STEPS -->
+    <hr class="section-divider">
+    <h3>Next Steps</h3>
+    <div class="card">
+      <table class="compact">
+        <thead><tr><th>Week</th><th>Actions</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge badge-green" style="font-size:10px">Week 1</span></td><td>Sign up for Modash free trial. Browse HypeAuditor &amp; Favikon free rankings. Run search queries on each platform.</td></tr>
+          <tr><td><span class="badge badge-blue" style="font-size:10px">Week 2</span></td><td>Shortlist 30&ndash;50 creators across tiers. Verify with Social Blade / NoxInfluencer. Build spreadsheet: name, platform, handle, followers, engagement rate, audience fit, estimated cost.</td></tr>
+          <tr><td><span class="badge badge-purple" style="font-size:10px">Week 3</span></td><td>Decide on Winkl or Qoruz for campaign management. Begin outreach to top 10 creators.</td></tr>
+          <tr><td><span class="badge badge-amber" style="font-size:10px">Ongoing</span></td><td>Monitor communities (Section 5) for language &amp; pain points to shape creator briefs.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
   </div>
 
 </main>
