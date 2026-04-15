@@ -14,6 +14,7 @@
       --bg-dark: #0f172a;
       --bg-surface: #1e293b;
       --bg-card: rgba(255, 255, 255, 0.05);
+      --bg-hover: rgba(255, 255, 255, 0.04);
       --border: rgba(255, 255, 255, 0.08);
       --text-primary: #f1f5f9;
       --text-secondary: #cbd5e1;
@@ -22,140 +23,354 @@
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
+    html, body { height: 100%; }
+
     body {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
       background: var(--bg-dark);
       color: var(--text-primary);
-      min-height: 100vh;
     }
 
-    .header {
-      padding: 60px 40px 40px;
-      max-width: 1200px;
-      margin: 0 auto;
+    .layout {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      height: 100vh;
     }
 
-    .header h1 {
-      font-size: 2.4rem;
-      font-weight: 800;
-      letter-spacing: -0.03em;
+    /* ── Sidebar ──────────────────────────────────────────── */
+    .sidebar {
+      background: var(--bg-surface);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    .sidebar-header {
+      padding: 24px 20px 16px;
+    }
+
+    .sidebar-header h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
       background: linear-gradient(135deg, #f1f5f9, var(--seekout-teal));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
-    .header p {
+    .sidebar-nav {
+      padding: 8px 12px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      border-radius: 8px;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      background: none;
+      border: none;
+      text-align: left;
+      width: 100%;
+      transition: background 0.15s, color 0.15s;
+      font-family: inherit;
+    }
+
+    .nav-item:hover {
+      background: var(--bg-hover);
+      color: var(--text-primary);
+    }
+
+    .nav-item.active {
+      background: rgba(45, 212, 191, 0.12);
+      color: var(--seekout-teal);
+    }
+
+    .nav-item.dim {
+      opacity: 0.4;
+    }
+
+    .nav-item .count {
+      font-size: 0.75rem;
       color: var(--text-muted);
-      font-size: 1.05rem;
-      margin-top: 8px;
+      font-variant-numeric: tabular-nums;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-      gap: 24px;
-      padding: 0 40px 60px;
-      max-width: 1200px;
-      margin: 0 auto;
+    .nav-item.active .count {
+      color: var(--seekout-teal);
     }
 
-    .card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 32px;
-      text-decoration: none;
-      color: inherit;
-      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    .nav-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 8px 4px;
+    }
+
+    /* ── Main pane ────────────────────────────────────────── */
+    .main {
+      overflow-y: auto;
       display: flex;
       flex-direction: column;
     }
 
-    .card:hover {
-      border-color: rgba(45, 212, 191, 0.4);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    }
-
-    .card-tags {
+    .search-bar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: var(--bg-dark);
+      padding: 24px 32px 16px;
+      border-bottom: 1px solid var(--border);
       display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 16px;
+      align-items: center;
+      gap: 12px;
     }
 
-    .tag {
+    .search-input-wrap {
+      position: relative;
+      flex: 1;
+      max-width: 560px;
+    }
+
+    .search-input-wrap::before {
+      content: '';
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      width: 16px;
+      height: 16px;
+      transform: translateY(-50%);
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8'/><line x1='21' y1='21' x2='16.65' y2='16.65'/></svg>");
+      background-repeat: no-repeat;
+      pointer-events: none;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 10px 56px 10px 36px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 0.9rem;
+      transition: border-color 0.15s, background 0.15s;
+    }
+
+    .search-input::placeholder { color: var(--text-muted); }
+
+    .search-input:focus {
+      outline: none;
+      border-color: rgba(45, 212, 191, 0.5);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .kbd-hint {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
       font-size: 0.7rem;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-family: inherit;
+      pointer-events: none;
+    }
+
+    /* ── List ─────────────────────────────────────────────── */
+    .list {
+      padding: 8px 32px 60px;
+      flex: 1;
+    }
+
+    .group-header {
+      position: sticky;
+      top: 73px; /* search-bar height */
+      z-index: 5;
+      background: var(--bg-dark);
+      padding: 24px 0 8px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 4px;
+    }
+
+    .row {
+      display: block;
+      padding: 14px 16px;
+      border-radius: 10px;
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.15s, transform 0.15s;
+      border: 1px solid transparent;
+    }
+
+    .row:hover {
+      background: var(--bg-hover);
+      border-color: var(--border);
+    }
+
+    .row + .row { margin-top: 2px; }
+
+    .row-line1 {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 4px;
+    }
+
+    .row-title {
+      font-size: 1rem;
       font-weight: 600;
-      padding: 3px 10px;
+      letter-spacing: -0.01em;
+      color: var(--text-primary);
+      flex: 1;
+      min-width: 0;
+    }
+
+    .type-chip {
+      flex-shrink: 0;
+      font-size: 0.65rem;
+      font-weight: 600;
+      padding: 3px 9px;
       border-radius: 20px;
       background: rgba(45, 212, 191, 0.12);
       color: var(--seekout-teal);
       text-transform: uppercase;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.06em;
     }
 
-    .card h2 {
-      font-size: 1.35rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      line-height: 1.3;
-      margin-bottom: 8px;
-    }
-
-    .card .description {
-      font-size: 0.9rem;
+    .row-description {
+      font-size: 0.85rem;
       color: var(--text-secondary);
-      line-height: 1.5;
-      flex: 1;
+      line-height: 1.45;
+      margin-bottom: 6px;
     }
 
-    .card-meta {
+    .row-meta {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin-top: 20px;
-      padding-top: 16px;
-      border-top: 1px solid var(--border);
-      font-size: 0.8rem;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 0.75rem;
       color: var(--text-muted);
     }
 
-    .card-arrow {
+    .row-arrow {
       color: var(--seekout-teal);
-      font-size: 1.2rem;
-      transition: transform 0.2s;
+      opacity: 0;
+      transform: translateX(-4px);
+      transition: opacity 0.15s, transform 0.15s;
     }
 
-    .card:hover .card-arrow {
-      transform: translateX(4px);
+    .row:hover .row-arrow {
+      opacity: 1;
+      transform: translateX(0);
     }
 
     .empty-state {
-      grid-column: 1 / -1;
       text-align: center;
       padding: 80px 20px;
       color: var(--text-muted);
+      font-size: 0.95rem;
     }
 
-    @media (max-width: 480px) {
-      .header { padding: 40px 20px 24px; }
-      .header h1 { font-size: 1.8rem; }
-      .grid { grid-template-columns: 1fr; padding: 0 20px 40px; }
+    /* ── Mobile ───────────────────────────────────────────── */
+    @media (max-width: 640px) {
+      .layout {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+        height: auto;
+        min-height: 100vh;
+      }
+
+      .sidebar {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        overflow: visible;
+      }
+
+      .sidebar-header {
+        padding: 20px 16px 12px;
+      }
+
+      .sidebar-nav {
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 0 12px 16px;
+        gap: 6px;
+        scrollbar-width: none;
+      }
+
+      .sidebar-nav::-webkit-scrollbar { display: none; }
+
+      .nav-item {
+        flex-shrink: 0;
+        padding: 6px 12px;
+        background: var(--bg-card);
+        border-radius: 999px;
+        gap: 6px;
+        width: auto;
+      }
+
+      .nav-divider { display: none; }
+
+      .search-bar { padding: 16px 16px 12px; }
+      .list { padding: 0 16px 40px; }
+      .group-header { top: 65px; }
+      .kbd-hint { display: none; }
     }
   </style>
 </head>
 <body>
-  <div class="header">
-    <h1>Presentations</h1>
-    <p>Select a presentation to view</p>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1>Presentations</h1>
+      </div>
+      <nav class="sidebar-nav" id="sidebarNav"></nav>
+    </aside>
+
+    <main class="main">
+      <div class="search-bar">
+        <div class="search-input-wrap">
+          <input type="search" id="searchInput" class="search-input" placeholder="Search presentations..." autocomplete="off" spellcheck="false">
+          <kbd class="kbd-hint">⌘K</kbd>
+        </div>
+      </div>
+      <div class="list" id="list"></div>
+    </main>
   </div>
-  <div class="grid" id="grid"></div>
 
   <script>
     // ── Presentation Registry ──────────────────────────────────────────
-    // Add new presentations here. Each entry renders as a card on this page.
+    // Add new presentations here. Each entry renders as a row.
+    //
+    // Schema:
+    //   slug:        kebab-case folder name under presentations/
+    //   title:       display title
+    //   description: one-line description shown below the title
+    //   date:        YYYY-MM-DD (used for sort + display)
+    //   authors:     display string (free-form)
+    //   project:     'Helix' | 'SPOT' | 'Other'   ← controlled vocab; missing → 'Other'
+    //                (Helix is the internal name; SeekOut.ai is the external name for the same product)
+    //   type:        'Wireframes' | 'Deck' | 'Proposal' | 'Spec'  ← controlled vocab; missing → no chip
+    //   tags:        free-form array of secondary labels
     const presentations = [
       {
         slug: 'jobpilot',
@@ -163,6 +378,8 @@
         description: 'Turning job applications into a jobseeker acquisition engine for Helix',
         date: '2026-02-26',
         authors: 'Akshay Gupta & Kailash Yogeshwar',
+        project: 'Other',
+        type: 'Deck',
         tags: ['Hackathon', 'Chrome Extension', 'AI'],
       },
       {
@@ -171,7 +388,9 @@
         description: 'Viral loops, funnel stages, rate metrics, and throughput formulas — deep-dive appendix',
         date: '2026-03-04',
         authors: 'Akshay Gupta',
-        tags: ['Helix', 'Metrics', 'Detailed'],
+        project: 'Helix',
+        type: 'Deck',
+        tags: ['Metrics', 'Detailed'],
       },
       {
         slug: 'helix-resume-tailoring',
@@ -179,7 +398,9 @@
         description: 'Wireframes and redesigned flows for portfolio tailoring in Helix',
         date: '2026-03-13',
         authors: 'Akshay Gupta',
-        tags: ['Helix', 'Wireframes', 'Resume Tailoring'],
+        project: 'Helix',
+        type: 'Wireframes',
+        tags: ['Resume Tailoring'],
       },
       {
         slug: 'helix-extension',
@@ -187,7 +408,9 @@
         description: 'Wireframes for the Helix browser extension that autofills job applications',
         date: '2026-03-18',
         authors: 'Akshay Gupta',
-        tags: ['Helix', 'Wireframes', 'Chrome Extension'],
+        project: 'Helix',
+        type: 'Wireframes',
+        tags: ['Chrome Extension'],
       },
       {
         slug: 'Seekout.ai Marketing ',
@@ -195,7 +418,9 @@
         description: 'Marketing strategy and plan for SeekOut.ai',
         date: '2026-03-20',
         authors: 'Akshay Gupta',
-        tags: ['Marketing', 'Strategy', 'SeekOut.ai'],
+        project: 'Helix',
+        type: 'Deck',
+        tags: ['Marketing', 'Strategy'],
       },
       {
         slug: 'spot-v2',
@@ -203,7 +428,9 @@
         description: 'ASCII wireframes, user flows, and UX spec for Engage (List, Email, Calendar, Kanban, Metrics) and Settings (Sender Identity, Sequences, Preferences)',
         date: '2026-03-23',
         authors: 'Akshay & Anna',
-        tags: ['SPOT', 'Wireframes', 'Engage', 'Settings'],
+        project: 'SPOT',
+        type: 'Wireframes',
+        tags: ['Engage', 'Settings'],
       },
       {
         slug: 'helix-portfolio-tailoring',
@@ -211,7 +438,9 @@
         description: 'Full wireframes for portfolio tailoring: onboarding wizard, always-on AI chat editor, share/tailor flow, applications dashboard, and 6 user flows',
         date: '2026-03-24',
         authors: 'Akshay Gupta',
-        tags: ['Helix', 'Wireframes', 'Portfolio', 'Tailoring'],
+        project: 'Helix',
+        type: 'Wireframes',
+        tags: ['Portfolio', 'Tailoring'],
       },
       {
         slug: 'helix-notifications',
@@ -219,7 +448,9 @@
         description: 'Notification preferences (Settings), unified in-app panel, email templates (collaborator invite, weekly digest), and 4 user flows',
         date: '2026-03-25',
         authors: 'Akshay Gupta',
-        tags: ['Helix', 'Wireframes', 'Notifications'],
+        project: 'Helix',
+        type: 'Wireframes',
+        tags: ['Notifications'],
       },
       {
         slug: 'helix-hiring-side-proposal-v2',
@@ -227,41 +458,223 @@
         description: 'A proposal to make UX simpler',
         date: '2026-04-06',
         authors: 'Aravind Bala and Akshay Gupta',
-        tags: ['Helix', 'Proposal'],
+        project: 'Helix',
+        type: 'Proposal',
+        tags: [],
       },
     ];
     // ── End Registry ───────────────────────────────────────────────────
 
-    const grid = document.getElementById('grid');
+    // ── State ──────────────────────────────────────────────────────────
+    const state = {
+      project: 'All',   // 'All' or a project name
+      search: '',
+    };
 
-    if (presentations.length === 0) {
-      grid.innerHTML = '<div class="empty-state"><p>No presentations yet.</p></div>';
-    } else {
-      presentations.forEach(p => {
-        const card = document.createElement('a');
-        card.className = 'card';
-        card.href = `presentations/${p.slug}/index.html`;
+    // ── URL hash sync ──────────────────────────────────────────────────
+    function readHash() {
+      const params = new URLSearchParams(window.location.hash.slice(1));
+      state.project = params.get('project') || 'All';
+      state.search = params.get('search') || '';
+    }
 
-        const tagsHtml = (p.tags || [])
-          .map(t => `<span class="tag">${t}</span>`)
-          .join('');
+    function writeHash() {
+      const params = new URLSearchParams();
+      if (state.project && state.project !== 'All') params.set('project', state.project);
+      if (state.search) params.set('search', state.search);
+      const hash = params.toString();
+      const target = hash ? '#' + hash : window.location.pathname;
+      // Use replaceState to avoid spamming history on every keystroke
+      history.replaceState(null, '', target);
+    }
 
-        const dateStr = p.date
-          ? new Date(p.date + 'T00:00:00').toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
-          : '';
+    // ── Derived data ───────────────────────────────────────────────────
+    function normalizedProject(p) {
+      return p.project || 'Other';
+    }
 
-        card.innerHTML = `
-          ${tagsHtml ? `<div class="card-tags">${tagsHtml}</div>` : ''}
-          <h2>${p.title}</h2>
-          <p class="description">${p.description}</p>
-          <div class="card-meta">
-            <span>${p.authors || ''}${dateStr ? ` &middot; ${dateStr}` : ''}</span>
-            <span class="card-arrow">&rarr;</span>
-          </div>
-        `;
-        grid.appendChild(card);
+    function matchesSearch(p, q) {
+      if (!q) return true;
+      const needle = q.toLowerCase();
+      const hay = [
+        p.title,
+        p.description,
+        normalizedProject(p),
+        p.type || '',
+        ...(p.tags || []),
+      ].join(' ').toLowerCase();
+      return hay.includes(needle);
+    }
+
+    function filteredPresentations() {
+      return presentations.filter(p => {
+        if (state.project !== 'All' && normalizedProject(p) !== state.project) return false;
+        if (!matchesSearch(p, state.search)) return false;
+        return true;
       });
     }
+
+    // Counts respect search but ignore current project selection (so the user
+    // can see how many results are in each project and switch).
+    function projectCounts() {
+      const projects = [...new Set(presentations.map(normalizedProject))].sort((a, b) => a.localeCompare(b));
+      const counts = { All: 0 };
+      projects.forEach(p => { counts[p] = 0; });
+      presentations.forEach(p => {
+        if (!matchesSearch(p, state.search)) return;
+        counts.All += 1;
+        counts[normalizedProject(p)] += 1;
+      });
+      return { projects, counts };
+    }
+
+    function groupByProject(items) {
+      const groups = {};
+      items.forEach(p => {
+        const key = normalizedProject(p);
+        (groups[key] ||= []).push(p);
+      });
+      // Sort each group by date desc
+      Object.values(groups).forEach(arr => {
+        arr.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+      });
+      // Return sorted by project name asc
+      return Object.keys(groups).sort((a, b) => a.localeCompare(b)).map(name => ({
+        name,
+        items: groups[name],
+      }));
+    }
+
+    // ── Rendering ──────────────────────────────────────────────────────
+    function formatDate(d) {
+      if (!d) return '';
+      return new Date(d + 'T00:00:00').toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+    }
+
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, c => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      }[c]));
+    }
+
+    function renderSidebar() {
+      const nav = document.getElementById('sidebarNav');
+      const { projects, counts } = projectCounts();
+      const items = [{ name: 'All', count: counts.All }];
+      // Mobile chip strip skips the divider; desktop shows it after All.
+      const projectItems = projects.map(p => ({ name: p, count: counts[p] }));
+
+      const allHtml = items.concat(projectItems).map((item, idx) => {
+        const isActive = state.project === item.name;
+        const isDim = item.count === 0 && state.search;
+        const cls = ['nav-item', isActive ? 'active' : '', isDim ? 'dim' : ''].filter(Boolean).join(' ');
+        return `
+          <button class="${cls}" data-project="${escapeHtml(item.name)}">
+            <span>${escapeHtml(item.name)}</span>
+            <span class="count">${item.count}</span>
+          </button>
+          ${idx === 0 ? '<div class="nav-divider"></div>' : ''}
+        `;
+      }).join('');
+
+      nav.innerHTML = allHtml;
+
+      nav.querySelectorAll('.nav-item').forEach(btn => {
+        btn.addEventListener('click', () => {
+          state.project = btn.dataset.project;
+          writeHash();
+          render();
+        });
+      });
+    }
+
+    function renderRow(p) {
+      const chip = p.type ? `<span class="type-chip">${escapeHtml(p.type)}</span>` : '';
+      const date = formatDate(p.date);
+      const authors = p.authors || '';
+      const meta = [authors, date].filter(Boolean).join(' · ');
+      const href = `presentations/${p.slug}/index.html`;
+      return `
+        <a class="row" href="${escapeHtml(href)}">
+          <div class="row-line1">
+            <div class="row-title">${escapeHtml(p.title)}</div>
+            ${chip}
+          </div>
+          ${p.description ? `<div class="row-description">${escapeHtml(p.description)}</div>` : ''}
+          <div class="row-meta">
+            <span>${escapeHtml(meta)}</span>
+            <span class="row-arrow">→</span>
+          </div>
+        </a>
+      `;
+    }
+
+    function renderList() {
+      const list = document.getElementById('list');
+      const items = filteredPresentations();
+
+      if (items.length === 0) {
+        list.innerHTML = '<div class="empty-state">No presentations match.</div>';
+        return;
+      }
+
+      // When a specific project is selected, render flat (no group headers).
+      if (state.project !== 'All') {
+        const sorted = items.slice().sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+        list.innerHTML = sorted.map(renderRow).join('');
+        return;
+      }
+
+      // 'All' view: group by project with sticky headers.
+      const groups = groupByProject(items);
+      list.innerHTML = groups.map(g => `
+        <div class="group-header">${escapeHtml(g.name)}</div>
+        ${g.items.map(renderRow).join('')}
+      `).join('');
+    }
+
+    function render() {
+      renderSidebar();
+      renderList();
+    }
+
+    // ── Wiring ─────────────────────────────────────────────────────────
+    const searchInput = document.getElementById('searchInput');
+
+    searchInput.addEventListener('input', e => {
+      state.search = e.target.value;
+      writeHash();
+      render();
+    });
+
+    searchInput.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        searchInput.value = '';
+        state.search = '';
+        writeHash();
+        render();
+        searchInput.blur();
+      }
+    });
+
+    document.addEventListener('keydown', e => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        searchInput.focus();
+        searchInput.select();
+      }
+    });
+
+    window.addEventListener('hashchange', () => {
+      readHash();
+      searchInput.value = state.search;
+      render();
+    });
+
+    // ── Init ───────────────────────────────────────────────────────────
+    readHash();
+    searchInput.value = state.search;
+    render();
   </script>
 </body>
 </html>

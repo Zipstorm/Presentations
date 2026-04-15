@@ -73,6 +73,29 @@ After creating the presentation folder and files, **always register it** in the 
   description: '<One-line description>',
   date: 'YYYY-MM-DD',
   authors: '<Author names>',
-  tags: ['Tag1', 'Tag2'],
+  project: 'Helix',         // see Vocabulary below
+  type: 'Wireframes',       // see Vocabulary below
+  tags: ['Tag1', 'Tag2'],   // free-form, secondary metadata
 }
 ```
+
+### Vocabulary
+
+The index page uses `project` as the primary grouping (sidebar) and `type` as a small chip on each row. Keep these stable so the sidebar doesn't fragment.
+
+**`project`** — controlled vocab:
+
+- `Helix` — also covers SeekOut.ai work (Helix is the internal name; SeekOut.ai is the external name for the same product)
+- `SPOT`
+- `Other` — for one-off or hackathon work that doesn't have enough volume to deserve its own sidebar entry
+
+Add a new top-level project only when there's enough work to justify a sidebar entry; otherwise use `Other`. Missing/unknown values fall back to `Other`.
+
+**`type`** — controlled vocab:
+
+- `Wireframes` — wireframes, user flows, UX specs
+- `Deck` — slide decks, presentations
+- `Proposal` — proposals
+- `Spec` — written specifications
+
+Topic-style labels (e.g. `Metrics`, `Strategy`, `Hackathon`, `Chrome Extension`) belong in `tags`, not `type`. Missing `type` simply renders no chip.
