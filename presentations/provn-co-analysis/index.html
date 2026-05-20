@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Provn.co — Company Analysis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --ink-soft: #2c2c2c;
+    --muted: #6b6b6b;
+    --rule: #e3e1dc;
+    --paper: #faf8f3;
+    --paper-warm: #f4f0e6;
+    --accent: #c0392b;
+    --accent-soft: #fdf2ed;
+    --highlight: #e8d9b8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    font-feature-settings: 'kern', 'liga', 'ss01';
+    -webkit-font-smoothing: antialiased;
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(0,0,0,0.025) 1px, transparent 0);
+    background-size: 24px 24px;
+  }
+
+  .page {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 80px 48px 120px;
+  }
+
+  /* ---------- Masthead ---------- */
+  .masthead {
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 28px;
+    margin-bottom: 56px;
+    position: relative;
+  }
+
+  .masthead-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .masthead-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  h1.title {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(40px, 6vw, 64px);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin-bottom: 16px;
+    font-variation-settings: 'opsz' 144, 'SOFT' 30;
+  }
+
+  h1.title em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+
+  .subtitle {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 19px;
+    color: var(--muted);
+    line-height: 1.45;
+    max-width: 580px;
+    margin-top: 18px;
+  }
+
+  .meta-row {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    margin-top: 32px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .meta-row span strong {
+    color: var(--ink);
+    font-weight: 600;
+    margin-right: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 11px;
+  }
+
+  /* ---------- TL;DR Box ---------- */
+  .tldr {
+    background: var(--paper-warm);
+    border-left: 3px solid var(--accent);
+    padding: 32px 36px;
+    margin: 48px 0 64px;
+    position: relative;
+  }
+
+  .tldr-label {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+
+  .tldr p {
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    font-weight: 400;
+  }
+
+  .tldr p + p { margin-top: 14px; }
+
+  .tldr strong {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  /* ---------- Section Headings ---------- */
+  section { margin-bottom: 64px; }
+
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 34px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 28px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--rule);
+    color: var(--ink);
+    font-variation-settings: 'opsz' 96;
+  }
+
+  h2 .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 500;
+    letter-spacing: 0;
+    margin-right: 14px;
+    vertical-align: 4px;
+  }
+
+  h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+    margin: 38px 0 14px;
+    color: var(--ink);
+  }
+
+  h3.heading-num::before {
+    content: attr(data-num);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 500;
+    margin-right: 12px;
+    vertical-align: 4px;
+  }
+
+  /* ---------- Body Text ---------- */
+  p {
+    margin-bottom: 18px;
+    color: var(--ink-soft);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  p strong { color: var(--ink); font-weight: 600; }
+  p em { font-family: 'Fraunces', serif; font-style: italic; font-size: 17px; }
+
+  a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(192, 57, 43, 0.3);
+    transition: border-color 0.2s, background 0.2s;
+  }
+  a:hover { border-color: var(--accent); background: var(--accent-soft); }
+
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.88em;
+    background: var(--paper-warm);
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: var(--ink);
+  }
+
+  /* ---------- Snapshot Table ---------- */
+  .snapshot {
+    background: white;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    padding: 8px 0;
+    margin: 24px 0 32px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+  }
+
+  .snapshot-row {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 24px;
+    padding: 14px 28px;
+    border-bottom: 1px solid var(--rule);
+    align-items: baseline;
+  }
+
+  .snapshot-row:last-child { border-bottom: none; }
+
+  .snapshot-key {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  .snapshot-val {
+    color: var(--ink);
+    font-size: 15px;
+  }
+
+  /* ---------- Lists ---------- */
+  ul, ol {
+    margin: 16px 0 24px;
+    padding-left: 0;
+    list-style: none;
+  }
+
+  ul li, ol li {
+    position: relative;
+    padding-left: 28px;
+    margin-bottom: 12px;
+    color: var(--ink-soft);
+    line-height: 1.65;
+  }
+
+  ul li::before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 11px;
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+
+  ol { counter-reset: list; }
+  ol li { counter-increment: list; }
+  ol li::before {
+    content: counter(list, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  ul li strong, ol li strong { color: var(--ink); font-weight: 600; }
+
+  /* ---------- Quote ---------- */
+  blockquote {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 19px;
+    line-height: 1.4;
+    color: var(--ink);
+    border-left: 2px solid var(--accent);
+    padding: 4px 0 4px 22px;
+    margin: 24px 0;
+    font-weight: 400;
+  }
+
+  /* ---------- Inline Quote (smaller, embedded) ---------- */
+  .pullquote {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  /* ---------- Funnel ---------- */
+  .funnel {
+    background: white;
+    border: 1px solid var(--rule);
+    padding: 32px 36px;
+    margin: 28px 0;
+    border-radius: 2px;
+  }
+
+  .funnel-title {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    font-weight: 600;
+    margin-bottom: 24px;
+  }
+
+  .funnel-step {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: baseline;
+    padding: 12px 0;
+    border-bottom: 1px dotted var(--rule);
+    gap: 16px;
+  }
+
+  .funnel-step:last-child { border-bottom: none; }
+
+  .funnel-step-label {
+    font-size: 15px;
+    color: var(--ink-soft);
+  }
+
+  .funnel-step-num {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  .funnel-step.final .funnel-step-num { color: var(--accent); }
+  .funnel-step.final .funnel-step-label { color: var(--ink); font-weight: 500; }
+
+  /* ---------- Two-column comparison ---------- */
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 24px 0 28px;
+  }
+
+  .compare-card {
+    background: white;
+    border: 1px solid var(--rule);
+    padding: 24px 24px 22px;
+    border-radius: 2px;
+  }
+
+  .compare-card-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .compare-card.helix .compare-card-label { color: #1e6091; }
+  .compare-card.provn .compare-card-label { color: var(--accent); }
+
+  .compare-card p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* ---------- Market Table ---------- */
+  .market-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 14px;
+  }
+
+  .market-table th, .market-table td {
+    text-align: left;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+    line-height: 1.55;
+  }
+
+  .market-table th {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    font-weight: 600;
+    border-bottom: 1.5px solid var(--ink);
+  }
+
+  .market-table tr td:first-child {
+    font-weight: 600;
+    color: var(--ink);
+    width: 30%;
+  }
+
+  /* ---------- Sources ---------- */
+  .sources-list {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+
+  .sources-list li {
+    padding-left: 16px;
+    margin-bottom: 8px;
+  }
+
+  .sources-list li::before {
+    content: '→';
+    background: transparent;
+    color: var(--accent);
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    top: 0;
+    left: 0;
+    font-size: 14px;
+  }
+
+  /* ---------- Divider ---------- */
+  hr {
+    border: none;
+    height: 1px;
+    background: var(--rule);
+    margin: 48px 0;
+  }
+
+  hr.ornament {
+    height: 24px;
+    background: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 64px 0;
+  }
+
+  hr.ornament::before {
+    content: '⁂';
+    color: var(--accent);
+    font-size: 18px;
+    letter-spacing: 0.5em;
+  }
+
+  /* ---------- Index / Contents ---------- */
+  .contents {
+    margin: 48px 0 64px;
+    padding: 28px 32px;
+    background: white;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+  }
+
+  .contents-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .contents-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  .contents-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  .contents-list li {
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+
+  .contents-list li::before { display: none; }
+
+  .contents-list a {
+    display: grid;
+    grid-template-columns: 38px 1fr;
+    gap: 12px;
+    align-items: baseline;
+    padding: 11px 4px;
+    border-bottom: 1px dotted var(--rule);
+    color: var(--ink);
+    text-decoration: none;
+    transition: background 0.15s, padding-left 0.2s;
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+  }
+
+  .contents-list a:hover {
+    background: var(--paper-warm);
+    padding-left: 10px;
+    border-bottom-color: var(--accent);
+  }
+
+  .contents-list a .contents-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+
+  /* On narrower viewports stack into one column */
+  @media (max-width: 720px) {
+    .contents-list { grid-template-columns: 1fr; }
+  }
+
+  /* Scroll offset so anchored sections aren't hidden under any browser chrome */
+  section[id] { scroll-margin-top: 24px; }
+
+  /* ---------- Footer note ---------- */
+  .footnote {
+    font-size: 13px;
+    color: var(--muted);
+    font-style: italic;
+    font-family: 'Fraunces', serif;
+    line-height: 1.55;
+    padding: 16px 0;
+  }
+
+  @media (max-width: 640px) {
+    .page { padding: 48px 24px 80px; }
+    h1.title { font-size: 36px; }
+    h2 { font-size: 26px; }
+    .compare { grid-template-columns: 1fr; }
+    .snapshot-row { grid-template-columns: 1fr; gap: 4px; padding: 14px 20px; }
+    .meta-row { gap: 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ========== MASTHEAD ========== -->
+  <header class="masthead">
+    <div class="masthead-label">Company Analysis · Internal</div>
+    <h1 class="title">Provn<em>.co</em></h1>
+    <p class="subtitle">Challenge-based hiring, the AI Talent Draft, and what it means for Helix.</p>
+    <div class="meta-row">
+      <span><strong>Prepared for</strong> SeekOut Helix stakeholders</span>
+      <span><strong>Author</strong> Akshay Gupta</span>
+      <span><strong>Date</strong> May 20, 2026</span>
+    </div>
+  </header>
+
+  <!-- ========== INDEX ========== -->
+  <nav class="contents" aria-label="Table of contents">
+    <div class="contents-label">Contents</div>
+    <ol class="contents-list">
+      <li><a href="#snapshot"><span class="contents-num">§ 01</span><span>Company snapshot</span></a></li>
+      <li><a href="#founder"><span class="contents-num">§ 02</span><span>Founder &amp; team</span></a></li>
+      <li><a href="#product"><span class="contents-num">§ 03</span><span>What Provn actually does</span></a></li>
+      <li><a href="#business"><span class="contents-num">§ 04</span><span>Business model</span></a></li>
+      <li><a href="#positioning"><span class="contents-num">§ 05</span><span>Market positioning</span></a></li>
+      <li><a href="#traction"><span class="contents-num">§ 06</span><span>Traction signals</span></a></li>
+      <li><a href="#helix"><span class="contents-num">§ 07</span><span>Direct relevance to Helix</span></a></li>
+      <li><a href="#risks"><span class="contents-num">§ 08</span><span>Risks &amp; open questions</span></a></li>
+      <li><a href="#sources"><span class="contents-num">§ 09</span><span>Sources</span></a></li>
+    </ol>
+  </nav>
+
+  <!-- ========== TL;DR ========== -->
+  <div class="tldr">
+    <div class="tldr-label">The short version</div>
+    <p>Provn is a pre-revenue, self-funded Seattle startup founded by serial entrepreneur Nikesh (Niki) Parekh — the same founder who built and sold Suplari to Microsoft in 2021. It's a challenge-based hiring platform pitched as <em>"the AI Talent Draft"</em>: instead of applying with a resume, candidates apply by completing a real, employer-designed work sample, recording a video walkthrough of their thinking, and documenting their AI usage. Hiring managers then review the work directly, scored against an explicit rubric.</p>
+    <p>The thesis is current and sharp: every 2026 job posting now gets 500–1,000 applications, every resume looks AI-polished, and the only signal that survives is <em>demonstrated work plus thinking process</em>. Provn's tagline — <em>"Performance over pedigree. Proof over polish."</em> — is a direct attack on credential-based screening and on resume-optimization tools. Notably, Provn explicitly tells candidates to <em>use</em> AI on challenges, not hide it; the differentiator is the video walkthrough of how they used it.</p>
+    <p><strong>Why this matters for Helix:</strong> Provn and Helix are pointed at the same candidate pain (AI has made resumes useless; candidates can't break through) but solving it from opposite sides. Helix produces a new candidate-owned portfolio artifact distinct from a resume or LinkedIn. Provn argues the resume should be replaced and is building the replacement on the employer side. Both are betting on a new portfolio artifact replacing the resume — the interesting differences are <em>where the artifact lives</em> and <em>what fills it</em>.</p>
+  </div>
+
+  <!-- ========== SNAPSHOT ========== -->
+  <section id="snapshot">
+    <h2><span class="num">§ 01</span>Company snapshot</h2>
+    <div class="snapshot">
+      <div class="snapshot-row"><div class="snapshot-key">Company</div><div class="snapshot-val">Provn Inc.</div></div>
+      <div class="snapshot-row"><div class="snapshot-key">Headquarters</div><div class="snapshot-val">Seattle, WA</div></div>
+      <div class="snapshot-row"><div class="snapshot-key">Founded</div><div class="snapshot-val">2025 — unveiled publicly November 2025</div></div>
+      <div class="snapshot-row"><div class="snapshot-key">Stage</div><div class="snapshot-val">Self-funded, pre-revenue, planning a seed round</div></div>
+      <div class="snapshot-row"><div class="snapshot-key">Founder / CEO</div><div class="snapshot-val">Nikesh (Niki) Parekh</div></div>
+      <div class="snapshot-row"><div class="snapshot-key">Team size</div><div class="snapshot-val">~6 named team members publicly</div></div>
+      <div class="snapshot-row"><div class="snapshot-key">Domain</div><div class="snapshot-val"><code>provn.co</code></div></div>
+      <div class="snapshot-row"><div class="snapshot-key">Tagline</div><div class="snapshot-val">"Performance over pedigree. Proof over polish. Merit over mystery."</div></div>
+    </div>
+    <p>Source for stage and funding posture: <a href="https://www.geekwire.com/2025/seattle-tech-vet-nikesh-parekh-unveils-provn-to-disrupt-how-companies-recruit-ai-talent/">GeekWire launch coverage, Nov 2025</a>. At launch, Parekh stated the company was self-funded, not yet generating revenue, and planning a seed round.</p>
+    <p class="footnote">Note on naming: there are several unrelated entities sharing similar names — a UK recruiting agency (<code>provntalent.com</code>), a vendor-management tool for VCs (<code>getproven.com</code>), and a student-career platform (<code>provn.live</code>). None are the same company. The subject of this doc is exclusively <code>provn.co</code>.</p>
+  </section>
+
+  <!-- ========== FOUNDER ========== -->
+  <section id="founder">
+    <h2><span class="num">§ 02</span>Founder &amp; team</h2>
+    <p><strong>Nikesh Parekh — CEO and founder.</strong> This is a real operator, not a first-time founder. Track record:</p>
+    <ul>
+      <li>Co-founded <strong>Suplari</strong>, an AI-driven spend-intelligence platform that raised ~$13.75M (Madrona, Shasta, Amplify, Two Sigma, Workday Ventures) and was <strong>acquired by Microsoft in 2021</strong>.</li>
+      <li>After the acquisition, spent ~4 years at Microsoft, ultimately as a GM on Copilot Studio and the Power Platform — meaning he was deep inside Microsoft's enterprise AI agent work right before starting Provn.</li>
+      <li>Earlier: VP of New Ventures at Trulia (acquired by Zillow for $2.5B), CEO of ActiveRain, EVP Product at Market Leader.</li>
+      <li>Harvard BA, Harvard MBA. Based in Bellevue, WA.</li>
+    </ul>
+    <p>This pedigree matters for two reasons. First, he can almost certainly raise a seed round when he chooses to. Second, his Copilot Studio tenure gives him an unusually grounded view of where AI in the enterprise actually delivers — useful context for someone now pitching that <em>"every job is becoming an AI role."</em></p>
+
+    <h3>Other publicly named team members</h3>
+    <ul>
+      <li><strong>Kate Hill</strong> — formerly VP of Sales &amp; CS at ActiveRain (a Parekh-era company); BD leader at EY.</li>
+      <li><strong>Ravi Mohan</strong> — formerly a VC at Shasta Ventures; board member at Suplari, Apptio, Anaplan.</li>
+      <li><strong>Taylor Brazelton, Forrest Corbett, David Tarico</strong> — also pictured in the launch photo. Worth noting Forrest Corbett appears to be at Arrivia (one of Provn's launch hiring partners) per the Ganesh webinar transcript — so he may be an embedded employer-side advisor rather than full-time Provn.</li>
+    </ul>
+    <p>Reading between the lines: this is largely the Suplari band getting back together, plus Mohan as a senior commercial / capital-markets presence. Strong execution-speed signal, but the team is small — likely under 10 full-time people.</p>
+  </section>
+
+  <!-- ========== WHAT PROVN DOES ========== -->
+  <section id="product">
+    <h2><span class="num">§ 03</span>What Provn actually does</h2>
+    <p>Provn is structured as a <strong>two-sided marketplace</strong> between candidates and employers, with the work sample ("challenge") as the central artifact. The event format is called the <strong>AI Talent Draft</strong>. Challenges are drawn from the real domain of each role — diagnosing a churn spike before a board meeting, untangling conflicting metrics for a dashboard, fixing silent order failures in an e-commerce pipeline, defining an AI-native fan platform for a league owner dinner. Each challenge has its own scenario, customer, and constraints.</p>
+
+    <h3>The candidate experience</h3>
+    <ol>
+      <li><strong>Sign up and set up a profile.</strong> Resume upload, profile basics, and up to 5 target roles from a curated taxonomy (Engineering, Product &amp; Design, Data &amp; AI, Operations, Sales, Marketing, Finance, People, Administration).</li>
+      <li><strong>Browse jobs.</strong> Currently ~22 live jobs from named employers like Envorso Sports, DAT Freight &amp; Analytics, Arrivia, Golden Analytics, mpathic, Gordian Software, Collabera, and Brilliant Earth — mostly Seattle / PNW, with explicit comp bands, apply-by deadlines, and a marker showing which roles require a challenge.</li>
+      <li><strong>Apply by completing a challenge.</strong> Each role has its own custom challenge — typically 50–120 minutes — with full context, a scoring rubric exposed up front, and three artifacts to submit: a written brief, a README with a mandatory AI Usage Log, and a 5–7 minute video walkthrough answering a mandatory AI question: <span class="pullquote">"Walk me through one moment where you disagreed with, pushed back on, or redirected what the AI gave you."</span></li>
+      <li><strong>Get reviewed by a real person.</strong> Per Provn's marketing: <em>"every completed application is reviewed by a real person… not a keyword filter, not a bot."</em> Top performers get surfaced directly to the hiring manager, bypassing recruiter screening.</li>
+      <li><strong>Build a public profile that travels.</strong> Every completed challenge becomes a reusable portfolio artifact attached to a public, shareable candidate profile at <code>provn.co/u/{username}</code> — clean username-based URLs, with a preview mode so candidates can see exactly what employers will see. This is functionally the LinkedIn analogue in Provn's worldview: a single canonical page that aggregates challenge submissions, video walkthroughs, and selected role interests.</li>
+    </ol>
+    <p>Beyond the per-job challenges, Provn also runs an <strong>AI Talent Draft</strong> — a parallel library of standalone challenges (Diagnose a Churn Spike, Untangle Conflicting Metrics, Diagnose Silent Order Failures, etc.) organized by function. These serve double duty: practice problems for candidates building their portfolio, and a recruiting funnel for employers who can scout high performers from the leaderboard.</p>
+
+    <h3>The employer experience <span style="color: var(--muted); font-weight: 400; font-size: 14px;">(inferred)</span></h3>
+    <ul>
+      <li>Challenges are <strong>co-designed with the hiring manager before the role goes live</strong> (per the Spring 2026 Talent Draft launch post). This is explicit positioning — they want candidates to know a human designed the challenge so they trust a human will read the response.</li>
+      <li>Submissions arrive as a packaged portfolio: brief + README + video, with the AI usage log front and center.</li>
+      <li>Hiring managers — explicitly <em>not</em> recruiters — review work. Parekh's stated success metric: candidate submits → VP / hiring manager interviews directly.</li>
+      <li>The Envorso Founding PM challenge I reviewed used five weighted categories: <em>Founding PM Craft &amp; 0→1 Execution (30%), AI-Native Product &amp; Builder Mindset (20%), Strategic Product &amp; Data Platform Thinking (18%), Customer &amp; Stakeholder Presence (18%), AI Fluency (14%)</em>. Rubric is published before the candidate starts.</li>
+    </ul>
+
+    <h3>The challenge construction is the product</h3>
+    <p>This is the part worth studying closely. The Envorso challenge isn't a generic <em>"build something cool"</em> prompt. It includes:</p>
+    <ul>
+      <li>A realistic founding scenario (9-person startup, named CEO, named teammates, named first customer).</li>
+      <li>Explicit constraints designed to test judgment: <em>"You can't hire a Staff Engineer this quarter. The fan you're designing for is 52, not 25. The audience for your video is non-technical sports executives."</em></li>
+      <li>A weighted, published rubric.</li>
+      <li>A required AI usage log forcing candidates to document where they pushed back on the model.</li>
+      <li>A scoring framework that explicitly rewards <em>iteration and critical evaluation</em> of AI output over polished final answers.</li>
+    </ul>
+    <p>The design intent is unmistakable: it's hard to fake this with a single Claude prompt, because the rubric specifically scores the <em>process</em> of working with AI, not the output.</p>
+
+    <blockquote>"It's very hard to fake the video walkthrough. You can have AI create the transcript and read it, but when you see hundreds of people doing the same thing, the copy-and-paste-from-AI is actually pretty obvious."<br><span style="font-style: normal; font-size: 13px; color: var(--muted); font-family: 'Inter', sans-serif;">— Niki Parekh, Talent Scout Webinar</span></blockquote>
+
+    <h3>The roadmap: Career Services</h3>
+    <p>Surfaced via a modal during signup, Provn has a "Career Services" suite explicitly in roadmap mode (<em>"Here's what's coming"</em>):</p>
+    <ul>
+      <li><strong>AI Interview Prep</strong> — company-specific mock interviews scored by AI</li>
+      <li><strong>Resume &amp; LinkedIn Optimization</strong> — AI + expert recruiter review</li>
+      <li><strong>Career Coaching</strong> — 1:1 with industry practitioners</li>
+      <li><strong>Portfolio &amp; Video Coaching</strong> — feedback on challenge submissions and walkthroughs</li>
+      <li><strong>Job Matching</strong> — an AI career agent that finds and tailors applications</li>
+      <li><strong>Skill Gap Analysis</strong> — based on Provn challenge scores</li>
+    </ul>
+    <p><strong>This is the layer most relevant to Helix.</strong> Today these are aspirational; the launch product is the challenge marketplace. But the direction of travel is clear: monetize candidates with premium career services on top of the free challenge platform, while monetizing employers per hire.</p>
+  </section>
+
+  <!-- ========== BUSINESS MODEL ========== -->
+  <section id="business">
+    <h2><span class="num">§ 04</span>Business model</h2>
+    <p>Per the GeekWire launch piece, the model has two revenue streams:</p>
+    <ol>
+      <li><strong>Employer side:</strong> charge per hire (success-based, not subscription).</li>
+      <li><strong>Candidate side:</strong> premium tools, including an "AI agent" that helps candidates market themselves and find opportunities. Confirmed in the candidate FAQ: <em>"Browsing jobs, applying via challenges, and building your portfolio is 100% free forever. Premium services will be added in the future."</em></li>
+    </ol>
+
+    <h3>Target customers</h3>
+    <ul>
+      <li><strong>Large enterprises</strong> hiring early- and mid-career information workers at volume, who want a vetted candidate database.</li>
+      <li><strong>Smaller startups without recruiting teams</strong> who need pre-vetted candidates with demonstrated AI fluency.</li>
+    </ul>
+
+    <h3>Target candidates</h3>
+    <p>Lifted directly from Parekh's Talent Scout webinar — this is explicit ICP positioning, not paraphrased:</p>
+    <ul>
+      <li>Candidates early in career who are strong but invisible on paper</li>
+      <li>International students on a US master's program</li>
+      <li>Career changers</li>
+      <li>People later in career watching AI reshape their field</li>
+      <li>Candidates from non-traditional backgrounds who are great with AI</li>
+    </ul>
+    <p>Provn explicitly acknowledges they're <em>not</em> for everyone: <em>"Some candidates aren't going to spend an hour completing a challenge, and that's a fair choice."</em></p>
+  </section>
+
+  <!-- ========== POSITIONING ========== -->
+  <section id="positioning">
+    <h2><span class="num">§ 05</span>Market positioning</h2>
+    <p>Provn frames itself against three categories of incumbent:</p>
+    <table class="market-table">
+      <thead>
+        <tr><th>Incumbent type</th><th>How Provn positions against it</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Resume-based job boards <span style="font-weight: 400; color: var(--muted);">(LinkedIn, Indeed)</span></td>
+          <td>Massive scale but unable to separate signal from "AI slop" — every resume now looks perfect.</td>
+        </tr>
+        <tr>
+          <td>Technical assessment tools <span style="font-weight: 400; color: var(--muted);">(HackerRank, Codility, Karat)</span></td>
+          <td>"Narrow" — code-only, not the full job, and don't capture thinking or communication.</td>
+        </tr>
+        <tr>
+          <td>Resume-optimization tools</td>
+          <td>Wrong abstraction. Optimizing resumes makes the AI-slop problem worse, not better.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>The narrative reads as a deliberate inversion of the resume-optimization category: rather than helping candidates package themselves better for a broken system, Provn argues for replacing the system with one where packaging matters less and demonstrated work matters more.</p>
+    <p><strong>A subtle but important positioning choice:</strong> most hiring tools right now try to detect AI use and penalize it. Provn does the opposite. <em>"We want you to use AI. We want you to lean into it."</em> The bet is that AI fluency is a hiring signal, not contraband — and that <em>how</em> you use AI is observable in the video walkthrough even when the written output is AI-assisted.</p>
+    <p><strong>Messaging contradiction worth flagging.</strong> Provn's <em>positioning</em> says "we're against resume optimization." Provn's <em>roadmap</em> includes resume and LinkedIn optimization as a paid candidate service. The most charitable reading: they see resume optimization as table-stakes monetization for candidates who still have to operate in the rest of the job market, while the challenge marketplace is the bet that changes the system over time.</p>
+  </section>
+
+  <!-- ========== TRACTION ========== -->
+  <section id="traction">
+    <h2><span class="num">§ 06</span>Traction signals</h2>
+    <p>Public signals are limited but specific. The blog is the highest-fidelity source.</p>
+
+    <h3>Launch and cadence</h3>
+    <ul>
+      <li><strong>November 2025</strong> — public launch (GeekWire).</li>
+      <li><strong>April 6, 2026</strong> — Spring 2026 Talent Draft goes live. The flagship event format: a batched, time-boxed cohort with submissions closing roughly four weeks later (April 30).</li>
+      <li>Spring Draft included <strong>18 jobs across 5 hiring partners</strong>: Arrivia, Gordian Software, Collabera, DAT Freight &amp; Analytics, Mpathic.</li>
+      <li>Roles in the Spring cohort: program managers, software engineers, B2B sales, data analysts, product designers, design engineers, operations specialists.</li>
+    </ul>
+
+    <h3>Content and top-of-funnel strategy</h3>
+    <p>Provn ran a <strong>Talent Scout webinar series</strong> in April 2026 with named hiring managers as guests:</p>
+    <ul>
+      <li><strong>April 14</strong> — Niki Parekh: <em>AI slop and the broken hiring market</em></li>
+      <li><strong>April 15</strong> — Ganesh Baskaran (Arrivia): <em>Builders, agent engineers, and proof of work</em></li>
+      <li><strong>April 22</strong> — Neal Zuckerman (BCG, 20+ years): <em>What a resume can't prove</em></li>
+      <li>More planned in the series ("five live conversations")</li>
+    </ul>
+    <p>This is a smart top-of-funnel motion: credible employer voices selling the platform's worldview to candidates, while implicitly recruiting more employers who see their peers participating.</p>
+
+    <h3>The one outcome story they're showing</h3>
+    <p>Alex at Brilliant Earth (Hired Spotlight, March 23, 2026). The Talent Scout webinar exposed the funnel math behind it:</p>
+
+    <div class="funnel">
+      <div class="funnel-title">Brilliant Earth — AI Product Manager hire</div>
+      <div class="funnel-step"><div class="funnel-step-label">Applicants</div><div class="funnel-step-num">234</div></div>
+      <div class="funnel-step"><div class="funnel-step-label">Completed the challenge</div><div class="funnel-step-num">47</div></div>
+      <div class="funnel-step"><div class="funnel-step-label">Reached the hiring manager</div><div class="funnel-step-num">10</div></div>
+      <div class="funnel-step final"><div class="funnel-step-label">Hired</div><div class="funnel-step-num">1</div></div>
+    </div>
+
+    <p>Alex's profile is instructive — she's exactly Provn's ICP: a biochem undergrad with a data science master's, working on a part-time MBA, mid-career-change, leaving an early-stage AI startup. The SVP opened her first interview with <em>"I feel like I know you already."</em> She reportedly out-competed PMs from Meta, Microsoft, and Oracle on the quality of her work.</p>
+    <p><strong>Where this lands:</strong> Provn is post-launch, pre-product-market-fit. Public traction is one named hire, ~18–22 jobs at a time, 5–6 active employer logos, and a webinar series. The April Draft batched format is partly a way to concentrate demand on the supply side while they're still scaling employer count.</p>
+  </section>
+
+  <hr class="ornament">
+
+  <!-- ========== HELIX RELEVANCE ========== -->
+  <section id="helix">
+    <h2><span class="num">§ 07</span>Direct relevance to Helix</h2>
+    <p>This is the section worth the most attention. Provn's surface area overlaps with Helix in five specific places.</p>
+
+    <h3 class="heading-num" data-num="01">The AI-forward candidate thesis is shared — but operationalization differs</h3>
+    <p>Both Helix and Provn assume that the candidate of 2026 has to demonstrate AI fluency, not claim it. Where they diverge is <em>how that proof gets produced</em>:</p>
+
+    <div class="compare">
+      <div class="compare-card helix">
+        <div class="compare-card-label">Helix's model</div>
+        <p>Produce a new candidate-owned portfolio artifact — one Helix curates from the candidate's own work history and AI-fluency signals — that the candidate then shares directly with employers. The artifact, not a resume or LinkedIn profile, is the thing being optimized.</p>
+      </div>
+      <div class="compare-card provn">
+        <div class="compare-card-label">Provn's model</div>
+        <p>The proof <em>is</em> a work sample completed on Provn's platform, with the AI-usage log as a structured artifact and a video answering "where did you push back on the AI?" as the highest-signal indicator. The artifact lives on Provn's public profile.</p>
+      </div>
+    </div>
+
+    <p>Both products bet on a new portfolio artifact replacing the resume. The differences are in <em>where the artifact lives</em> (candidate-owned in Helix; platform-owned in Provn) and <em>what fills it</em> (curated existing work in Helix; net-new challenge submissions in Provn).</p>
+    <p>Worth noting: the <em>language</em> Provn's employer guests use is identical to what we'd want our candidates to be able to speak. Ganesh (Arrivia): <em>"Curious and resilient."</em> Neal (BCG): <em>"Work hard, accuracy, teams, curiosity, flexibility."</em> Both explicitly say a resume can't prove any of it. This is exactly the gap both Helix and Provn are trying to close.</p>
+
+    <h3 class="heading-num" data-num="02">The Career Services roadmap is the closest direct overlap</h3>
+    <p>The features Provn has explicitly listed as "coming" — AI Interview Prep, Resume &amp; LinkedIn Optimization, Career Coaching, Portfolio &amp; Video Coaching, Job Matching, Skill Gap Analysis — are roughly the SeekOut.ai / Helix surface area. <strong>None are live yet.</strong> Provn has explicitly opted to ship the challenge marketplace first and layer career services on top later.</p>
+    <p>This is a useful sequencing data point. Provn's bet is that <em>the proof is the wedge</em>, and career services are downstream monetization on top of an established candidate base. Helix's bet is closer to the inverse: <em>the polish is the wedge</em>, with proof a possible extension. Worth a conversation about which sequence is right for SeekOut's audience.</p>
+
+    <h3 class="heading-num" data-num="03">The AI Usage Log + Video Walkthrough is the strongest borrowable idea</h3>
+    <p>The single sharpest product idea on Provn is the combination of:</p>
+    <ul>
+      <li><strong>A mandatory AI Usage Log</strong> inside the README submission, and</li>
+      <li><strong>A mandatory AI question</strong> in the video walkthrough — <em>"walk me through one moment where you disagreed with, pushed back on, or redirected the AI."</em></li>
+    </ul>
+    <p>Together these produce something neither a resume nor a code sample can: credible evidence of <em>how a candidate actually works with AI</em>, not just whether they used it. Per Parekh, the video walkthrough is the part that's hardest to fake. That's a defensibility argument that I think mostly holds up.</p>
+    <p><strong>For Helix specifically:</strong> this concept is directly portable as a candidate-side coaching mechanic, decoupled from Provn's marketplace. We could help candidates produce a personal AI Usage Log across their recent work — what they asked AI for, what they kept, what they rejected, and why — as a portable portfolio artifact independent of any specific application. Plus a structured "AI moment" video they could attach to LinkedIn or send with applications. A much stronger AI-fluency signal than "lists ChatGPT under skills."</p>
+
+    <h3 class="heading-num" data-num="04">The challenge rubric design is worth studying</h3>
+    <p>Even setting aside the marketplace mechanics, the way Provn structures a challenge is instructive:</p>
+    <ul>
+      <li>Scenario-rich and constraint-heavy, not a blank prompt.</li>
+      <li>Rubric is published before the candidate starts.</li>
+      <li>Process (iteration, redirection of AI) is explicitly weighted alongside output.</li>
+      <li>Submission has three distinct surfaces: written analysis, structured README, video.</li>
+    </ul>
+    <p>If Helix ever moves into producing practice or assessment artifacts for candidates (mock challenges, portfolio prompts, "show your AI work" templates), this rubric design is a strong reference template.</p>
+
+    <h3 class="heading-num" data-num="05">The public profile is the artifact, not the resume</h3>
+    <p>Provn ships every candidate a public, shareable profile at <code>provn.co/u/{username}</code> that aggregates their challenge work — submissions, videos, role interests — into one canonical page. This is the part most directly competitive with the LinkedIn-as-default-portfolio model that Helix is also operating against. Provn's bet is that the profile <em>is</em> the application: a candidate hands an employer their <code>provn.co/u/...</code> URL and the employer sees demonstrated work plus AI-fluency artifacts inline, not a resume that gestures at them.</p>
+    <p>Helix's canonical artifact is also a portfolio — a candidate-owned page produced only through Helix, distinct from a resume or LinkedIn profile. That puts Helix and Provn on the same side of the artifact question (a new thing the candidate hands to an employer, not a polished version of an old one) and points to direct positioning comparison as both products mature. The differences worth tracking: who hosts the artifact (Provn the platform vs. Helix the candidate-owned URL), what fills it (Provn challenge submissions vs. Helix-curated work history and AI-fluency artifacts), and who discovers the candidate through it (Provn employer search vs. inbound candidate sharing).</p>
+  </section>
+
+  <!-- ========== RISKS ========== -->
+  <section id="risks">
+    <h2><span class="num">§ 08</span>Risks &amp; open questions</h2>
+    <p>Where Provn might struggle, and what to watch:</p>
+    <ul>
+      <li><strong>Challenge authoring is high-touch.</strong> The Envorso challenge is excellent. Someone had to write it. Spring 2026 was 18 jobs across 5 partners — i.e., they're co-authoring per role with hiring managers, which doesn't scale per logo. If they push challenge authoring out to employers entirely, quality will vary and design effort becomes friction.</li>
+      <li><strong>Roadmap collision with their own positioning.</strong> Listing resume / LinkedIn optimization on the roadmap contradicts the "we're against resume optimization" stance. How they resolve this messaging will say something about the discipline of the company.</li>
+    </ul>
+  </section>
+
+  <!-- ========== SOURCES ========== -->
+  <section id="sources">
+    <h2><span class="num">§ 09</span>Sources</h2>
+    <ul class="sources-list">
+      <li><a href="https://provn.co/">Provn — main site</a></li>
+      <li><a href="https://provn.co/about">Provn — About page (full positioning narrative)</a></li>
+      <li><a href="https://provn.co/candidates">Provn — For Candidates page</a></li>
+      <li><a href="https://provn.co/blog">Provn — Blog</a></li>
+      <li><a href="https://provn.co/blog/2026/04/spring-2026-talent-draft">Spring 2026 Talent Draft launch post</a></li>
+      <li><a href="https://provn.co/blog/2026/04/niki-talent-scout-webinar">Niki Parekh — Talent Scout Webinar: AI slop and the broken hiring market</a></li>
+      <li><a href="https://provn.co/blog/2026/04/ganesh-arrivia">Ganesh Baskaran (Arrivia) — Talent Scout Webinar: Builders, agent engineers, and proof of work</a></li>
+      <li><a href="https://provn.co/blog/2026/04/neal-bcg">Neal Zuckerman (BCG) — Talent Scout Webinar: What a resume can't prove</a></li>
+      <li><a href="https://provn.co/blog/2026/03/alex-brilliant-earth">Hired Spotlight: Alex at Brilliant Earth</a></li>
+      <li><a href="https://www.geekwire.com/2025/seattle-tech-vet-nikesh-parekh-unveils-provn-to-disrupt-how-companies-recruit-ai-talent/">GeekWire — Seattle tech vet Nikesh Parekh unveils Provn (Nov 2025)</a></li>
+      <li><a href="https://www.linkedin.com/in/nparekh">Nikesh Parekh — LinkedIn</a></li>
+      <li><a href="https://seattle.tie.org/my-story-entrepreneur-founder-2/">TiE Seattle — Parekh founder profile</a></li>
+      <li>Primary screenshots of the candidate flow, dashboard, jobs board, and Envorso Founding PM challenge (Akshay's session, May 2026)</li>
+    </ul>
+  </section>
+
+</div>
+</body>
+</html>
